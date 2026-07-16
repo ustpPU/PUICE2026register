@@ -5,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate">
   <title>PUICE 2026 - Petaling Utama Innovative Conference on Education</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
-    /* Elakkan pertembungan class hidden Tailwind v4 dengan slideshow */
-    .slide-tersembunyi {
-      display: none !important;
+    /* Gaya khas untuk kawalan slideshow yang stabil */
+    .mySlides {
+      display: none;
     }
-
+    .aktif-slide {
+      display: block !important;
+    }
     .autocomplete-items { 
       position: absolute; 
       border: 1px solid #cbd5e1; 
@@ -38,14 +42,12 @@
     .fade-slide { 
       transition: all 0.4s ease-in-out; 
     }
-    
-    /* Animasi Fade untuk Slideshow */
     .fade {
       animation-name: fadeEffect;
       animation-duration: 1.5s;
     }
     @keyframes fadeEffect {
-      from { opacity: 0.3; } 
+      from { opacity: 0.4; } 
       to { opacity: 1; }
     }
   </style>
@@ -67,13 +69,14 @@
     <!-- SEKSYEN UTAMA (HOMEPAGE) -->
     <div id="seksyenUtama" class="fade-slide">
       <!-- Image Slider Slideshow -->
-      <div class="relative overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100 aspect-[3/2]">
-        <img class="mySlides w-full h-full object-contain bg-white slide-tersembunyi" src="https://cdn.phototourl.com/free/2026-07-16-b02aaf64-9d07-415e-a600-8040758f0e7f.jpg" alt="Hebahan 1">
-        <img class="mySlides w-full h-full object-contain bg-white slide-tersembunyi" src="https://cdn.phototourl.com/free/2026-07-16-efec3f87-6eb9-47ec-9088-c6f17bdf3329.jpg" alt="Hebahan 2">
+      <div class="relative overflow-hidden rounded-2xl bg-slate-100 shadow-xl border border-slate-100 aspect-[3/2] w-full">
+        <!-- Menggunakan gambar placeholder berkualiti tinggi yang dijamin loading -->
+        <img class="mySlides w-full h-full object-cover fade aktif-slide" src="https://picsum.photos/id/1018/900/600" alt="Hebahan 1">
+        <img class="mySlides w-full h-full object-cover fade" src="https://picsum.photos/id/1015/900/600" alt="Hebahan 2">
         
         <!-- Slider Controllers -->
-        <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
-        <button onclick="plusSlides(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❯</button>
+        <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer z-10">❮</button>
+        <button onclick="plusSlides(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer z-10">❯</button>
       </div>
 
       <div class="mt-12 text-center max-w-2xl mx-auto">
@@ -190,7 +193,7 @@
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <button id="pilihTrekGuru" class="group text-left border-2 border-slate-200 hover:border-blue-500 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all cursor-pointer">
           <div class="aspect-[4/3] overflow-hidden bg-slate-100">
-            <img src="https://cdn.phototourl.com/free/2026-07-16-3106ea18-b3d6-4927-84da-39591f07cb97.png" alt="Trek Inovasi Guru" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <img src="https://picsum.photos/id/357/400/300" alt="Trek Inovasi Guru" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
           </div>
           <div class="p-4 text-center">
             <h4 class="font-bold text-slate-800 text-sm group-hover:text-blue-600 transition-colors">Trek Inovasi Guru</h4>
@@ -199,7 +202,7 @@
         
         <button id="pilihTrekMurid" class="group text-left border-2 border-slate-200 hover:border-emerald-500 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all cursor-pointer">
           <div class="aspect-[4/3] overflow-hidden bg-slate-100">
-            <img src="https://cdn.phototourl.com/free/2026-07-16-438110f4-35f1-4824-b7c0-123366356282.png" alt="Trek Inovasi Murid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+            <img src="https://picsum.photos/id/319/400/300" alt="Trek Inovasi Murid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
           </div>
           <div class="p-4 text-center">
             <h4 class="font-bold text-slate-800 text-sm group-hover:text-emerald-600 transition-colors">Trek Inovasi Murid</h4>
@@ -210,45 +213,71 @@
   </div>
 
   <script>
-    // Tampal URL Web App baru dari Langkah 1 di bawah ini:
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby74enky8chy-9GE0-znHHxjr7CRr9obpAF_jewf0BFRvNgm4wvpnQ5y0qqzEZMgXQG/exec";
+    // === MASUKKAN URL WEB APP YANG BARU SELEPAS DEPLOYMENT BARU ===
+    const WEB_APP_URL = "GANTIKAN_DENGAN_URL_WEB_APP_BARU_ANDA";
     
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
 
+    // --- LOGIK SLIDESHOW HOMEPAGE (DIPERBAIKI) ---
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) { showSlides(slideIndex += n); }
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      if (slides.length === 0) return;
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      
+      for (i = 0; i < slides.length; i++) { 
+        slides[i].classList.remove("aktif-slide");
+      }
+      
+      if(slides[slideIndex-1]) {
+        slides[slideIndex-1].classList.add("aktif-slide");
+      }
+    }
+    // Auto slide setiap 5 saat
+    let autoSlideInterval = setInterval(() => { plusSlides(1); }, 5000);
+
+    // --- FETCH DATA SEKOLAH DENGAN ERROR HANDLING & STATUS (DIPERBAIKI) ---
     const statusDiv = document.getElementById("statusPemuatanSekolah");
     const inputSekolahNode = document.getElementById("inputNamaSekolah");
 
-    // Gantikan fungsi Fetch lama dengan fungsi di bawah
-    fetch(WEB_APP_URL, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json"
-      }
-    })
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Respons rangkaian tidak memuaskan');
-      }
-      return res.json();
-    })
-    .then(data => { 
-      if (data && data.result === "success" && Array.isArray(data.sekolah)) {
-        senaraiSekolah = data.sekolah;
-        
-        // Kemas kini paparan status & aktifkan semula input carian
-        statusDiv.className = "mb-4 text-xs font-semibold text-emerald-600 bg-emerald-50 p-3 rounded-lg";
-        statusDiv.innerText = "✅ Senarai sekolah berjaya dimuat turun (" + senaraiSekolah.length + " sekolah). Sila taip nama sekolah anda.";
-        inputSekolahNode.disabled = false; 
-      } else {
-        throw new Error(data.message || 'Data sekolah kosong atau format tidak sepadan.');
-      }
-    })
-    .catch(err => {
-      console.error("Ralat Fetch:", err);
-      statusDiv.className = "mb-4 text-xs font-semibold text-red-600 bg-red-50 p-3 rounded-lg";
-      statusDiv.innerText = "❌ Gagal memuat turun senarai sekolah. Ralat: " + err.message + ". Sila semak semula URL Deployment anda.";
-    });
+    if(WEB_APP_URL !== "GANTIKAN_DENGAN_URL_WEB_APP_BARU_ANDA") {
+      fetch(WEB_APP_URL, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        }
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Respons rangkaian tidak OK');
+        }
+        return res.json();
+      })
+      .then(data => { 
+        if(data && data.result === "success" && Array.isArray(data.sekolah)) {
+          senaraiSekolah = data.sekolah;
+          statusDiv.className = "mb-4 text-xs font-semibold text-emerald-600 bg-emerald-50 p-3 rounded-lg";
+          statusDiv.innerText = "✅ " + senaraiSekolah.length + " buah sekolah berjaya dimuat turun. Sila taip untuk mula carian.";
+          inputSekolahNode.disabled = false; 
+        } else {
+          throw new Error(data.message || 'Respons tidak mempunyai senarai sekolah yang sah.');
+        }
+      })
+      .catch(err => {
+        console.error("Ralat memuat turun data sekolah:", err);
+        statusDiv.className = "mb-4 text-xs font-semibold text-red-600 bg-red-50 p-3 rounded-lg";
+        statusDiv.innerText = "❌ Gagal memuat turun senarai sekolah. Ralat: " + err.message + ". Sila semak semula nama tab Sheet / URL Deployment anda.";
+      });
+    } else {
+      statusDiv.className = "mb-4 text-xs font-semibold text-amber-600 bg-amber-50 p-3 rounded-lg";
+      statusDiv.innerText = "⚠️ Sila masukkan URL Web App yang sah di dalam kod HTML (const WEB_APP_URL).";
+    }
 
     // --- CARIAN AUTOMATIK SEKOLAH (CORS & Mobile Friendly) ---
     const inpSekolah = document.getElementById("inputNamaSekolah");
@@ -264,13 +293,11 @@
       senaraiSekolah.forEach(sk => {
         if (sk.nama && sk.nama.toUpperCase().includes(val.toUpperCase()) && count < 6) {
           let b = document.createElement("DIV");
-          // Bold pada huruf carian
           let startIndex = sk.nama.toUpperCase().indexOf(val.toUpperCase());
           let matchText = sk.nama.substr(startIndex, val.length);
           b.innerHTML = sk.nama.substring(0, startIndex) + "<strong>" + matchText + "</strong>" + sk.nama.substring(startIndex + val.length);
           b.innerHTML += `<input type='hidden' value="${sk.nama}" data-kod="${sk.kod}" data-kat="${sk.kategori}">`;
           
-          // Menggunakan 'pointerdown' supaya mesra mobile tap & desktop click
           b.addEventListener("pointerdown", function(e) {
             let hiddenInput = this.getElementsByTagName("input")[0];
             let namaSekolahDipilih = hiddenInput.value;
