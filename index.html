@@ -30,11 +30,11 @@
     
     <!-- SEKSYEN UTAMA (HOMEPAGE) -->
     <div id="seksyenUtama" class="fade-slide">
-      <!-- Image Slider Slideshow (Cun & Fit) -->
+      <!-- Image Slider Slideshow -->
       <div class="relative overflow-hidden rounded-2xl bg-slate-200 shadow-xl border border-slate-100 aspect-[16/10] sm:aspect-[21/9]">
-        <!-- Sila pastikan anda menggantikan pautan di bawah dengan URL Raw GitHub anda sendiri jika mahu -->
-        <img class="mySlides w-full h-full object-cover hidden" src="https://raw.githubusercontent.com/[USERNAME_ANDA]/[NAMA_REPO_ANDA]/main/slide1.jpg" alt="Hebahan 1">
-        <img class="mySlides w-full h-full object-cover hidden" src="https://raw.githubusercontent.com/[USERNAME_ANDA]/[NAMA_REPO_ANDA]/main/slide2.jpg" alt="Hebahan 2">
+        <!-- Menggunakan imej placeholder pendidikan yang stabil -->
+        <img class="mySlides w-full h-full object-cover hidden" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Hebahan 1">
+        <img class="mySlides w-full h-full object-cover hidden" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Hebahan 2">
         
         <!-- Slider Controllers -->
         <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
@@ -103,7 +103,7 @@
             <!-- BLOK UTAMA DINAMIK BERDASARKAN TREK -->
             <div id="fieldsDinamik" class="space-y-4"></div>
 
-            <!-- DOKUMEN TUGASAN/HASIL KERJA (NAMA LABEL BERUBAH DINAMIK) -->
+            <!-- DOKUMEN TUGASAN/HASIL KERJA -->
             <div>
               <label id="labelUploadDoc" class="block text-sm font-semibold text-slate-700 mb-1">Muat Naik Fail Tugasan *</label>
               <input type="file" id="inputDokumen" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
@@ -157,7 +157,8 @@
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzAKHmfxetTCl09rsXwdzm-T95cXQbj8pMUsvk2PsDuZgDmL10UJR9BSc0XMnQc4hfa/exec";
+    // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby6AswJeQNqxNHA2L-SEJ9ze8RSGLx6DC6D1RjWPDShrQ2qtZOyKF6WZV5DSW6Lw7XL/exec";
     
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
@@ -183,7 +184,7 @@
       .then(data => { if(data.result === "success") senaraiSekolah = data.sekolah; })
       .catch(err => console.error("Ralat data sekolah:", err));
 
-    // --- CARIAN AUTOMATIK SEKOLAH ---
+    // --- CARIAN AUTOMATIK SEKOLAH (DENGAN RECONCILED HIGHLIGHT) ---
     const inpSekolah = document.getElementById("inputNamaSekolah");
     const inpKod = document.getElementById("inputKodSekolah");
     const listContainer = document.getElementById("autocompleteList");
@@ -195,9 +196,15 @@
       let count = 0;
       
       senaraiSekolah.forEach(sk => {
-        if (sk.nama.toUpperCase().includes(val.toUpperCase()) && count < 6) {
+        let idx = sk.nama.toUpperCase().indexOf(val.toUpperCase());
+        if (idx > -1 && count < 6) {
           let b = document.createElement("DIV");
-          b.innerHTML = "<strong>" + sk.nama.substr(0, val.length) + "</strong>" + sk.nama.substr(val.length);
+          
+          // Memisahkan teks untuk highlight perkataan carian secara tepat di mana-mana kedudukan nama sekolah
+          let originalText = sk.nama;
+          let highlighted = originalText.substring(0, idx) + "<strong>" + originalText.substring(idx, idx + val.length) + "</strong>" + originalText.substring(idx + val.length);
+          b.innerHTML = highlighted;
+          
           b.innerHTML += `<input type='hidden' value="${sk.nama}" data-kod="${sk.kod}" data-kat="${sk.kategori}">`;
           b.addEventListener("click", function() {
             let hiddenInput = this.getElementsByTagName("input")[0];
@@ -205,10 +212,13 @@
             inpKod.value = hiddenInput.getAttribute("data-kod");
             
             kategoriSekolahTerpilih = hiddenInput.getAttribute("data-kat");
-            if(kategoriSekolahTerpilih.toLowerCase() === "rendah") {
+            let kat = kategoriSekolahTerpilih.toLowerCase().trim();
+            if(kat === "rendah") {
               document.getElementById("katRendah").checked = true;
-            } else if(kategoriSekolahTerpilih.toLowerCase() === "menengah") {
+              document.getElementById("katMenengah").checked = false;
+            } else if(kat === "menengah") {
               document.getElementById("katMenengah").checked = true;
+              document.getElementById("katRendah").checked = false;
             }
             closeAllLists();
           });
@@ -406,6 +416,11 @@
       const fileDoc = document.getElementById('inputDokumen').files[0];
       const fileReceipt = document.getElementById('inputResit').files[0];
 
+      if (!fileDoc) {
+        Swal.fire("Fail Diperlukan", "Sila sertakan fail tugasan/dokumen projek anda sebelum menghantar.", "warning");
+        return;
+      }
+
       const readerDoc = new FileReader();
       readerDoc.onload = function(eDoc) {
         const docBase64 = eDoc.target.result.split(',')[1];
@@ -446,7 +461,7 @@
           formData.subtema = document.getElementsByName('subtema')[0].value;
           if (selectAcara.value === "Inovasi") {
             formData.jenisPenyertaan = document.getElementById('jenisPenyertaan').value;
-            formData.namaKumpulan = document.getElementsByName('namaKumpulan')[0].value;
+            formData.namaKumpulan = document.getElementsByName('namaKumpulan')[0].value || "";
           }
         } else {
           formData.tajukProjek = document.getElementsByName('tajukProjek')[0].value;
@@ -454,8 +469,8 @@
           formData.noHpGuru = document.getElementsByName('noHpGuru')[0].value;
           formData.emailMoeGuru = emailTapis;
           formData.peserta1 = document.getElementsByName('peserta1')[0].value;
-          formData.peserta2 = document.getElementsByName('peserta2')[0].value;
-          formData.peserta3 = document.getElementsByName('peserta3')[0].value;
+          formData.peserta2 = document.getElementsByName('peserta2')[0].value || "";
+          formData.peserta3 = document.getElementsByName('peserta3')[0].value || "";
         }
 
         fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(formData), mode: "no-cors" })
@@ -474,7 +489,7 @@
           });
         })
         .catch(err => {
-          Swal.fire("Ralat Sistem", "Penghantaran gagal. Sila periksa semula rangkaian anda.", "error");
+          Swal.fire("Ralat Sistem", "Penghantaran gagal. Sila periksa semula sambungan internet anda.", "error");
         });
       }
     }
