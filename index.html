@@ -210,62 +210,45 @@
   </div>
 
   <script>
-    // MASUKKAN URL DEPLOYMENT BARU ANDA DI SINI
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxGWbmIDtiTXQjEQ8g4RjImdqMTvPKRB4wf8a7H1uSH2B8CX1BLrLDx7sUNUPRMIjHY/exec";
+    // Tampal URL Web App baru dari Langkah 1 di bawah ini:
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby74enky8chy-9GE0-znHHxjr7CRr9obpAF_jewf0BFRvNgm4wvpnQ5y0qqzEZMgXQG/exec";
     
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
 
-    // --- LOGIK SLIDESHOW HOMEPAGE ---
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) { showSlides(slideIndex += n); }
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      if (slides.length === 0) return;
-      if (n > slides.length) {slideIndex = 1}    
-      if (n < 1) {slideIndex = slides.length}
-      
-      for (i = 0; i < slides.length; i++) { 
-        slides[i].classList.add("slide-tersembunyi"); 
-        slides[i].classList.remove("fade");
-      }
-      
-      if(slides[slideIndex-1]) {
-        slides[slideIndex-1].classList.remove("slide-tersembunyi");
-        slides[slideIndex-1].classList.add("fade");
-      }
-    }
-    setInterval(() => { plusSlides(1); }, 5000);
-
-    // --- FETCH DATA SEKOLAH DENGAN ERROR HANDLING & STATUS ---
     const statusDiv = document.getElementById("statusPemuatanSekolah");
     const inputSekolahNode = document.getElementById("inputNamaSekolah");
 
-    fetch(WEB_APP_URL)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Respons rangkaian tidak OK');
-        }
-        return res.json();
-      })
-      .then(data => { 
-        if(data && data.result === "success" && Array.isArray(data.sekolah)) {
-          senaraiSekolah = data.sekolah;
-          statusDiv.className = "mb-4 text-xs font-semibold text-emerald-600 bg-emerald-50 p-3 rounded-lg";
-          statusDiv.innerText = "✅ Senarai sekolah berjaya dimuat turun. Sila mula menaip.";
-          inputSekolahNode.disabled = false; // Aktifkan carian sekolah
-        } else {
-          throw new Error('Data sekolah tidak dijumpai dalam respons');
-        }
-      })
-      .catch(err => {
-        console.error("Ralat memuat turun data sekolah:", err);
-        statusDiv.className = "mb-4 text-xs font-semibold text-red-600 bg-red-50 p-3 rounded-lg";
-        statusDiv.innerText = "❌ Gagal memuat turun senarai sekolah. Sila refresh halaman atau hubungi urus setia.";
-      });
+    // Gantikan fungsi Fetch lama dengan fungsi di bawah
+    fetch(WEB_APP_URL, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      }
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Respons rangkaian tidak memuaskan');
+      }
+      return res.json();
+    })
+    .then(data => { 
+      if (data && data.result === "success" && Array.isArray(data.sekolah)) {
+        senaraiSekolah = data.sekolah;
+        
+        // Kemas kini paparan status & aktifkan semula input carian
+        statusDiv.className = "mb-4 text-xs font-semibold text-emerald-600 bg-emerald-50 p-3 rounded-lg";
+        statusDiv.innerText = "✅ Senarai sekolah berjaya dimuat turun (" + senaraiSekolah.length + " sekolah). Sila taip nama sekolah anda.";
+        inputSekolahNode.disabled = false; 
+      } else {
+        throw new Error(data.message || 'Data sekolah kosong atau format tidak sepadan.');
+      }
+    })
+    .catch(err => {
+      console.error("Ralat Fetch:", err);
+      statusDiv.className = "mb-4 text-xs font-semibold text-red-600 bg-red-50 p-3 rounded-lg";
+      statusDiv.innerText = "❌ Gagal memuat turun senarai sekolah. Ralat: " + err.message + ". Sila semak semula URL Deployment anda.";
+    });
 
     // --- CARIAN AUTOMATIK SEKOLAH (CORS & Mobile Friendly) ---
     const inpSekolah = document.getElementById("inputNamaSekolah");
