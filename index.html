@@ -8,10 +8,36 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
-    .autocomplete-items { position: absolute; border: 1px solid #e2e8f0; border-bottom: none; border-top: none; z-index: 99; top: 100%; left: 0; right: 0; border-radius: 0 0 12px 12px; max-height: 200px; overflow-y: auto; }
-    .autocomplete-items div { padding: 10px; cursor: pointer; background-color: #fff; border-bottom: 1px solid #e2e8f0; }
-    .autocomplete-items div:hover { background-color: #f1f5f9; }
-    .fade-slide { transition: all 0.4s ease-in-out; }
+    /* Elakkan pertembungan class hidden Tailwind v4 dengan slideshow */
+    .slide-tersembunyi {
+      display: none !important;
+    }
+
+    .autocomplete-items { 
+      position: absolute; 
+      border: 1px solid #e2e8f0; 
+      border-bottom: none; 
+      border-top: none; 
+      z-index: 99; 
+      top: 100%; 
+      left: 0; 
+      right: 0; 
+      border-radius: 0 0 12px 12px; 
+      max-height: 200px; 
+      overflow-y: auto; 
+    }
+    .autocomplete-items div { 
+      padding: 12px; 
+      cursor: pointer; 
+      background-color: #fff; 
+      border-bottom: 1px solid #e2e8f0; 
+    }
+    .autocomplete-items div:hover { 
+      background-color: #f1f5f9; 
+    }
+    .fade-slide { 
+      transition: all 0.4s ease-in-out; 
+    }
     
     /* Animasi Fade untuk Slideshow */
     .fade {
@@ -40,11 +66,10 @@
     
     <!-- SEKSYEN UTAMA (HOMEPAGE) -->
     <div id="seksyenUtama" class="fade-slide">
-      <!-- Image Slider Slideshow (Ketinggian dipertingkat, tiada imej terpotong, background putih jika gambar pendek) -->
-      <div class="relative overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100 aspect-[3/2] sm:aspect-[3/2]">
-        <!-- Sila pastikan anda menggantikan pautan di bawah dengan URL Raw GitHub anda sendiri jika mahu -->
-        <img class="mySlides w-full h-full object-contain bg-white hidden" src="https://cdn.phototourl.com/free/2026-07-16-b02aaf64-9d07-415e-a600-8040758f0e7f.jpg" alt="Hebahan 1">
-        <img class="mySlides w-full h-full object-contain bg-white hidden" src="https://cdn.phototourl.com/free/2026-07-16-efec3f87-6eb9-47ec-9088-c6f17bdf3329.jpg" alt="Hebahan 2">
+      <!-- Image Slider Slideshow -->
+      <div class="relative overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100 aspect-[3/2]">
+        <img class="mySlides w-full h-full object-contain bg-white slide-tersembunyi" src="https://cdn.phototourl.com/free/2026-07-16-b02aaf64-9d07-415e-a600-8040758f0e7f.jpg" alt="Hebahan 1">
+        <img class="mySlides w-full h-full object-contain bg-white slide-tersembunyi" src="https://cdn.phototourl.com/free/2026-07-16-efec3f87-6eb9-47ec-9088-c6f17bdf3329.jpg" alt="Hebahan 2">
         
         <!-- Slider Controllers -->
         <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
@@ -73,13 +98,13 @@
         <form id="formPendaftaran" onsubmit="handleFormSubmit(event)" autocomplete="off">
           <input type="hidden" id="inputTrek" name="trek" value="">
 
-          <!-- PILIH ACARA (SENTIASA KELUAR DULU) -->
+          <!-- PILIH ACARA -->
           <div class="mb-6">
             <label class="block text-sm font-semibold text-slate-700 mb-2">Pilih Acara / Pertandingan *</label>
             <select id="selectAcara" name="acara" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-slate-800 transition-all cursor-pointer"></select>
           </div>
 
-          <!-- KONTEN BORANG DI BAWAH HANYA AKAN MUNCUL SELEPAS ACARA DIPILIH -->
+          <!-- KONTEN BORANG DI BAWAH -->
           <div id="wrapperBorangBawah" class="hidden space-y-6">
             
             <!-- AUTOCOMPLETE CARIAN SEKOLAH -->
@@ -95,7 +120,7 @@
               </div>
             </div>
 
-            <!-- KATEGORI SEKOLAH (AUTO-SELECTED) -->
+            <!-- KATEGORI SEKOLAH -->
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori Sekolah *</label>
               <div class="grid grid-cols-2 gap-4">
@@ -113,15 +138,15 @@
             <!-- BLOK UTAMA DINAMIK BERDASARKAN TREK -->
             <div id="fieldsDinamik" class="space-y-4"></div>
 
-            <!-- DOKUMEN TUGASAN/HASIL KERJA (NAMA LABEL BERUBAH DINAMIK) -->
+            <!-- DOKUMEN TUGASAN/HASIL KERJA -->
             <div>
               <label id="labelUploadDoc" class="block text-sm font-semibold text-slate-700 mb-1">Muat Naik Fail Tugasan *</label>
               <input type="file" id="inputDokumen" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
-              <p class="text-xs text-amber-600 font-medium mt-1">⚠️ Nota: Jika tugasan mengandungi berbilang fail (slaid, dokumen, imej), sila himpunkan ke dalam format <b>.ZIP</b> atau gabungkan menjadi satu fail <b>.PDF</b> sebelum muat naik.</p>
+              <p class="text-xs text-amber-600 font-medium mt-1">⚠️ Nota: Jika tugasan mengandungi berbilang fail, sila himpunkan ke dalam format <b>.ZIP</b> atau gabungkan menjadi satu fail <b>.PDF</b> sebelum muat naik.</p>
               <div id="containerTemplateBtn" class="mt-2 hidden"></div>
             </div>
 
-            <!-- SKRIN PRE-NOTIS PEMBAYARAN ONLINE (POSTER & CITM SAHAJA) -->
+            <!-- SKRIN PRE-NOTIS PEMBAYARAN ONLINE -->
             <div id="divPembayaran" class="hidden">
               <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-4 shadow-inner">
                 <h4 class="text-sm font-bold text-blue-900 uppercase tracking-wide">Maklumat Pembayaran</h4>
@@ -148,18 +173,15 @@
     </div>
   </main>
 
-  <!-- MODAL TREK (Siri penambahbaikan imej dan penjajaran tengah) -->
+  <!-- MODAL TREK -->
   <div id="modalTrek" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
     <div id="modalContent" class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative">
-      <!-- Butang Tutup di penjuru kanan atas -->
       <button id="btnCloseModal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer">X</button>
       
-      <!-- Tajuk diposisikan ke tengah (Centered) -->
       <div class="text-center pb-4 border-b border-slate-100">
         <h3 class="text-xl font-bold text-slate-900">Pilih Trek Inovasi</h3>
       </div>
       
-      <!-- Butang Trek Menggunakan Imej Sepenuhnya -->
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <button id="pilihTrekGuru" class="group text-left border-2 border-slate-200 hover:border-blue-500 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all cursor-pointer">
           <div class="aspect-[4/3] overflow-hidden bg-slate-100">
@@ -188,7 +210,7 @@
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
 
-    // --- LOGIK SLIDESHOW HOMEPAGE ---
+    // --- LOGIK SLIDESHOW HOMEPAGE (MENGGUNAKAN KELAS Khas) ---
     let slideIndex = 1;
     showSlides(slideIndex);
 
@@ -196,28 +218,33 @@
     function showSlides(n) {
       let i;
       let slides = document.getElementsByClassName("mySlides");
+      if (slides.length === 0) return;
       if (n > slides.length) {slideIndex = 1}    
       if (n < 1) {slideIndex = slides.length}
       
       for (i = 0; i < slides.length; i++) { 
-        slides[i].classList.add("hidden"); 
-        slides[i].classList.remove("fade"); // Buang class fade lama
+        slides[i].classList.add("slide-tersembunyi"); 
+        slides[i].classList.remove("fade");
       }
       
       if(slides[slideIndex-1]) {
-        slides[slideIndex-1].classList.remove("hidden");
-        slides[slideIndex-1].classList.add("fade"); // Tambah class fade baru
+        slides[slideIndex-1].classList.remove("slide-tersembunyi");
+        slides[slideIndex-1].classList.add("fade");
       }
     }
     setInterval(() => { plusSlides(1); }, 5000);
 
-    // Ambil data sekolah
+    // Dapatkan senarai sekolah
     fetch(WEB_APP_URL)
       .then(res => res.json())
-      .then(data => { if(data.result === "success") senaraiSekolah = data.sekolah; })
-      .catch(err => console.error("Ralat data sekolah:", err));
+      .then(data => { 
+        if(data.result === "success") {
+          senaraiSekolah = data.sekolah; 
+        }
+      })
+      .catch(err => console.error("Ralat memuat turun data sekolah:", err));
 
-    // --- CARIAN AUTOMATIK SEKOLAH ---
+    // --- CARIAN AUTOMATIK SEKOLAH (Mesra Mobile & Laptop) ---
     const inpSekolah = document.getElementById("inputNamaSekolah");
     const inpKod = document.getElementById("inputKodSekolah");
     const listContainer = document.getElementById("autocompleteList");
@@ -233,7 +260,9 @@
           let b = document.createElement("DIV");
           b.innerHTML = "<strong>" + sk.nama.substr(0, val.length) + "</strong>" + sk.nama.substr(val.length);
           b.innerHTML += `<input type='hidden' value="${sk.nama}" data-kod="${sk.kod}" data-kat="${sk.kategori}">`;
-          b.addEventListener("click", function() {
+          
+          // Menggunakan 'mousedown' atau 'click' agar serasi dengan semua peranti
+          b.addEventListener("mousedown", function(e) {
             let hiddenInput = this.getElementsByTagName("input")[0];
             inpSekolah.value = hiddenInput.value;
             inpKod.value = hiddenInput.getAttribute("data-kod");
@@ -255,7 +284,7 @@
     function closeAllLists() { listContainer.innerHTML = ""; }
     document.addEventListener("click", function (e) { if (e.target != inpSekolah) closeAllLists(); });
 
-    // --- NAVIGASI DAN PENGENDALIAN TREK/ACARA ---
+    // --- NAVIGASI DAN PENGENDALIAN TREK ---
     const modalTrek = document.getElementById('modalTrek');
     const modalContent = document.getElementById('modalContent');
     const btnSertai = document.getElementById('btnSertai');
@@ -299,14 +328,15 @@
           let opt = document.createElement('option'); opt.value = ac; opt.innerText = ac; selectAcara.appendChild(opt);
         });
       }
-      seksyenUtama.classList.add('hidden'); seksyenBorang.classList.remove('hidden');
+      seksyenUtama.classList.add('hidden'); 
+      seksyenBorang.classList.remove('hidden');
       setTimeout(() => { seksyenBorang.classList.remove('opacity-0', 'translate-y-4'); }, 50);
     }
 
     document.getElementById('pilihTrekGuru').addEventListener('click', () => paparkanBorang('GURU'));
     document.getElementById('pilihTrekMurid').addEventListener('click', () => paparkanBorang('MURID'));
 
-    // --- PANDUAN MUNCUL SELEPAS PILIH PERTANDINGAN ---
+    // --- DINAMIK INPUT BAGI SETIAP ACARA ---
     selectAcara.addEventListener('change', (e) => {
       fieldsDinamik.innerHTML = "";
       let acara = e.target.value;
@@ -365,9 +395,11 @@
           jp.addEventListener('change', function() {
             const nk = document.getElementById('divNamaKumpulan');
             if(this.value === 'Kumpulan') {
-              nk.classList.remove('hidden'); nk.querySelector('input').setAttribute('required', true);
+              nk.classList.remove('hidden'); 
+              nk.querySelector('input').setAttribute('required', true);
             } else {
-              nk.classList.add('hidden'); nk.querySelector('input').removeAttribute('required');
+              nk.classList.add('hidden'); 
+              nk.querySelector('input').removeAttribute('required');
             }
           });
         }
@@ -409,10 +441,13 @@
 
     document.getElementById('btnKembali').addEventListener('click', () => {
       seksyenBorang.classList.add('opacity-0', 'translate-y-4');
-      setTimeout(() => { seksyenBorang.classList.add('hidden'); seksyenUtama.classList.remove('hidden'); }, 300);
+      setTimeout(() => { 
+        seksyenBorang.classList.add('hidden'); 
+        seksyenUtama.classList.remove('hidden'); 
+      }, 300);
     });
 
-    // --- PROSES SUBMIT & PARSING DENGAN SWEETALERT WAITING ---
+    // --- PROSES SUBMIT ---
     function handleFormSubmit(event) {
       event.preventDefault();
       
