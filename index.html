@@ -12,6 +12,16 @@
     .autocomplete-items div { padding: 10px; cursor: pointer; background-color: #fff; border-bottom: 1px solid #e2e8f0; }
     .autocomplete-items div:hover { background-color: #f1f5f9; }
     .fade-slide { transition: all 0.4s ease-in-out; }
+    
+    /* Animasi Fade untuk Slideshow */
+    .fade {
+      animation-name: fadeEffect;
+      animation-duration: 1.5s;
+    }
+    @keyframes fadeEffect {
+      from { opacity: 0.3; } 
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
@@ -188,8 +198,16 @@
       let slides = document.getElementsByClassName("mySlides");
       if (n > slides.length) {slideIndex = 1}    
       if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) { slides[i].classList.add("hidden"); }
-      if(slides[slideIndex-1]) slides[slideIndex-1].classList.remove("hidden");
+      
+      for (i = 0; i < slides.length; i++) { 
+        slides[i].classList.add("hidden"); 
+        slides[i].classList.remove("fade"); // Buang class fade lama
+      }
+      
+      if(slides[slideIndex-1]) {
+        slides[slideIndex-1].classList.remove("hidden");
+        slides[slideIndex-1].classList.add("fade"); // Tambah class fade baru
+      }
     }
     setInterval(() => { plusSlides(1); }, 5000);
 
