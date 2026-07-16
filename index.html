@@ -4,13 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate">
-  <title>PUICE 2026 - Petaling Utama Innovative Conference on Education</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>PUICE 2026 - Petaling Utama Innovation Conference on Education</title>
+  <!-- Menggunakan Tailwind CSS v3 yang jauh lebih stabil untuk pemprosesan kelas dinamik -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
-    .autocomplete-items { position: absolute; border: 1px solid #e2e8f0; border-bottom: none; border-top: none; z-index: 99; top: 100%; left: 0; right: 0; border-radius: 0 0 12px 12px; max-height: 200px; overflow-y: auto; }
-    .autocomplete-items div { padding: 10px; cursor: pointer; background-color: #fff; border-bottom: 1px solid #e2e8f0; }
-    .autocomplete-items div:hover { background-color: #f1f5f9; }
+    .autocomplete-items { 
+      position: absolute; 
+      z-index: 99; 
+      top: 100%; 
+      left: 0; 
+      right: 0; 
+      max-height: 200px; 
+      overflow-y: auto; 
+      background-color: #ffffff;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .autocomplete-items div { 
+      padding: 12px; 
+      cursor: pointer; 
+      background-color: #ffffff; 
+      border-bottom: 1px solid #e2e8f0; 
+      border-left: 1px solid #e2e8f0;
+      border-right: 1px solid #e2e8f0;
+    }
+    .autocomplete-items div:first-child {
+      border-top: 1px solid #e2e8f0;
+      border-radius: 8px 8px 0 0;
+    }
+    .autocomplete-items div:last-child {
+      border-radius: 0 0 12px 12px;
+    }
+    .autocomplete-items div:hover { 
+      background-color: #f1f5f9; 
+    }
     .fade-slide { transition: all 0.4s ease-in-out; }
   </style>
 </head>
@@ -20,7 +47,7 @@
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div>
         <h1 class="text-xl font-bold tracking-tight text-slate-900">PUICE <span class="text-blue-600">2026</span></h1>
-        <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovative Conference on Education</p>
+        <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovation Conference on Education</p>
       </div>
       <nav><span class="text-sm font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full">Pendaftaran Dibuka</span></nav>
     </div>
@@ -76,7 +103,7 @@
               <div class="relative sm:col-span-2">
                 <label class="block text-sm font-semibold text-slate-700 mb-1">Carian Nama Sekolah *</label>
                 <input type="text" id="inputNamaSekolah" placeholder="Taip nama sekolah..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500">
-                <div id="autocompleteList" class="autocomplete-items shadow-lg"></div>
+                <div id="autocompleteList" class="autocomplete-items"></div>
               </div>
               <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-1">Kod Sekolah *</label>
@@ -116,12 +143,12 @@
                 <h4 class="text-sm font-bold text-blue-900 uppercase tracking-wide">Maklumat Pembayaran</h4>
                 <p class="text-sm text-blue-900 mt-2 font-medium">Jumlah Amaun Perlu Dibayar:</p>
                 <p class="text-2xl font-black text-blue-700 mt-1">RM 50.00</p>
-                <p class="text-sm text-blue-900 mt-3 font-semibold">Online Transfer:</p>
+                <p class="text-sm text-blue-900 mt-3 font-semibold">📌 Online Transfer:</p>
                 <ul class="text-xs text-blue-800 mt-1 space-y-1 list-disc pl-4">
                   <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
                   <li><b>No. Akaun:</b> 1102 3036 33</li>
                 </ul>
-                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum meneruskan pengisian borang ini.</p>
+                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum meneruskan pengisian borang di bawah.</p>
               </div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Bukti Slip Resit Pembayaran *</label>
               <input type="file" id="inputResit" accept="image/*,application/pdf" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
@@ -147,11 +174,11 @@
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
         <!-- BUTANG GAMBAR GURU -->
         <button id="pilihTrekGuru" class="group overflow-hidden border-2 border-slate-200 hover:border-blue-500 hover:shadow-lg rounded-2xl bg-white transition-all cursor-pointer focus:outline-none">
-          <img src="https://cdn.phototourl.com/free/2026-07-16-3106ea18-b3d6-4927-84da-39591f07cb97.png" alt="Trek Inovasi Guru" class="w-full h-auto object-cover block group-hover:scale-102 transition-transform duration-300">
+          <img src="https://cdn.phototourl.com/free/2026-07-16-3106ea18-b3d6-4927-84da-39591f07cb97.png" alt="Trek Inovasi Guru" class="w-full h-auto object-cover block group-hover:scale-105 transition-transform duration-300">
         </button>
         <!-- BUTANG GAMBAR MURID -->
         <button id="pilihTrekMurid" class="group overflow-hidden border-2 border-slate-200 hover:border-emerald-500 hover:shadow-lg rounded-2xl bg-white transition-all cursor-pointer focus:outline-none">
-          <img src="https://cdn.phototourl.com/free/2026-07-16-438110f4-35f1-4824-b7c0-123366356282.png" alt="Trek Inovasi Murid" class="w-full h-auto object-cover block group-hover:scale-102 transition-transform duration-300">
+          <img src="https://cdn.phototourl.com/free/2026-07-16-438110f4-35f1-4824-b7c0-123366356282.png" alt="Trek Inovasi Murid" class="w-full h-auto object-cover block group-hover:scale-105 transition-transform duration-300">
         </button>
       </div>
     </div>
@@ -179,13 +206,22 @@
     }
     setInterval(() => { plusSlides(1); }, 5000);
 
-    // Ambil data sekolah
+    // Ambil data sekolah dengan penanganan ralat
     fetch(WEB_APP_URL)
       .then(res => res.json())
-      .then(data => { if(data.result === "success") senaraiSekolah = data.sekolah; })
-      .catch(err => console.error("Ralat data sekolah:", err));
+      .then(data => { 
+        if(data && data.result === "success" && Array.isArray(data.sekolah)) {
+          senaraiSekolah = data.sekolah; 
+          console.log("Data sekolah berjaya dimuat turun:", senaraiSekolah.length, "sekolah.");
+        } else {
+          console.error("Format data sekolah tidak betul dari GAS.");
+        }
+      })
+      .catch(err => {
+        console.error("Ralat rangkaian memuat turun data sekolah:", err);
+      });
 
-    // --- CARIAN AUTOMATIK SEKOLAH ---
+    // --- CARIAN AUTOMATIK SEKOLAH (DENGAN RECONCILED HIGHLIGHT DAN PERTAHANAN RALAT KUKUH) ---
     const inpSekolah = document.getElementById("inputNamaSekolah");
     const inpKod = document.getElementById("inputKodSekolah");
     const listContainer = document.getElementById("autocompleteList");
@@ -197,33 +233,42 @@
       let count = 0;
       
       senaraiSekolah.forEach(sk => {
-        let idx = sk.nama.toUpperCase().indexOf(val.toUpperCase());
-        if (idx > -1 && count < 6) {
-          let b = document.createElement("DIV");
+        // Memastikan entiti sk dan sk.nama wujud (mengelakkan kerosakan akibat sel kosong di Sheets)
+        if (sk && sk.nama) {
+          let skNama = String(sk.nama);
+          let skKod = sk.kod ? String(sk.kod) : "";
+          let skKat = sk.kategori ? String(sk.kategori) : "";
           
-          let originalText = sk.nama;
-          let highlighted = originalText.substring(0, idx) + "<strong>" + originalText.substring(idx, idx + val.length) + "</strong>" + originalText.substring(idx + val.length);
-          b.innerHTML = highlighted;
-          
-          b.innerHTML += `<input type='hidden' value="${sk.nama}" data-kod="${sk.kod}" data-kat="${sk.kategori}">`;
-          b.addEventListener("click", function() {
-            let hiddenInput = this.getElementsByTagName("input")[0];
-            inpSekolah.value = hiddenInput.value;
-            inpKod.value = hiddenInput.getAttribute("data-kod");
+          let idx = skNama.toUpperCase().indexOf(val.toUpperCase());
+          if (idx > -1 && count < 6) {
+            let b = document.createElement("DIV");
             
-            kategoriSekolahTerpilih = hiddenInput.getAttribute("data-kat");
-            let kat = kategoriSekolahTerpilih.toLowerCase().trim();
-            if(kat === "rendah") {
-              document.getElementById("katRendah").checked = true;
-              document.getElementById("katMenengah").checked = false;
-            } else if(kat === "menengah") {
-              document.getElementById("katMenengah").checked = true;
-              document.getElementById("katRendah").checked = false;
-            }
-            closeAllLists();
-          });
-          listContainer.appendChild(b);
-          count++;
+            // Highlight perkataan secara fleksibel mengikut kedudukan carian
+            let highlighted = skNama.substring(0, idx) + "<strong>" + skNama.substring(idx, idx + val.length) + "</strong>" + skNama.substring(idx + val.length);
+            b.innerHTML = highlighted;
+            
+            // Simpan data mentah ke dalam atribut input tersembunyi dengan selamat
+            b.innerHTML += `<input type='hidden' value="${skNama.replace(/"/g, '&quot;')}" data-kod="${skKod}" data-kat="${skKat}">`;
+            
+            b.addEventListener("click", function() {
+              let hiddenInput = this.getElementsByTagName("input")[0];
+              inpSekolah.value = hiddenInput.value;
+              inpKod.value = hiddenInput.getAttribute("data-kod");
+              
+              kategoriSekolahTerpilih = hiddenInput.getAttribute("data-kat");
+              let kat = kategoriSekolahTerpilih.toLowerCase().trim();
+              if(kat === "rendah") {
+                document.getElementById("katRendah").checked = true;
+                document.getElementById("katMenengah").checked = false;
+              } else if(kat === "menengah") {
+                document.getElementById("katMenengah").checked = true;
+                document.getElementById("katRendah").checked = false;
+              }
+              closeAllLists();
+            });
+            listContainer.appendChild(b);
+            count++;
+          }
         }
       });
     });
