@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate">
-  <title>PUICE 2026 - Petaling Utama Innovation Conference on Education</title>
+  <title>PUICE 2026 - Petaling Utama Innovative Conference on Education</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
@@ -20,7 +20,7 @@
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div>
         <h1 class="text-xl font-bold tracking-tight text-slate-900">PUICE <span class="text-blue-600">2026</span></h1>
-        <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovation Conference on Education</p>
+        <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovative Conference on Education</p>
       </div>
       <nav><span class="text-sm font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full">Pendaftaran Dibuka</span></nav>
     </div>
@@ -30,11 +30,10 @@
     
     <!-- SEKSYEN UTAMA (HOMEPAGE) -->
     <div id="seksyenUtama" class="fade-slide">
-      <!-- Image Slider Slideshow -->
-      <div class="relative overflow-hidden rounded-2xl bg-slate-200 shadow-xl border border-slate-100 aspect-[16/10] sm:aspect-[21/9]">
-        <!-- Menggunakan imej placeholder pendidikan yang stabil -->
-        <img class="mySlides w-full h-full object-cover hidden" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Hebahan 1">
-        <img class="mySlides w-full h-full object-cover hidden" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Hebahan 2">
+      <!-- Image Slider Slideshow (Ketinggian dipertingkat & tiada lagi isu terpotong) -->
+      <div class="relative overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100 h-[250px] sm:h-[480px] w-full flex items-center justify-center">
+        <img class="mySlides w-full h-full object-contain hidden bg-white" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Hebahan 1">
+        <img class="mySlides w-full h-full object-contain hidden bg-white" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Hebahan 2">
         
         <!-- Slider Controllers -->
         <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
@@ -63,16 +62,16 @@
         <form id="formPendaftaran" onsubmit="handleFormSubmit(event)" autocomplete="off">
           <input type="hidden" id="inputTrek" name="trek" value="">
 
-          <!-- PILIH ACARA (SENTIASA KELUAR DULU) -->
+          <!-- PILIH ACARA -->
           <div class="mb-6">
             <label class="block text-sm font-semibold text-slate-700 mb-2">Pilih Acara / Pertandingan *</label>
             <select id="selectAcara" name="acara" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-slate-800 transition-all cursor-pointer"></select>
           </div>
 
-          <!-- KONTEN BORANG DI BAWAH HANYA AKAN MUNCUL SELEPAS ACARA DIPILIH -->
+          <!-- KONTEN BORANG BAWAH -->
           <div id="wrapperBorangBawah" class="hidden space-y-6">
             
-            <!-- AUTOCOMPLETE CARIAN SEKOLAH -->
+            <!-- AUTOCOMPLETE SEKOLAH -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div class="relative sm:col-span-2">
                 <label class="block text-sm font-semibold text-slate-700 mb-1">Carian Nama Sekolah *</label>
@@ -100,7 +99,7 @@
               </div>
             </div>
 
-            <!-- BLOK UTAMA DINAMIK BERDASARKAN TREK -->
+            <!-- BLOK UTAMA DINAMIK -->
             <div id="fieldsDinamik" class="space-y-4"></div>
 
             <!-- DOKUMEN TUGASAN/HASIL KERJA -->
@@ -117,12 +116,12 @@
                 <h4 class="text-sm font-bold text-blue-900 uppercase tracking-wide">Maklumat Pembayaran</h4>
                 <p class="text-sm text-blue-900 mt-2 font-medium">Jumlah Amaun Perlu Dibayar:</p>
                 <p class="text-2xl font-black text-blue-700 mt-1">RM 50.00</p>
-                <p class="text-sm text-blue-900 mt-3 font-semibold">📌 Online Transfer:</p>
+                <p class="text-sm text-blue-900 mt-3 font-semibold">Online Transfer:</p>
                 <ul class="text-xs text-blue-800 mt-1 space-y-1 list-disc pl-4">
                   <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
                   <li><b>No. Akaun:</b> 1102 3036 33</li>
                 </ul>
-                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum meneruskan pengisian borang di bawah.</p>
+                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum meneruskan pengisian borang ini.</p>
               </div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Bukti Slip Resit Pembayaran *</label>
               <input type="file" id="inputResit" accept="image/*,application/pdf" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
@@ -138,19 +137,21 @@
     </div>
   </main>
 
-  <!-- MODAL TREK -->
+  <!-- MODAL TREK (TEKS CENTERED & BUTTON GAMBAR TERKINI) -->
   <div id="modalTrek" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
     <div id="modalContent" class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300">
-      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
-        <h3 class="text-xl font-bold text-slate-900">Pilih Trek Inovasi</h3>
-        <button id="btnCloseModal" class="text-slate-400 hover:text-slate-600 font-bold cursor-pointer">X</button>
+      <div class="relative flex items-center justify-center pb-4 border-b border-slate-100">
+        <h3 class="text-xl font-bold text-slate-900 text-center">Pilih Trek Inovasi</h3>
+        <button id="btnCloseModal" class="absolute right-0 top-1 text-slate-400 hover:text-slate-600 font-bold cursor-pointer text-xl">✕</button>
       </div>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <button id="pilihTrekGuru" class="text-left p-5 border-2 border-slate-200 hover:border-blue-500 rounded-xl bg-white transition-all cursor-pointer">
-          <div class="text-2xl">👨‍🏫</div><h4 class="mt-2 font-bold">Trek Inovasi Guru</h4>
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <!-- BUTANG GAMBAR GURU -->
+        <button id="pilihTrekGuru" class="group overflow-hidden border-2 border-slate-200 hover:border-blue-500 hover:shadow-lg rounded-2xl bg-white transition-all cursor-pointer focus:outline-none">
+          <img src="https://cdn.phototourl.com/free/2026-07-16-3106ea18-b3d6-4927-84da-39591f07cb97.png" alt="Trek Inovasi Guru" class="w-full h-auto object-cover block group-hover:scale-102 transition-transform duration-300">
         </button>
-        <button id="pilihTrekMurid" class="text-left p-5 border-2 border-slate-200 hover:border-emerald-500 rounded-xl bg-white transition-all cursor-pointer">
-          <div class="text-2xl">🎒</div><h4 class="mt-2 font-bold">Trek Inovasi Murid</h4>
+        <!-- BUTANG GAMBAR MURID -->
+        <button id="pilihTrekMurid" class="group overflow-hidden border-2 border-slate-200 hover:border-emerald-500 hover:shadow-lg rounded-2xl bg-white transition-all cursor-pointer focus:outline-none">
+          <img src="https://cdn.phototourl.com/free/2026-07-16-438110f4-35f1-4824-b7c0-123366356282.png" alt="Trek Inovasi Murid" class="w-full h-auto object-cover block group-hover:scale-102 transition-transform duration-300">
         </button>
       </div>
     </div>
@@ -158,7 +159,7 @@
 
   <script>
     // MASUKKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby6AswJeQNqxNHA2L-SEJ9ze8RSGLx6DC6D1RjWPDShrQ2qtZOyKF6WZV5DSW6Lw7XL/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzAKHmfxetTCl09rsXwdzm-T95cXQbj8pMUsvk2PsDuZgDmL10UJR9BSc0XMnQc4hfa/exec";
     
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
@@ -184,7 +185,7 @@
       .then(data => { if(data.result === "success") senaraiSekolah = data.sekolah; })
       .catch(err => console.error("Ralat data sekolah:", err));
 
-    // --- CARIAN AUTOMATIK SEKOLAH (DENGAN RECONCILED HIGHLIGHT) ---
+    // --- CARIAN AUTOMATIK SEKOLAH ---
     const inpSekolah = document.getElementById("inputNamaSekolah");
     const inpKod = document.getElementById("inputKodSekolah");
     const listContainer = document.getElementById("autocompleteList");
@@ -200,7 +201,6 @@
         if (idx > -1 && count < 6) {
           let b = document.createElement("DIV");
           
-          // Memisahkan teks untuk highlight perkataan carian secara tepat di mana-mana kedudukan nama sekolah
           let originalText = sk.nama;
           let highlighted = originalText.substring(0, idx) + "<strong>" + originalText.substring(idx, idx + val.length) + "</strong>" + originalText.substring(idx + val.length);
           b.innerHTML = highlighted;
@@ -282,7 +282,7 @@
     document.getElementById('pilihTrekGuru').addEventListener('click', () => paparkanBorang('GURU'));
     document.getElementById('pilihTrekMurid').addEventListener('click', () => paparkanBorang('MURID'));
 
-    // --- PANDUAN MUNCUL SELEPAS PILIH PERTANDINGAN ---
+    // --- PANDUAN LABEL DINAMIK MENGIKUT ACARA PERTANDINGAN ---
     selectAcara.addEventListener('change', (e) => {
       fieldsDinamik.innerHTML = "";
       let acara = e.target.value;
@@ -388,7 +388,7 @@
       setTimeout(() => { seksyenBorang.classList.add('hidden'); seksyenUtama.classList.remove('hidden'); }, 300);
     });
 
-    // --- PROSES SUBMIT & PARSING DENGAN SWEETALERT WAITING ---
+    // --- PROSES SUBMIT ---
     function handleFormSubmit(event) {
       event.preventDefault();
       
