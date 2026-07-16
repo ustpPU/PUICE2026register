@@ -30,11 +30,11 @@
     
     <!-- SEKSYEN UTAMA (HOMEPAGE) -->
     <div id="seksyenUtama" class="fade-slide">
-      <!-- Image Slider Slideshow (Cun & Fit) -->
-      <div class="relative overflow-hidden rounded-2xl bg-slate-200 shadow-xl border border-slate-100 aspect-[16/10] sm:aspect-[21/9]">
+      <!-- Image Slider Slideshow (Ketinggian dipertingkat, tiada imej terpotong, background putih jika gambar pendek) -->
+      <div class="relative overflow-hidden rounded-2xl bg-white shadow-xl border border-slate-100 aspect-[3/2] sm:aspect-[3/2]">
         <!-- Sila pastikan anda menggantikan pautan di bawah dengan URL Raw GitHub anda sendiri jika mahu -->
-        <img class="mySlides w-full h-full object-cover hidden" src="https://raw.githubusercontent.com/ustpPU/PUICE2026register/main/slide1.jpeg" alt="Hebahan 1">
-        <img class="mySlides w-full h-full object-cover hidden" src="https://raw.githubusercontent.com/ustpPU/PUICE2026register/main/slide2.jpeg" alt="Hebahan 2">
+        <img class="mySlides w-full h-full object-contain bg-white hidden" src="https://raw.githubusercontent.com/[USERNAME_ANDA]/[NAMA_REPO_ANDA]/main/slide1.jpg" alt="Hebahan 1">
+        <img class="mySlides w-full h-full object-contain bg-white hidden" src="https://raw.githubusercontent.com/[USERNAME_ANDA]/[NAMA_REPO_ANDA]/main/slide2.jpg" alt="Hebahan 2">
         
         <!-- Slider Controllers -->
         <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
@@ -122,7 +122,7 @@
                   <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
                   <li><b>No. Akaun:</b> 1102 3036 33</li>
                 </ul>
-                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum meneruskan pengisian borang ini.</p>
+                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum meneruskan pengisian borang di bawah.</p>
               </div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Bukti Slip Resit Pembayaran *</label>
               <input type="file" id="inputResit" accept="image/*,application/pdf" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
@@ -138,19 +138,35 @@
     </div>
   </main>
 
-  <!-- MODAL TREK -->
+  <!-- MODAL TREK (Siri penambahbaikan imej dan penjajaran tengah) -->
   <div id="modalTrek" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-    <div id="modalContent" class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300">
-      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+    <div id="modalContent" class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300 relative">
+      <!-- Butang Tutup di penjuru kanan atas -->
+      <button id="btnCloseModal" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-lg cursor-pointer">X</button>
+      
+      <!-- Tajuk diposisikan ke tengah (Centered) -->
+      <div class="text-center pb-4 border-b border-slate-100">
         <h3 class="text-xl font-bold text-slate-900">Pilih Trek Inovasi</h3>
-        <button id="btnCloseModal" class="text-slate-400 hover:text-slate-600 font-bold cursor-pointer">X</button>
       </div>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <button id="pilihTrekGuru" class="text-left p-5 border-2 border-slate-200 hover:border-blue-500 rounded-xl bg-white transition-all cursor-pointer">
-          <div class="text-2xl">👨‍🏫</div><h4 class="mt-2 font-bold">Trek Inovasi Guru</h4>
+      
+      <!-- Butang Trek Menggunakan Imej Sepenuhnya -->
+      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <button id="pilihTrekGuru" class="group text-left border-2 border-slate-200 hover:border-blue-500 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img src="https://cdn.phototourl.com/free/2026-07-16-3106ea18-b3d6-4927-84da-39591f07cb97.png" alt="Trek Inovasi Guru" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-4 text-center">
+            <h4 class="font-bold text-slate-800 text-sm group-hover:text-blue-600 transition-colors">Trek Inovasi Guru</h4>
+          </div>
         </button>
-        <button id="pilihTrekMurid" class="text-left p-5 border-2 border-slate-200 hover:border-emerald-500 rounded-xl bg-white transition-all cursor-pointer">
-          <div class="text-2xl">🎒</div><h4 class="mt-2 font-bold">Trek Inovasi Murid</h4>
+        
+        <button id="pilihTrekMurid" class="group text-left border-2 border-slate-200 hover:border-emerald-500 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all cursor-pointer">
+          <div class="aspect-[4/3] overflow-hidden bg-slate-100">
+            <img src="https://cdn.phototourl.com/free/2026-07-16-438110f4-35f1-4824-b7c0-123366356282.png" alt="Trek Inovasi Murid" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          </div>
+          <div class="p-4 text-center">
+            <h4 class="font-bold text-slate-800 text-sm group-hover:text-emerald-600 transition-colors">Trek Inovasi Murid</h4>
+          </div>
         </button>
       </div>
     </div>
