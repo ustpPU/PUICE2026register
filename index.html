@@ -375,13 +375,16 @@
         fieldsDinamik.innerHTML = htmlFields;
 
         const containerBtn = document.getElementById('containerTemplateBtn');
-        if (acara === "KmR") {
-          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1jqT-k9HAS6bI4nGp0ML271RnYU7_WgUN6OguSUgcL-Q/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg hover:bg-blue-100">Muat Turun Template OPR KmR ↗</a>`;
-          containerBtn.classList.remove('hidden');
-        } else if (acara === "PBL") {
-          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1YUazTgh5_rt9E7EWqf078fUY-d2V-KJDi-6tRhoRHT0/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg hover:bg-emerald-100">Muat Turun Template OPR PBL ↗</a>`;
-          containerBtn.classList.remove('hidden');
-        }
+if (acara === "KmR") {
+  containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1jqT-k9HAS6bI4nGp0ML271RnYU7_WgUN6OguSUgcL-Q/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg hover:bg-blue-100">Muat Turun Template OPR KmR ↗</a>`;
+  containerBtn.classList.remove('hidden');
+} else if (acara === "PBL") {
+  containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1YUazTgh5_rt9E7EWqf078fUY-d2V-KJDi-6tRhoRHT0/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg hover:bg-emerald-100">Muat Turun Template OPR PBL ↗</a>`;
+  containerBtn.classList.remove('hidden');
+} else if (acara === "PBL STEM") {
+  containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1JDeSKdeXG3qe_gkDhDxyn78RFlEJvQht/edit?usp=sharing&ouid=110130494883998446596&rtpof=true&sd=true" target="_blank" class="inline-block mt-2 text-xs font-bold text-purple-600 bg-purple-50 px-3 py-2 rounded-lg hover:bg-purple-100">Muat Turun Template OPR PBL STEM ↗</a>`;
+  containerBtn.classList.remove('hidden');
+}
       }
     });
 
