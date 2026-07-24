@@ -120,10 +120,10 @@
                 <p class="text-2xl font-black text-blue-700 mt-1">RM 50.00</p>
                 <p class="text-sm text-blue-900 mt-3 font-semibold">Online Transfer:</p>
                 <ul class="text-xs text-blue-800 mt-1 space-y-1 list-disc pl-4">
-  <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
-  <li><b>No. Akaun:</b> 1102 3036 33</li>
-  <li><b>Rujukan (Ref):</b> (Nama Pertandingan) - (Nama Pendek)<br><span class="opacity-75">Contoh: <i>Poster - Ahmad</i> atau <i>CITM - Ahmad</i></span></li>
-</ul>
+                  <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
+                  <li><b>No. Akaun:</b> 1102 3036 33</li>
+                  <li><b>Rujukan (Ref):</b> (Nama Pertandingan) - (Nama Pendek)<br><span class="opacity-75">Contoh: <i>Poster - Ahmad</i> atau <i>CITM - Ahmad</i></span></li>
+                </ul>
                 <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum melengkapkan pengisian borang ini.</p>
               </div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Bukti Slip Resit Pembayaran *</label>
@@ -376,16 +376,16 @@
         fieldsDinamik.innerHTML = htmlFields;
 
         const containerBtn = document.getElementById('containerTemplateBtn');
-if (acara === "KmR") {
-  containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1jqT-k9HAS6bI4nGp0ML271RnYU7_WgUN6OguSUgcL-Q/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg hover:bg-blue-100">Muat Turun Template OPR KmR ↗</a>`;
-  containerBtn.classList.remove('hidden');
-} else if (acara === "PBL") {
-  containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1YUazTgh5_rt9E7EWqf078fUY-d2V-KJDi-6tRhoRHT0/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg hover:bg-emerald-100">Muat Turun Template OPR PBL ↗</a>`;
-  containerBtn.classList.remove('hidden');
-} else if (acara === "PBL STEM") {
-  containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1JDeSKdeXG3qe_gkDhDxyn78RFlEJvQht/edit?usp=sharing&ouid=110130494883998446596&rtpof=true&sd=true" target="_blank" class="inline-block mt-2 text-xs font-bold text-purple-600 bg-purple-50 px-3 py-2 rounded-lg hover:bg-purple-100">Muat Turun Template OPR PBL STEM ↗</a>`;
-  containerBtn.classList.remove('hidden');
-}
+        if (acara === "KmR") {
+          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1jqT-k9HAS6bI4nGp0ML271RnYU7_WgUN6OguSUgcL-Q/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg hover:bg-blue-100">Muat Turun Template OPR KmR ↗</a>`;
+          containerBtn.classList.remove('hidden');
+        } else if (acara === "PBL") {
+          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1YUazTgh5_rt9E7EWqf078fUY-d2V-KJDi-6tRhoRHT0/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg hover:bg-emerald-100">Muat Turun Template OPR PBL ↗</a>`;
+          containerBtn.classList.remove('hidden');
+        } else if (acara === "PBL STEM") {
+          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1JDeSKdeXG3qe_gkDhDxyn78RFlEJvQht/edit?usp=sharing&ouid=110130494883998446596&rtpof=true&sd=true" target="_blank" class="inline-block mt-2 text-xs font-bold text-purple-600 bg-purple-50 px-3 py-2 rounded-lg hover:bg-purple-100">Muat Turun Template OPR PBL STEM ↗</a>`;
+          containerBtn.classList.remove('hidden');
+        }
       }
     });
 
@@ -493,18 +493,18 @@ if (acara === "KmR") {
         fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(formData), mode: "no-cors" })
         .then(() => {
           Swal.fire({
-  title: "Pendaftaran Dihantar!",
-  html: `
-    <p class="text-slate-700 text-sm mb-3">
-      E-mel pengesahan akan masuk ke <b>${emailTapis}</b> jika pendaftaran berjaya. Mohon semak folder <b>Spam / Junk</b> juga.
-    </p>
-    <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-700 text-left">
-      ⚠️ <b>Perhatian:</b> Jika pendaftaran tidak berjaya atau tiada e-mel pengesahan diterima, mohon semak semula saiz fail yang dimuat naik dan daftar semula.
-    </div>
-  `,
-  icon: "success",
-  confirmButtonText: "Kembali ke Utama"
-})
+            title: "Pendaftaran Dihantar!",
+            html: `
+              <p class="text-slate-700 text-sm mb-3">
+                E-mel pengesahan akan masuk ke <b>${emailTapis}</b> jika pendaftaran berjaya. Mohon semak folder <b>Spam / Junk</b> juga.
+              </p>
+              <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-700 text-left">
+                ⚠️ <b>Perhatian:</b> Jika pendaftaran tidak berjaya atau tiada e-mel pengesahan diterima, mohon semak semula saiz fail yang dimuat naik dan daftar semula.
+              </div>
+            `,
+            icon: "success",
+            confirmButtonText: "Kembali ke Utama"
+          }).then(() => {
             seksyenBorang.classList.add('opacity-0', 'translate-y-4');
             setTimeout(() => {
               seksyenBorang.classList.add('hidden');
