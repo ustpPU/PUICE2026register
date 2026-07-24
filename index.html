@@ -262,31 +262,63 @@
 
       setInputsRequired(false);
 
+      // --- LOGIK KAWALAN TARIKH BUKA & TUTUP ---
+      const now = new Date();
+      const tarikhTutupMalamNi = new Date('2026-07-24T23:59:59');
+      const tarikhTutupCITM = new Date('2026-08-11T23:59:59');
+      const tarikhBukaPoster = new Date('2026-08-17T00:00:00');
+
       if(trek === 'GURU') {
         document.getElementById('badgeTrek').innerText = "Trek Inovasi Guru";
         document.getElementById('badgeTrek').className = "text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-600";
         
-        // Logik semak tarikh untuk kunci Poster Digital secara automatik
-        const posterLocked = new Date() < new Date('2026-08-17T00:00:00');
-
         ["Poster Digital", "CITM", "Inovasi"].forEach(ac => {
           let opt = document.createElement('option');
           opt.value = ac;
           
-          if (ac === "Poster Digital" && posterLocked) {
-            opt.innerText = "Poster Digital (Dibuka mulai 17 Ogos)";
-            opt.disabled = true;
-            opt.className = "text-slate-400 bg-slate-100 font-medium";
-          } else {
-            opt.innerText = ac;
+          if (ac === "Poster Digital") {
+            if (now < tarikhBukaPoster) {
+              opt.innerText = "Poster Digital (Dibuka mulai 17 Ogos)";
+              opt.disabled = true;
+              opt.className = "text-slate-400 bg-slate-100 font-medium";
+            } else {
+              opt.innerText = ac;
+            }
+          } else if (ac === "CITM") {
+            if (now > tarikhTutupCITM) {
+              opt.innerText = "CITM (Pendaftaran Ditutup)";
+              opt.disabled = true;
+              opt.className = "text-slate-400 bg-slate-100 font-medium";
+            } else {
+              opt.innerText = ac;
+            }
+          } else if (ac === "Inovasi") {
+            if (now > tarikhTutupMalamNi) {
+              opt.innerText = "Inovasi (Pendaftaran Ditutup)";
+              opt.disabled = true;
+              opt.className = "text-slate-400 bg-slate-100 font-medium";
+            } else {
+              opt.innerText = ac;
+            }
           }
           selectAcara.appendChild(opt);
         });
       } else {
         document.getElementById('badgeTrek').innerText = "Trek Inovasi Murid";
         document.getElementById('badgeTrek').className = "text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-600";
+        
         ["PBL STEM", "KmR", "PBL"].forEach(ac => {
-          let opt = document.createElement('option'); opt.value = ac; opt.innerText = ac; selectAcara.appendChild(opt);
+          let opt = document.createElement('option');
+          opt.value = ac;
+          
+          if (now > tarikhTutupMalamNi) {
+            opt.innerText = `${ac} (Pendaftaran Ditutup)`;
+            opt.disabled = true;
+            opt.className = "text-slate-400 bg-slate-100 font-medium";
+          } else {
+            opt.innerText = ac;
+          }
+          selectAcara.appendChild(opt);
         });
       }
       seksyenUtama.classList.add('hidden'); seksyenBorang.classList.remove('hidden');
@@ -408,6 +440,20 @@
     // --- PROSES SUBMIT & PARSING ---
     function handleFormSubmit(event) {
       event.preventDefault();
+
+      const MAX_FILE_SIZE = 3 * 1024 * 1024; // Had 3MB
+      const fileDoc = document.getElementById('inputDokumen').files[0];
+      const fileReceipt = document.getElementById('inputResit').files[0];
+
+      if (fileDoc && fileDoc.size > MAX_FILE_SIZE) {
+        Swal.fire("Fail Terlalu Besar", "Sila pastikan saiz fail tugasan/projek tidak melebihi 3MB.", "warning");
+        return;
+      }
+
+      if (fileReceipt && fileReceipt.size > MAX_FILE_SIZE) {
+        Swal.fire("Fail Terlalu Besar", "Sila pastikan saiz resit pembayaran tidak melebihi 3MB.", "warning");
+        return;
+      }
       
       let trek = document.getElementById('inputTrek').value;
       let emailTapis = (trek === 'GURU') ? document.getElementsByName('emailMoe')[0].value.trim().toLowerCase() : document.getElementsByName('emailMoeGuru')[0].value.trim().toLowerCase();
@@ -429,9 +475,6 @@
         allowEscapeKey: false,
         didOpen: () => { Swal.showLoading(); }
       });
-
-      const fileDoc = document.getElementById('inputDokumen').files[0];
-      const fileReceipt = document.getElementById('inputResit').files[0];
 
       if (!fileDoc) {
         Swal.fire("Fail Diperlukan", "Sila sertakan fail tugasan/dokumen projek anda sebelum menghantar.", "warning");
