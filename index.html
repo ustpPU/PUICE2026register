@@ -32,9 +32,9 @@
     <div id="seksyenUtama" class="fade-slide">
       <!-- Image Slider Slideshow -->
       <div class="relative overflow-hidden rounded-2xl bg-slate-50 shadow-xl border border-slate-50 aspect-[4/3] sm:aspect-[16/9]">
-        <!-- Slide 1 (Lebih lebar) -->
+        <!-- Slide 1 -->
         <img class="mySlides w-full h-full object-contain hidden" src="https://cdn.phototourl.com/free/2026-07-16-4f01c664-ef3e-4f11-8a6a-8b56b07a4f35.jpg" alt="Hebahan 1">
-        <!-- Slide 2 (Lebih tinggi) -->
+        <!-- Slide 2 -->
         <img class="mySlides w-full h-full object-contain hidden" src="https://cdn.phototourl.com/free/2026-07-16-efec3f87-6eb9-47ec-9088-c6f17bdf3329.jpg" alt="Hebahan 2">
         
         <!-- Slider Controllers -->
@@ -42,7 +42,14 @@
         <button onclick="plusSlides(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❯</button>
       </div>
 
-      <div class="mt-12 text-center max-w-2xl mx-auto">
+      <div class="mt-8 text-center max-w-2xl mx-auto">
+        
+        <!-- BANNER LANJUTAN & COUNTDOWN AUTOMATIK -->
+        <div id="bannerLanjutan" class="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm transition-all duration-300">
+          <p id="teksNotis" class="text-sm font-semibold leading-relaxed"></p>
+          <div id="boxCountdown" class="mt-3 flex justify-center items-center space-x-2 text-amber-950 font-extrabold text-sm sm:text-base"></div>
+        </div>
+
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Serlahkan Inovasi Pendidikan Anda di PUICE 2026</h2>
         <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">Sertai platform persidangan inovasi berprestij anjuran PPD Petaling Utama.</p>
         <div class="mt-8">
@@ -164,6 +171,46 @@
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
 
+    // --- LOGIK COUNTDOWN HOMEPAGE & BANNER AUTOMATIK ---
+    function jalankanCountdown() {
+      const tarikhTamat = new Date('2026-07-27T23:59:59').getTime();
+      const banner = document.getElementById('bannerLanjutan');
+      const teksNotis = document.getElementById('teksNotis');
+      const boxCountdown = document.getElementById('boxCountdown');
+
+      function kemaskini() {
+        const sekarang = new Date().getTime();
+        const baki = tarikhTamat - sekarang;
+
+        if (baki > 0) {
+          const totalJam = Math.floor(baki / (1000 * 60 * 60));
+          const hari = Math.floor(totalJam / 24);
+          const jamBaki = totalJam % 24;
+          const minit = Math.floor((baki % (1000 * 60 * 60)) / (1000 * 60));
+          const saat = Math.floor((baki % (1000 * 60)) / 1000);
+
+          banner.className = "mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm";
+          teksNotis.innerHTML = `🔥 <b>PENGUMUMAN:</b> Pendaftaran bagi <b>Inovasi Guru, PBL STEM, KmR dan PBL Murid</b> DILANJUTKAN sehingga <b>Isnin, 27 Julai 2026 (11:59 Malam)</b>!`;
+          
+          boxCountdown.classList.remove('hidden');
+          boxCountdown.innerHTML = `
+            <span class="text-xs font-semibold mr-1">Masa Berbaki:</span>
+            <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${hari > 0 ? hari + ' Hari ' : ''}${jamBaki} Jam</span> : 
+            <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(minit).padStart(2, '0')} Minit</span> : 
+            <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(saat).padStart(2, '0')} Saat</span>
+          `;
+        } else {
+          banner.className = "mb-6 p-4 rounded-2xl bg-slate-100 border border-slate-200 text-slate-700 shadow-sm";
+          teksNotis.innerHTML = `⛔ Pendaftaran bagi <b>Inovasi Guru, PBL STEM, KmR, dan PBL Murid</b> telah <b>DITUTUP</b>.<br><span class="text-xs text-slate-500 font-medium mt-1 block">💡 Pendaftaran <b>CITM</b> (sehingga 11 Ogos) & <b>Poster Digital</b> (buka 17 Ogos) masih dibuka / bakal dibuka.</span>`;
+          boxCountdown.classList.add('hidden');
+        }
+      }
+
+      kemaskini();
+      setInterval(kemaskini, 1000);
+    }
+    jalankanCountdown();
+
     // --- LOGIK SLIDESHOW HOMEPAGE ---
     let slideIndex = 1;
     showSlides(slideIndex);
@@ -264,7 +311,7 @@
 
       // --- LOGIK KAWALAN TARIKH BUKA & TUTUP ---
       const now = new Date();
-      const tarikhTutupMalamNi = new Date('2026-07-24T23:59:59');
+      const tarikhTutupLanjutan = new Date('2026-07-27T23:59:59'); // DILANJUTKAN SEHINGGA 27 JULAI
       const tarikhTutupCITM = new Date('2026-08-11T23:59:59');
       const tarikhBukaPoster = new Date('2026-08-17T00:00:00');
 
@@ -293,7 +340,7 @@
               opt.innerText = ac;
             }
           } else if (ac === "Inovasi") {
-            if (now > tarikhTutupMalamNi) {
+            if (now > tarikhTutupLanjutan) {
               opt.innerText = "Inovasi (Pendaftaran Ditutup)";
               opt.disabled = true;
               opt.className = "text-slate-400 bg-slate-100 font-medium";
@@ -311,7 +358,7 @@
           let opt = document.createElement('option');
           opt.value = ac;
           
-          if (now > tarikhTutupMalamNi) {
+          if (now > tarikhTutupLanjutan) {
             opt.innerText = `${ac} (Pendaftaran Ditutup)`;
             opt.disabled = true;
             opt.className = "text-slate-400 bg-slate-100 font-medium";
