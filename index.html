@@ -8,207 +8,147 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
+    /* Animasi Cop Hentakan Sinematik */
+    @keyframes stampSlam {
+      0% { opacity: 0; transform: scale(5) rotate(-12deg); }
+      70% { opacity: 1; transform: scale(0.9) rotate(-3deg); }
+      85% { transform: scale(1.05) rotate(-5deg); }
+      100% { transform: scale(1) rotate(-4deg); }
+    }
+
+    /* Animasi Kilat Flashing Red */
+    @keyframes emergencyFlash {
+      0%, 100% { background-color: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); }
+      50% { background-color: rgba(239, 68, 68, 0.35); border-color: rgba(239, 68, 68, 0.8); }
+    }
+
+    .animate-stamp { animation: stampSlam 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .animate-emergency { animation: emergencyFlash 0.3s infinite; }
+    
     .autocomplete-items { position: absolute; border: 1px solid #e2e8f0; border-bottom: none; border-top: none; z-index: 99; top: 100%; left: 0; right: 0; border-radius: 0 0 12px 12px; max-height: 200px; overflow-y: auto; }
     .autocomplete-items div { padding: 10px; cursor: pointer; background-color: #fff; border-bottom: 1px solid #e2e8f0; }
     .autocomplete-items div:hover { background-color: #f1f5f9; }
-    .fade-slide { transition: all 0.4s ease-in-out; }
+    .fade-slide { transition: all 0.5s ease-in-out; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-slate-900 text-slate-800 font-sans antialiased overflow-x-hidden">
 
-  <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div>
-        <h1 class="text-xl font-bold tracking-tight text-slate-900">PUICE <span class="text-blue-600">2026</span></h1>
-        <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovative Conference on Education</p>
-      </div>
-      <nav><span id="badgeStatusHeader" class="text-sm font-medium text-red-700 bg-red-100 px-3 py-1.5 rounded-full">Pendaftaran Ditutup</span></nav>
-    </div>
-  </header>
-
-  <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+  <!-- CINEMATIC OVERLAY CONTAINER -->
+  <div id="cinematicWrapper" class="min-h-screen bg-slate-50 transition-all duration-700">
     
-    <!-- SEKSYEN UTAMA (HOMEPAGE) -->
-    <div id="seksyenUtama" class="fade-slide">
-      <!-- Image Slider Slideshow -->
-      <div class="relative overflow-hidden rounded-2xl bg-slate-50 shadow-xl border border-slate-50 aspect-[4/3] sm:aspect-[16/9]">
-        <!-- Slide 1 -->
-        <img class="mySlides w-full h-full object-contain hidden" src="https://cdn.phototourl.com/free/2026-07-16-4f01c664-ef3e-4f11-8a6a-8b56b07a4f35.jpg" alt="Hebahan 1">
-        <!-- Slide 2 -->
-        <img class="mySlides w-full h-full object-contain hidden" src="https://cdn.phototourl.com/free/2026-07-16-efec3f87-6eb9-47ec-9088-c6f17bdf3329.jpg" alt="Hebahan 2">
-        
-        <!-- Slider Controllers -->
-        <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
-        <button onclick="plusSlides(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❯</button>
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div>
+          <h1 class="text-xl font-bold tracking-tight text-slate-900">PUICE <span class="text-blue-600">2026</span></h1>
+          <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovative Conference on Education</p>
+        </div>
+        <nav><span id="badgeStatusHeader" class="text-sm font-semibold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full transition-all">Memproses Status...</span></nav>
       </div>
+    </header>
 
-      <div class="mt-8 text-center max-w-2xl mx-auto">
+    <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12 relative">
+      
+      <!-- SEKSYEN UTAMA -->
+      <div id="seksyenUtama" class="fade-slide">
         
-        <!-- BANNER COUNTDOWN LAJU & PENUTUPAN KESEMUA PERTANDINGAN -->
-        <div id="bannerLanjutan" class="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm transition-all duration-300">
-          <p id="teksNotis" class="text-sm font-semibold leading-relaxed">⏳ Menutup borang pendaftaran rasmi...</p>
-          <div id="boxCountdown" class="mt-3 flex justify-center items-center space-x-2 text-amber-950 font-extrabold text-sm sm:text-base"></div>
+        <!-- Image Slider Slideshow -->
+        <div class="relative overflow-hidden rounded-2xl bg-slate-100 shadow-xl border border-slate-100 aspect-[4/3] sm:aspect-[16/9]">
+          <img class="mySlides w-full h-full object-contain hidden" src="https://cdn.phototourl.com/free/2026-07-16-4f01c664-ef3e-4f11-8a6a-8b56b07a4f35.jpg" alt="Hebahan 1">
+          <img class="mySlides w-full h-full object-contain hidden" src="https://cdn.phototourl.com/free/2026-07-16-efec3f87-6eb9-47ec-9088-c6f17bdf3329.jpg" alt="Hebahan 2">
+          
+          <button onclick="plusSlides(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❮</button>
+          <button onclick="plusSlides(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/70 cursor-pointer">❯</button>
         </div>
 
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Persidangan Inovasi Pendidikan PUICE 2026</h2>
-        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">Terima kasih atas sokongan dan penyertaan padu warga pendidik serta murid PPD Petaling Utama.</p>
-        
-        <!-- BUTANG GREYED OUT (DISABLED) -->
-        <div class="mt-8">
-          <button id="btnSertai" disabled class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-400 bg-slate-200 rounded-xl cursor-not-allowed shadow-none border border-slate-300">
-            Pendaftaran Telah Ditutup
-          </button>
-        </div>
-      </div>
-    </div>
+        <div class="mt-8 text-center max-w-2xl mx-auto relative">
+          
+          <!-- BANNER COUNTDOWN DRAMATIK & COP KUNCI -->
+          <div id="bannerLanjutan" class="relative overflow-hidden mb-6 p-6 rounded-2xl bg-amber-50 border-2 border-amber-300 text-amber-950 shadow-lg transition-all duration-500">
+            
+            <!-- STAMP LOCKDOWN DENGAN TEKS BARU -->
+            <div id="stampClosed" class="hidden absolute inset-0 z-20 flex items-center justify-center bg-slate-950/50 backdrop-blur-xs p-4">
+              <span class="animate-stamp inline-block border-4 sm:border-8 border-red-600 text-red-500 font-black text-lg sm:text-2xl uppercase px-5 py-2.5 rounded-2xl tracking-wider shadow-2xl bg-slate-950/95 -rotate-3 text-center leading-tight">
+                🔒 TEMPOH PENDAFTARAN PERTANDINGAN TAMAT
+              </span>
+            </div>
 
-    <!-- SEKSYEN BORANG -->
-    <div id="seksyenBorang" class="hidden fade-slide opacity-0 transform translate-y-4">
-      <div class="bg-white rounded-2xl p-6 sm:p-10 shadow-xl border border-slate-100 max-w-2xl mx-auto">
-        <button id="btnKembali" class="mb-6 flex items-center text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors cursor-pointer">← Kembali</button>
-
-        <div class="border-b border-slate-100 pb-4 mb-6">
-          <span id="badgeTrek" class="text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full">Trek</span>
-          <h3 id="tajukBorang" class="text-2xl font-bold text-slate-900 mt-2">Borang Pendaftaran</h3>
-        </div>
-
-        <form id="formPendaftaran" onsubmit="handleFormSubmit(event)" autocomplete="off">
-          <input type="hidden" id="inputTrek" name="trek" value="">
-
-          <div class="mb-6">
-            <label class="block text-sm font-semibold text-slate-700 mb-2">Pilih Acara / Pertandingan *</label>
-            <select id="selectAcara" name="acara" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 transition-all cursor-pointer"></select>
+            <p id="teksNotis" class="text-base sm:text-lg font-bold leading-relaxed tracking-wide">
+              ⚡ AMARAN SISTEM: MASA PENDAFTARAN HAMPIR TAMAT!
+            </p>
+            
+            <div id="boxCountdown" class="mt-4 flex justify-center items-center space-x-2 font-mono font-black text-lg sm:text-2xl text-red-600"></div>
           </div>
 
-          <div id="wrapperBorangBawah" class="hidden space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div class="relative sm:col-span-2">
-                <label class="block text-sm font-semibold text-slate-700 mb-1">Carian Nama Sekolah *</label>
-                <input type="text" id="inputNamaSekolah" placeholder="Taip nama sekolah..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-blue-500">
-                <div id="autocompleteList" class="autocomplete-items shadow-lg"></div>
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1">Kod Sekolah *</label>
-                <input type="text" id="inputKodSekolah" readonly placeholder="Auto-fill" class="w-full px-4 py-3 bg-slate-200 border border-slate-300 rounded-xl text-sm text-slate-600 font-bold">
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori Sekolah *</label>
-              <div class="grid grid-cols-2 gap-4">
-                <label class="flex items-center p-3 bg-slate-100 border border-slate-200 rounded-xl">
-                  <input type="radio" id="katRendah" name="kategoriSekolah" value="Rendah" disabled class="w-4 h-4 text-blue-600">
-                  <span class="ml-2 text-sm text-slate-700">Sekolah Rendah (Auto)</span>
-                </label>
-                <label class="flex items-center p-3 bg-slate-100 border border-slate-200 rounded-xl">
-                  <input type="radio" id="katMenengah" name="kategoriSekolah" value="Menengah" disabled class="w-4 h-4 text-blue-600">
-                  <span class="ml-2 text-sm text-slate-700">Sekolah Menengah (Auto)</span>
-                </label>
-              </div>
-            </div>
-
-            <div id="fieldsDinamik" class="space-y-4"></div>
-
-            <div>
-              <label id="labelUploadDoc" class="block text-sm font-semibold text-slate-700 mb-1">Muat Naik Fail Tugasan *</label>
-              <input type="file" id="inputDokumen" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
-              <p class="text-xs text-amber-600 font-medium mt-1">⚠️ Nota: Himpunkan fail ke dalam format <b>.ZIP</b> atau gabungkan menjadi satu fail <b>.PDF</b>.</p>
-              <div id="containerTemplateBtn" class="mt-2 hidden"></div>
-            </div>
-
-            <div id="divPembayaran" class="hidden">
-              <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-4 shadow-inner">
-                <h4 class="text-sm font-bold text-blue-900 uppercase tracking-wide">Maklumat Pembayaran</h4>
-                <p class="text-sm text-blue-900 mt-2 font-medium">Jumlah Amaun Perlu Dibayar:</p>
-                <p class="text-2xl font-black text-blue-700 mt-1">RM 50.00</p>
-                <p class="text-sm text-blue-900 mt-3 font-semibold">Online Transfer:</p>
-                <ul class="text-xs text-blue-800 mt-1 space-y-1 list-disc pl-4">
-                  <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
-                  <li><b>No. Akaun:</b> 1102 3036 33</li>
-                </ul>
-              </div>
-              <label class="block text-sm font-semibold text-slate-700 mb-1">Bukti Slip Resit Pembayaran *</label>
-              <input type="file" id="inputResit" accept="image/*,application/pdf" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
-            </div>
-
-            <button type="submit" disabled class="w-full bg-slate-300 text-slate-500 font-bold py-4 px-6 rounded-xl cursor-not-allowed">
-              <span>Pendaftaran Ditutup</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Persidangan Inovasi Pendidikan PUICE 2026</h2>
+          <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">Platform persidangan inovasi berprestij anjuran PPD Petaling Utama.</p>
+          
+          <!-- BUTANG UTAMA -->
+          <div class="mt-8">
+            <button id="btnSertai" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white bg-blue-600 hover:bg-blue-700 transition-all rounded-xl shadow-lg cursor-pointer transform hover:scale-105">
+              <span>Sertai Sekarang</span>
             </button>
-
           </div>
-        </form>
+        </div>
       </div>
-    </div>
-  </main>
 
-  <!-- MODAL TREK -->
-  <div id="modalTrek" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-    <div id="modalContent" class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300">
-      <div class="relative flex items-center justify-center pb-4 border-b border-slate-100">
-        <h3 class="text-xl font-bold text-slate-900 text-center">Pilih Trek Inovasi</h3>
-        <button id="btnCloseModal" class="absolute right-0 top-1 text-slate-400 hover:text-slate-600 font-bold cursor-pointer">✕</button>
-      </div>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <button id="pilihTrekGuru" class="text-center p-6 border-2 border-slate-200 hover:border-blue-500 hover:bg-blue-50/30 rounded-2xl bg-white transition-all cursor-pointer">
-          <span class="text-lg sm:text-xl font-bold text-slate-800 tracking-wide">Trek Inovasi Guru</span>
-        </button>
-        <button id="pilihTrekMurid" class="text-center p-6 border-2 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/30 rounded-2xl bg-white transition-all cursor-pointer">
-          <span class="text-lg sm:text-xl font-bold text-slate-800 tracking-wide">Trek Inovasi Murid</span>
-        </button>
-      </div>
-    </div>
+    </main>
   </div>
 
   <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby6AswJeQNqxNHA2L-SEJ9ze8RSGLx6DC6D1RjWPDShrQ2qtZOyKF6WZV5DSW6Lw7XL/exec";
-    let senaraiSekolah = [];
-    let kategoriSekolahTerpilih = "";
-
-    // --- EFEK COUNTDOWN LAJU & PENUTUPAN AUTOMATIK ---
-    function jalankanCountdownLaju() {
+    // --- SKRIP EFFECT DRAMATIK LOCKDOWN ---
+    function muatSinematikLockdown() {
       const banner = document.getElementById('bannerLanjutan');
       const teksNotis = document.getElementById('teksNotis');
       const boxCountdown = document.getElementById('boxCountdown');
+      const stampClosed = document.getElementById('stampClosed');
       const btnSertai = document.getElementById('btnSertai');
+      const badgeHeader = document.getElementById('badgeStatusHeader');
+      const cinematicWrapper = document.getElementById('cinematicWrapper');
 
-      let bakiMod = 35; // 35 langkah pemasa laju (sekitar 2.5 saat)
+      let detikMasa = 30;
 
-      const intervalLaju = setInterval(() => {
-        bakiMod--;
-        
-        let jamSim = Math.floor(bakiMod / 6);
-        let minitSim = (bakiMod * 7) % 60;
-        let saatSim = (bakiMod * 13) % 60;
+      banner.classList.add('animate-emergency');
+
+      const pemasaLaju = setInterval(() => {
+        detikMasa--;
+
+        let jamSim = Math.floor(detikMasa / 10);
+        let minitSim = (detikMasa * 8) % 60;
+        let saatSim = (detikMasa * 19) % 60;
 
         boxCountdown.innerHTML = `
-          <span class="text-xs font-semibold mr-1">Masa Berbaki:</span>
-          <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${jamSim} Jam</span> : 
-          <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(minitSim).padStart(2, '0')} Minit</span> : 
-          <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(saatSim).padStart(2, '0')} Saat</span>
+          <div class="bg-slate-900 text-red-500 px-3 py-1.5 rounded-lg border border-red-500/30 shadow-inner">${String(jamSim).padStart(2, '0')}</div> :
+          <div class="bg-slate-900 text-red-500 px-3 py-1.5 rounded-lg border border-red-500/30 shadow-inner">${String(minitSim).padStart(2, '0')}</div> :
+          <div class="bg-slate-900 text-red-500 px-3 py-1.5 rounded-lg border border-red-500/30 shadow-inner">${String(saatSim).padStart(2, '0')}</div>
         `;
 
-        if (bakiMod <= 0) {
-          clearInterval(intervalLaju);
-          
-          // BERTUKAR KE STATUS TELAH DITUTUP
-          banner.className = "mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-900 shadow-sm transition-all duration-300";
-          teksNotis.innerHTML = `⛔ <b>PENGUMUMAN:</b> Pendaftaran bagi <b>PENDAFTARAN BAGI KESEMUA PERTANDINGAN PUICE 2026</b> (Trek Guru & Trek Murid) kini <b>TELAH DITUTUP SEPENUHNYA</b>.<br><span class="text-xs text-red-700 font-medium mt-1 block">Terima kasih atas sokongan dan penyertaan anda!</span>`;
-          boxCountdown.classList.add('hidden');
-          
-          // PASTI KAN BUTANG TERUS GREYED OUT
+        // MOMEN LOCKDOWN SEBAIK DETIK MASA TAMAT
+        if (detikMasa <= 0) {
+          clearInterval(pemasaLaju);
+
+          banner.classList.remove('animate-emergency');
+          cinematicWrapper.classList.add('backdrop-blur-md');
+          stampClosed.classList.remove('hidden');
+
+          banner.className = "relative overflow-hidden mb-6 p-6 rounded-2xl bg-red-950 border-2 border-red-600 text-red-100 shadow-2xl transition-all duration-500";
+          teksNotis.innerHTML = `<span class="text-sm font-semibold opacity-80">SISTEM DIKUNCI: BORANG PENDAFTARAN TELAH DITUTUP SEPENUHNYA</span>`;
+          boxCountdown.innerHTML = `<span class="text-xs text-red-400 font-mono tracking-widest mt-2">[ SYSTEM OFF-LINE ]</span>`;
+
+          badgeHeader.className = "text-sm font-bold text-red-400 bg-red-950/80 border border-red-800 px-3 py-1.5 rounded-full shadow-sm";
+          badgeHeader.innerText = "⛔ Pendaftaran Ditutup";
+
           btnSertai.disabled = true;
-          btnSertai.className = "inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-400 bg-slate-200 rounded-xl cursor-not-allowed shadow-none border border-slate-300";
-          btnSertai.innerText = "Pendaftaran Telah Ditutup";
+          btnSertai.className = "inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-500 bg-slate-300 border border-slate-400 rounded-xl cursor-not-allowed shadow-none transform opacity-60";
+          btnSertai.innerHTML = `<span>🔒 Pendaftaran Telah Ditutup</span>`;
         }
-      }, 70); // Kelajuan 70ms per detik
+      }, 60);
     }
 
-    jalankanCountdownLaju();
+    window.addEventListener('DOMContentLoaded', muatSinematikLockdown);
 
     // --- LOGIK SLIDESHOW ---
     let slideIndex = 1;
     showSlides(slideIndex);
-
     function plusSlides(n) { showSlides(slideIndex += n); }
     function showSlides(n) {
       let i;
@@ -219,127 +159,6 @@
       if(slides[slideIndex-1]) slides[slideIndex-1].classList.remove("hidden");
     }
     setInterval(() => { plusSlides(1); }, 5000);
-
-    // Ambil data sekolah
-    fetch(WEB_APP_URL)
-      .then(res => res.json())
-      .then(data => { if(data.result === "success") senaraiSekolah = data.sekolah; })
-      .catch(err => console.error("Ralat data sekolah:", err));
-
-    // CARIAN AUTOMATIK SEKOLAH
-    const inpSekolah = document.getElementById("inputNamaSekolah");
-    const inpKod = document.getElementById("inputKodSekolah");
-    const listContainer = document.getElementById("autocompleteList");
-
-    inpSekolah.addEventListener("input", function() {
-      let val = this.value;
-      closeAllLists();
-      if (!val) return false;
-      let count = 0;
-      
-      senaraiSekolah.forEach(sk => {
-        let idx = sk.nama.toUpperCase().indexOf(val.toUpperCase());
-        if (idx > -1 && count < 6) {
-          let b = document.createElement("DIV");
-          let originalText = sk.nama;
-          let highlighted = originalText.substring(0, idx) + "<strong>" + originalText.substring(idx, idx + val.length) + "</strong>" + originalText.substring(idx + val.length);
-          b.innerHTML = highlighted;
-          b.innerHTML += `<input type='hidden' value="${sk.nama}" data-kod="${sk.kod}" data-kat="${sk.kategori}">`;
-          b.addEventListener("click", function() {
-            let hiddenInput = this.getElementsByTagName("input")[0];
-            inpSekolah.value = hiddenInput.value;
-            inpKod.value = hiddenInput.getAttribute("data-kod");
-            
-            kategoriSekolahTerpilih = hiddenInput.getAttribute("data-kat");
-            let kat = kategoriSekolahTerpilih.toLowerCase().trim();
-            if(kat === "rendah") {
-              document.getElementById("katRendah").checked = true;
-              document.getElementById("katMenengah").checked = false;
-            } else if(kat === "menengah") {
-              document.getElementById("katMenengah").checked = true;
-              document.getElementById("katRendah").checked = false;
-            }
-            closeAllLists();
-          });
-          listContainer.appendChild(b);
-          count++;
-        }
-      });
-    });
-
-    function closeAllLists() { listContainer.innerHTML = ""; }
-    document.addEventListener("click", function (e) { if (e.target != inpSekolah) closeAllLists(); });
-
-    // BORANG KUNCI PERTANDINGAN
-    const modalTrek = document.getElementById('modalTrek');
-    const modalContent = document.getElementById('modalContent');
-    const btnSertai = document.getElementById('btnSertai');
-    const btnCloseModal = document.getElementById('btnCloseModal');
-    const seksyenUtama = document.getElementById('seksyenUtama');
-    const seksyenBorang = document.getElementById('seksyenBorang');
-    const selectAcara = document.getElementById('selectAcara');
-    const fieldsDinamik = document.getElementById('fieldsDinamik');
-    const wrapperBorangBawah = document.getElementById('wrapperBorangBawah');
-
-    btnSertai.addEventListener('click', () => {
-      if(btnSertai.disabled) return;
-      modalTrek.classList.remove('hidden');
-      setTimeout(() => { modalTrek.classList.remove('opacity-0'); modalContent.classList.replace('scale-95', 'scale-100'); }, 10);
-    });
-
-    btnCloseModal.addEventListener('click', () => modalTrek.classList.add('hidden'));
-
-    function paparkanBorang(trek) {
-      modalTrek.classList.add('hidden');
-      document.getElementById('formPendaftaran').reset();
-      selectAcara.innerHTML = '<option value="" disabled selected>-- Sila Pilih Acara --</option>';
-      document.getElementById('inputTrek').value = trek;
-      fieldsDinamik.innerHTML = "";
-      wrapperBorangBawah.classList.add('hidden');
-      document.getElementById('divPembayaran').classList.add('hidden');
-      document.getElementById('containerTemplateBtn').classList.add('hidden');
-
-      if(trek === 'GURU') {
-        document.getElementById('badgeTrek').innerText = "Trek Inovasi Guru";
-        document.getElementById('badgeTrek').className = "text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-blue-50 text-blue-600";
-        
-        ["Poster Digital", "CITM", "Inovasi"].forEach(ac => {
-          let opt = document.createElement('option');
-          opt.value = ac;
-          opt.innerText = `${ac} (Pendaftaran Ditutup)`;
-          opt.disabled = true;
-          opt.className = "text-slate-400 bg-slate-100 font-medium";
-          selectAcara.appendChild(opt);
-        });
-      } else {
-        document.getElementById('badgeTrek').innerText = "Trek Inovasi Murid";
-        document.getElementById('badgeTrek').className = "text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 text-emerald-600";
-        
-        ["PBL STEM", "KmR", "PBL"].forEach(ac => {
-          let opt = document.createElement('option');
-          opt.value = ac;
-          opt.innerText = `${ac} (Pendaftaran Ditutup)`;
-          opt.disabled = true;
-          opt.className = "text-slate-400 bg-slate-100 font-medium";
-          selectAcara.appendChild(opt);
-        });
-      }
-      seksyenUtama.classList.add('hidden'); seksyenBorang.classList.remove('hidden');
-      setTimeout(() => { seksyenBorang.classList.remove('opacity-0', 'translate-y-4'); }, 50);
-    }
-
-    document.getElementById('pilihTrekGuru').addEventListener('click', () => paparkanBorang('GURU'));
-    document.getElementById('pilihTrekMurid').addEventListener('click', () => paparkanBorang('MURID'));
-
-    document.getElementById('btnKembali').addEventListener('click', () => {
-      seksyenBorang.classList.add('opacity-0', 'translate-y-4');
-      setTimeout(() => { seksyenBorang.classList.add('hidden'); seksyenUtama.classList.remove('hidden'); }, 300);
-    });
-
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      Swal.fire("Pendaftaran Ditutup", "Maaf, pendaftaran bagi kesemua pertandingan PUICE 2026 telah ditutup secara rasmi.", "warning");
-    }
   </script>
 </body>
 </html>
