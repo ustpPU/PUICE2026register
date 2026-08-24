@@ -22,7 +22,7 @@
         <h1 class="text-xl font-bold tracking-tight text-slate-900">PUICE <span class="text-blue-600">2026</span></h1>
         <p class="text-xs text-slate-500 font-medium hidden sm:block">Petaling Utama Innovative Conference on Education</p>
       </div>
-      <nav><span class="text-sm font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full">Pendaftaran Dibuka</span></nav>
+      <nav><span id="badgeStatusHeader" class="text-sm font-medium text-red-700 bg-red-100 px-3 py-1.5 rounded-full">Pendaftaran Ditutup</span></nav>
     </div>
   </header>
 
@@ -44,16 +44,20 @@
 
       <div class="mt-8 text-center max-w-2xl mx-auto">
         
-        <!-- BANNER LANJUTAN & COUNTDOWN AUTOMATIK -->
+        <!-- BANNER COUNTDOWN LAJU & PENUTUPAN KESEMUA PERTANDINGAN -->
         <div id="bannerLanjutan" class="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm transition-all duration-300">
-          <p id="teksNotis" class="text-sm font-semibold leading-relaxed"></p>
+          <p id="teksNotis" class="text-sm font-semibold leading-relaxed">⏳ Menutup borang pendaftaran rasmi...</p>
           <div id="boxCountdown" class="mt-3 flex justify-center items-center space-x-2 text-amber-950 font-extrabold text-sm sm:text-base"></div>
         </div>
 
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Serlahkan Inovasi Pendidikan Anda di PUICE 2026</h2>
-        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">Sertai platform persidangan inovasi berprestij anjuran PPD Petaling Utama.</p>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Persidangan Inovasi Pendidikan PUICE 2026</h2>
+        <p class="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">Terima kasih atas sokongan dan penyertaan padu warga pendidik serta murid PPD Petaling Utama.</p>
+        
+        <!-- BUTANG GREYED OUT (DISABLED) -->
         <div class="mt-8">
-          <button id="btnSertai" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors rounded-xl shadow-lg cursor-pointer">Sertai Sekarang</button>
+          <button id="btnSertai" disabled class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-400 bg-slate-200 rounded-xl cursor-not-allowed shadow-none border border-slate-300">
+            Pendaftaran Telah Ditutup
+          </button>
         </div>
       </div>
     </div>
@@ -71,16 +75,12 @@
         <form id="formPendaftaran" onsubmit="handleFormSubmit(event)" autocomplete="off">
           <input type="hidden" id="inputTrek" name="trek" value="">
 
-          <!-- PILIH ACARA (SENTIASA KELUAR DULU) -->
           <div class="mb-6">
             <label class="block text-sm font-semibold text-slate-700 mb-2">Pilih Acara / Pertandingan *</label>
-            <select id="selectAcara" name="acara" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 text-slate-800 transition-all cursor-pointer"></select>
+            <select id="selectAcara" name="acara" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 transition-all cursor-pointer"></select>
           </div>
 
-          <!-- KONTEN BORANG DI BAWAH HANYA AKAN MUNCUL SELEPAS ACARA DIPILIH -->
           <div id="wrapperBorangBawah" class="hidden space-y-6">
-            
-            <!-- AUTOCOMPLETE CARIAN SEKOLAH -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div class="relative sm:col-span-2">
                 <label class="block text-sm font-semibold text-slate-700 mb-1">Carian Nama Sekolah *</label>
@@ -93,7 +93,6 @@
               </div>
             </div>
 
-            <!-- KATEGORI SEKOLAH (AUTO-SELECTED) -->
             <div>
               <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori Sekolah *</label>
               <div class="grid grid-cols-2 gap-4">
@@ -108,18 +107,15 @@
               </div>
             </div>
 
-            <!-- BLOK UTAMA DINAMIK BERDASARKAN TREK -->
             <div id="fieldsDinamik" class="space-y-4"></div>
 
-            <!-- DOKUMEN TUGASAN/HASIL KERJA -->
             <div>
               <label id="labelUploadDoc" class="block text-sm font-semibold text-slate-700 mb-1">Muat Naik Fail Tugasan *</label>
               <input type="file" id="inputDokumen" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
-              <p class="text-xs text-amber-600 font-medium mt-1">⚠️ Nota: Jika tugasan mengandungi berbilang fail (slaid, dokumen, imej), sila himpunkan ke dalam format <b>.ZIP</b> atau gabungkan menjadi satu fail <b>.PDF</b> sebelum muat naik.</p>
+              <p class="text-xs text-amber-600 font-medium mt-1">⚠️ Nota: Himpunkan fail ke dalam format <b>.ZIP</b> atau gabungkan menjadi satu fail <b>.PDF</b>.</p>
               <div id="containerTemplateBtn" class="mt-2 hidden"></div>
             </div>
 
-            <!-- SKRIN PRE-NOTIS PEMBAYARAN ONLINE (POSTER & CITM SAHAJA) -->
             <div id="divPembayaran" class="hidden">
               <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 mb-4 shadow-inner">
                 <h4 class="text-sm font-bold text-blue-900 uppercase tracking-wide">Maklumat Pembayaran</h4>
@@ -129,16 +125,14 @@
                 <ul class="text-xs text-blue-800 mt-1 space-y-1 list-disc pl-4">
                   <li><b>Bank:</b> Bank Rakyat (Persatuan Kebajikan PPD Petaling Utama)</li>
                   <li><b>No. Akaun:</b> 1102 3036 33</li>
-                  <li><b>Rujukan (Ref):</b> (Nama Pertandingan) - (Nama Pendek)<br><span class="opacity-75">Contoh: <i>Poster - Ahmad</i> atau <i>CITM - Ahmad</i></span></li>
                 </ul>
-                <p class="text-xs text-red-600 mt-3 font-bold">Sila lakukan pindahan wang dan dapatkan screenshot transaksi sebelum melengkapkan pengisian borang ini.</p>
               </div>
               <label class="block text-sm font-semibold text-slate-700 mb-1">Bukti Slip Resit Pembayaran *</label>
               <input type="file" id="inputResit" accept="image/*,application/pdf" class="w-full text-sm text-slate-500 border border-slate-200 rounded-xl bg-slate-50 p-1.5">
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center cursor-pointer">
-              <span>Hantar Pendaftaran</span>
+            <button type="submit" disabled class="w-full bg-slate-300 text-slate-500 font-bold py-4 px-6 rounded-xl cursor-not-allowed">
+              <span>Pendaftaran Ditutup</span>
             </button>
 
           </div>
@@ -167,51 +161,51 @@
 
   <script>
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycby6AswJeQNqxNHA2L-SEJ9ze8RSGLx6DC6D1RjWPDShrQ2qtZOyKF6WZV5DSW6Lw7XL/exec";
-    
     let senaraiSekolah = [];
     let kategoriSekolahTerpilih = "";
 
-    // --- LOGIK COUNTDOWN HOMEPAGE & BANNER AUTOMATIK ---
-    function jalankanCountdown() {
-      const tarikhTamat = new Date('2026-07-27T23:59:59').getTime();
+    // --- EFEK COUNTDOWN LAJU & PENUTUPAN AUTOMATIK ---
+    function jalankanCountdownLaju() {
       const banner = document.getElementById('bannerLanjutan');
       const teksNotis = document.getElementById('teksNotis');
       const boxCountdown = document.getElementById('boxCountdown');
+      const btnSertai = document.getElementById('btnSertai');
 
-      function kemaskini() {
-        const sekarang = new Date().getTime();
-        const baki = tarikhTamat - sekarang;
+      let bakiMod = 35; // 35 langkah pemasa laju (sekitar 2.5 saat)
 
-        if (baki > 0) {
-          const totalJam = Math.floor(baki / (1000 * 60 * 60));
-          const hari = Math.floor(totalJam / 24);
-          const jamBaki = totalJam % 24;
-          const minit = Math.floor((baki % (1000 * 60 * 60)) / (1000 * 60));
-          const saat = Math.floor((baki % (1000 * 60)) / 1000);
+      const intervalLaju = setInterval(() => {
+        bakiMod--;
+        
+        let jamSim = Math.floor(bakiMod / 6);
+        let minitSim = (bakiMod * 7) % 60;
+        let saatSim = (bakiMod * 13) % 60;
 
-          banner.className = "mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 shadow-sm";
-          teksNotis.innerHTML = `🔥 <b>PENGUMUMAN:</b> Pendaftaran bagi <b>Inovasi Guru, PBL STEM, KmR dan PBL Murid</b> DILANJUTKAN sehingga <b>Isnin, 27 Julai 2026 (11:59 Malam)</b>!`;
+        boxCountdown.innerHTML = `
+          <span class="text-xs font-semibold mr-1">Masa Berbaki:</span>
+          <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${jamSim} Jam</span> : 
+          <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(minitSim).padStart(2, '0')} Minit</span> : 
+          <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(saatSim).padStart(2, '0')} Saat</span>
+        `;
+
+        if (bakiMod <= 0) {
+          clearInterval(intervalLaju);
           
-          boxCountdown.classList.remove('hidden');
-          boxCountdown.innerHTML = `
-            <span class="text-xs font-semibold mr-1">Masa Berbaki:</span>
-            <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${hari > 0 ? hari + ' Hari ' : ''}${jamBaki} Jam</span> : 
-            <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(minit).padStart(2, '0')} Minit</span> : 
-            <span class="bg-amber-200/80 px-2.5 py-1 rounded-lg">${String(saat).padStart(2, '0')} Saat</span>
-          `;
-        } else {
-          banner.className = "mb-6 p-4 rounded-2xl bg-slate-100 border border-slate-200 text-slate-700 shadow-sm";
-          teksNotis.innerHTML = `⛔ Pendaftaran bagi <b>Inovasi Guru, CITM, PBL STEM, KmR, dan PBL Murid</b> telah <b>DITUTUP</b>.<br><span class="text-xs text-slate-500 font-medium mt-1 block">💡 Pendaftaran <b>Poster Digital</b> telah dibuka!!!</span>`;
+          // BERTUKAR KE STATUS TELAH DITUTUP
+          banner.className = "mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-900 shadow-sm transition-all duration-300";
+          teksNotis.innerHTML = `⛔ <b>PENGUMUMAN:</b> Pendaftaran bagi <b>PENDAFTARAN BAGI KESEMUA PERTANDINGAN PUICE 2026</b> (Trek Guru & Trek Murid) kini <b>TELAH DITUTUP SEPENUHNYA</b>.<br><span class="text-xs text-red-700 font-medium mt-1 block">Terima kasih atas sokongan dan penyertaan anda!</span>`;
           boxCountdown.classList.add('hidden');
+          
+          // PASTI KAN BUTANG TERUS GREYED OUT
+          btnSertai.disabled = true;
+          btnSertai.className = "inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-slate-400 bg-slate-200 rounded-xl cursor-not-allowed shadow-none border border-slate-300";
+          btnSertai.innerText = "Pendaftaran Telah Ditutup";
         }
-      }
-
-      kemaskini();
-      setInterval(kemaskini, 1000);
+      }, 70); // Kelajuan 70ms per detik
     }
-    jalankanCountdown();
 
-    // --- LOGIK SLIDESHOW HOMEPAGE ---
+    jalankanCountdownLaju();
+
+    // --- LOGIK SLIDESHOW ---
     let slideIndex = 1;
     showSlides(slideIndex);
 
@@ -232,7 +226,7 @@
       .then(data => { if(data.result === "success") senaraiSekolah = data.sekolah; })
       .catch(err => console.error("Ralat data sekolah:", err));
 
-    // --- CARIAN AUTOMATIK SEKOLAH ---
+    // CARIAN AUTOMATIK SEKOLAH
     const inpSekolah = document.getElementById("inputNamaSekolah");
     const inpKod = document.getElementById("inputKodSekolah");
     const listContainer = document.getElementById("autocompleteList");
@@ -247,11 +241,9 @@
         let idx = sk.nama.toUpperCase().indexOf(val.toUpperCase());
         if (idx > -1 && count < 6) {
           let b = document.createElement("DIV");
-          
           let originalText = sk.nama;
           let highlighted = originalText.substring(0, idx) + "<strong>" + originalText.substring(idx, idx + val.length) + "</strong>" + originalText.substring(idx + val.length);
           b.innerHTML = highlighted;
-          
           b.innerHTML += `<input type='hidden' value="${sk.nama}" data-kod="${sk.kod}" data-kat="${sk.kategori}">`;
           b.addEventListener("click", function() {
             let hiddenInput = this.getElementsByTagName("input")[0];
@@ -278,7 +270,7 @@
     function closeAllLists() { listContainer.innerHTML = ""; }
     document.addEventListener("click", function (e) { if (e.target != inpSekolah) closeAllLists(); });
 
-    // --- NAVIGASI DAN PENGENDALIAN TREK/ACARA ---
+    // BORANG KUNCI PERTANDINGAN
     const modalTrek = document.getElementById('modalTrek');
     const modalContent = document.getElementById('modalContent');
     const btnSertai = document.getElementById('btnSertai');
@@ -290,6 +282,7 @@
     const wrapperBorangBawah = document.getElementById('wrapperBorangBawah');
 
     btnSertai.addEventListener('click', () => {
+      if(btnSertai.disabled) return;
       modalTrek.classList.remove('hidden');
       setTimeout(() => { modalTrek.classList.remove('opacity-0'); modalContent.classList.replace('scale-95', 'scale-100'); }, 10);
     });
@@ -305,15 +298,6 @@
       wrapperBorangBawah.classList.add('hidden');
       document.getElementById('divPembayaran').classList.add('hidden');
       document.getElementById('containerTemplateBtn').classList.add('hidden');
-      kategoriSekolahTerpilih = "";
-
-      setInputsRequired(false);
-
-      // --- LOGIK KAWALAN TARIKH BUKA & TUTUP ---
-      const now = new Date();
-      const tarikhTutupLanjutan = new Date('2026-07-27T23:59:59'); // DILANJUTKAN SEHINGGA 27 JULAI
-      const tarikhTutupCITM = new Date('2026-08-11T23:59:59');
-      const tarikhBukaPoster = new Date('2026-08-17T00:00:00');
 
       if(trek === 'GURU') {
         document.getElementById('badgeTrek').innerText = "Trek Inovasi Guru";
@@ -322,32 +306,9 @@
         ["Poster Digital", "CITM", "Inovasi"].forEach(ac => {
           let opt = document.createElement('option');
           opt.value = ac;
-          
-          if (ac === "Poster Digital") {
-            if (now < tarikhBukaPoster) {
-              opt.innerText = "Poster Digital (Dibuka mulai 17 Ogos)";
-              opt.disabled = true;
-              opt.className = "text-slate-400 bg-slate-100 font-medium";
-            } else {
-              opt.innerText = ac;
-            }
-          } else if (ac === "CITM") {
-            if (now > tarikhTutupCITM) {
-              opt.innerText = "CITM (Pendaftaran Ditutup)";
-              opt.disabled = true;
-              opt.className = "text-slate-400 bg-slate-100 font-medium";
-            } else {
-              opt.innerText = ac;
-            }
-          } else if (ac === "Inovasi") {
-            if (now > tarikhTutupLanjutan) {
-              opt.innerText = "Inovasi (Pendaftaran Ditutup)";
-              opt.disabled = true;
-              opt.className = "text-slate-400 bg-slate-100 font-medium";
-            } else {
-              opt.innerText = ac;
-            }
-          }
+          opt.innerText = `${ac} (Pendaftaran Ditutup)`;
+          opt.disabled = true;
+          opt.className = "text-slate-400 bg-slate-100 font-medium";
           selectAcara.appendChild(opt);
         });
       } else {
@@ -357,14 +318,9 @@
         ["PBL STEM", "KmR", "PBL"].forEach(ac => {
           let opt = document.createElement('option');
           opt.value = ac;
-          
-          if (now > tarikhTutupLanjutan) {
-            opt.innerText = `${ac} (Pendaftaran Ditutup)`;
-            opt.disabled = true;
-            opt.className = "text-slate-400 bg-slate-100 font-medium";
-          } else {
-            opt.innerText = ac;
-          }
+          opt.innerText = `${ac} (Pendaftaran Ditutup)`;
+          opt.disabled = true;
+          opt.className = "text-slate-400 bg-slate-100 font-medium";
           selectAcara.appendChild(opt);
         });
       }
@@ -375,244 +331,14 @@
     document.getElementById('pilihTrekGuru').addEventListener('click', () => paparkanBorang('GURU'));
     document.getElementById('pilihTrekMurid').addEventListener('click', () => paparkanBorang('MURID'));
 
-    // --- PANDUAN MUNCUL SELEPAS PILIH PERTANDINGAN ---
-    selectAcara.addEventListener('change', (e) => {
-      fieldsDinamik.innerHTML = "";
-      let acara = e.target.value;
-      let trek = document.getElementById('inputTrek').value;
-      
-      wrapperBorangBawah.classList.remove('hidden');
-      setInputsRequired(true);
-
-      document.getElementById('divPembayaran').classList.add('hidden');
-      document.getElementById('inputResit').removeAttribute('required');
-      document.getElementById('containerTemplateBtn').classList.add('hidden');
-
-      if (trek === 'GURU') {
-        let htmlFields = `
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nama Peserta *</label><input type="text" name="namaPeserta" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nombor H/P *</label><input type="text" name="noHp" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">E-mel MOE *</label><input type="email" name="emailMoe" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-        `;
-
-        if (acara === "Poster Digital") {
-          htmlFields += `
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Tajuk Hasil Kerja *</label><input type="text" name="tajukKerja" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Subtema / Mata Pelajaran / Tajuk *</label><input type="text" name="subtema" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          `;
-          document.getElementById('labelUploadDoc').innerText = "Muat Naik Poster *";
-          document.getElementById('divPembayaran').classList.remove('hidden');
-          document.getElementById('inputResit').setAttribute('required', true);
-
-        } else if (acara === "CITM") {
-          htmlFields += `
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Tajuk Hasil Kerja *</label><input type="text" name="tajukKerja" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Subtema / Mata Pelajaran / Tajuk *</label><input type="text" name="subtema" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          `;
-          document.getElementById('labelUploadDoc').innerText = "Muat Naik Abstrak *";
-          document.getElementById('divPembayaran').classList.remove('hidden');
-          document.getElementById('inputResit').setAttribute('required', true);
-
-        } else if (acara === "Inovasi") {
-          htmlFields += `
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Individu / Kumpulan *</label>
-              <select name="jenisPenyertaan" id="jenisPenyertaan" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
-                <option value="Individu">Individu</option>
-                <option value="Kumpulan">Kumpulan</option>
-              </select>
-            </div>
-            <div id="divNamaKumpulan" class="hidden"><label class="block text-sm font-semibold text-slate-700 mb-1">Nama Kumpulan *</label><input type="text" name="namaKumpulan" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Tajuk Hasil Kerja *</label><input type="text" name="tajukKerja" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-            <div><label class="block text-sm font-semibold text-slate-700 mb-1">Subtema / Mata Pelajaran / Tajuk *</label><input type="text" name="subtema" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          `;
-          document.getElementById('labelUploadDoc').innerText = "Muat Naik Laporan/Dokumentasi *";
-        }
-        fieldsDinamik.innerHTML = htmlFields;
-
-        const jp = document.getElementById('jenisPenyertaan');
-        if(jp) {
-          jp.addEventListener('change', function() {
-            const nk = document.getElementById('divNamaKumpulan');
-            if(this.value === 'Kumpulan') {
-              nk.classList.remove('hidden'); nk.querySelector('input').setAttribute('required', true);
-            } else {
-              nk.classList.add('hidden'); nk.querySelector('input').removeAttribute('required');
-            }
-          });
-        }
-
-      } else if (trek === 'MURID') {
-        document.getElementById('labelUploadDoc').innerText = "Muat Naik Fail Projek / Dokumen OPR *";
-        let htmlFields = `
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Tajuk Projek *</label><input type="text" name="tajukProjek" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nama Guru Pengiring *</label><input type="text" name="namaGuru" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nombor Telefon Guru Pengiring *</label><input type="text" name="noHpGuru" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">E-mel MOE Guru Pengiring *</label><input type="email" name="emailMoeGuru" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nama Peserta 1 *</label><input type="text" name="peserta1" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nama Peserta 2</label><input type="text" name="peserta2" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-          <div><label class="block text-sm font-semibold text-slate-700 mb-1">Nama Peserta 3</label><input type="text" name="peserta3" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm"></div>
-        `;
-        fieldsDinamik.innerHTML = htmlFields;
-
-        const containerBtn = document.getElementById('containerTemplateBtn');
-        if (acara === "KmR") {
-          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1jqT-k9HAS6bI4nGp0ML271RnYU7_WgUN6OguSUgcL-Q/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-2 rounded-lg hover:bg-blue-100">Muat Turun Template OPR KmR ↗</a>`;
-          containerBtn.classList.remove('hidden');
-        } else if (acara === "PBL") {
-          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1YUazTgh5_rt9E7EWqf078fUY-d2V-KJDi-6tRhoRHT0/edit?usp=sharing" target="_blank" class="inline-block mt-2 text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-lg hover:bg-emerald-100">Muat Turun Template OPR PBL ↗</a>`;
-          containerBtn.classList.remove('hidden');
-        } else if (acara === "PBL STEM") {
-          containerBtn.innerHTML = `<a href="https://docs.google.com/document/d/1JDeSKdeXG3qe_gkDhDxyn78RFlEJvQht/edit?usp=sharing&ouid=110130494883998446596&rtpof=true&sd=true" target="_blank" class="inline-block mt-2 text-xs font-bold text-purple-600 bg-purple-50 px-3 py-2 rounded-lg hover:bg-purple-100">Muat Turun Template OPR PBL STEM ↗</a>`;
-          containerBtn.classList.remove('hidden');
-        }
-      }
-    });
-
-    function setInputsRequired(status) {
-      document.getElementById('inputNamaSekolah').disabled = !status;
-      if(status) {
-        document.getElementById('inputNamaSekolah').setAttribute('required', true);
-        document.getElementById('inputDokumen').setAttribute('required', true);
-      } else {
-        document.getElementById('inputNamaSekolah').removeAttribute('required');
-        document.getElementById('inputDokumen').removeAttribute('required');
-      }
-    }
-
     document.getElementById('btnKembali').addEventListener('click', () => {
       seksyenBorang.classList.add('opacity-0', 'translate-y-4');
       setTimeout(() => { seksyenBorang.classList.add('hidden'); seksyenUtama.classList.remove('hidden'); }, 300);
     });
 
-    // --- PROSES SUBMIT & PARSING ---
     function handleFormSubmit(event) {
       event.preventDefault();
-
-      const MAX_FILE_SIZE = 3 * 1024 * 1024; // Had 3MB
-      const fileDoc = document.getElementById('inputDokumen').files[0];
-      const fileReceipt = document.getElementById('inputResit').files[0];
-
-      if (fileDoc && fileDoc.size > MAX_FILE_SIZE) {
-        Swal.fire("Fail Terlalu Besar", "Sila pastikan saiz fail tugasan/projek tidak melebihi 3MB.", "warning");
-        return;
-      }
-
-      if (fileReceipt && fileReceipt.size > MAX_FILE_SIZE) {
-        Swal.fire("Fail Terlalu Besar", "Sila pastikan saiz resit pembayaran tidak melebihi 3MB.", "warning");
-        return;
-      }
-      
-      let trek = document.getElementById('inputTrek').value;
-      let emailTapis = (trek === 'GURU') ? document.getElementsByName('emailMoe')[0].value.trim().toLowerCase() : document.getElementsByName('emailMoeGuru')[0].value.trim().toLowerCase();
-
-      if (!emailTapis.endsWith('@moe.edu.my') && !emailTapis.endsWith('@moe-dl.edu.my')) {
-        Swal.fire({ title: "Akses Disekat", text: "Pendaftaran ini khas untuk e-mel rasmi @moe.edu.my atau @moe-dl.edu.my sahaja.", icon: "error" });
-        return;
-      }
-
-      if(!kategoriSekolahTerpilih) {
-        Swal.fire("Sila Pilih Sekolah", "Pastikan anda memilih nama sekolah daripada senarai carian.", "warning");
-        return;
-      }
-
-      Swal.fire({
-        title: 'Memproses Pendaftaran',
-        text: 'Sedang memproses maklumat dan memuat naik fail. Sila tunggu sebentar...',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        didOpen: () => { Swal.showLoading(); }
-      });
-
-      if (!fileDoc) {
-        Swal.fire("Fail Diperlukan", "Sila sertakan fail tugasan/dokumen projek anda sebelum menghantar.", "warning");
-        return;
-      }
-
-      const readerDoc = new FileReader();
-      readerDoc.onload = function(eDoc) {
-        const docBase64 = eDoc.target.result.split(',')[1];
-
-        if (fileReceipt) {
-          const readerReceipt = new FileReader();
-          readerReceipt.onload = function(eReceipt) {
-            const receiptBase64 = eReceipt.target.result.split(',')[1];
-            kumpulDanHantar(docBase64, fileDoc, receiptBase64, fileReceipt);
-          };
-          readerReceipt.readAsDataURL(fileReceipt);
-        } else {
-          kumpulDanHantar(docBase64, fileDoc, null, null);
-        }
-      };
-      readerDoc.readAsDataURL(fileDoc);
-
-      function kumpulDanHantar(docBase64, fileDoc, receiptBase64, fileReceipt) {
-        let formData = {
-          trek: trek,
-          acara: selectAcara.value,
-          kodSekolah: document.getElementById('inputKodSekolah').value,
-          namaSekolah: document.getElementById('inputNamaSekolah').value,
-          kategoriSekolah: kategoriSekolahTerpilih,
-          docBase64: docBase64,
-          docType: fileDoc.type,
-          docName: fileDoc.name,
-          receiptBase64: receiptBase64 || "",
-          receiptType: fileReceipt ? fileReceipt.type : "",
-          receiptName: fileReceipt ? fileReceipt.name : ""
-        };
-
-        if (trek === 'GURU') {
-          formData.namaPeserta = document.getElementsByName('namaPeserta')[0].value;
-          formData.noHp = document.getElementsByName('noHp')[0].value;
-          formData.emailMoe = emailTapis;
-          formData.tajukKerja = document.getElementsByName('tajukKerja')[0].value;
-          formData.subtema = document.getElementsByName('subtema')[0].value;
-          if (selectAcara.value === "Inovasi") {
-            formData.jenisPenyertaan = document.getElementById('jenisPenyertaan').value;
-            formData.namaKumpulan = document.getElementsByName('namaKumpulan')[0].value || "";
-          }
-        } else {
-          formData.tajukProjek = document.getElementsByName('tajukProjek')[0].value;
-          formData.namaGuru = document.getElementsByName('namaGuru')[0].value;
-          formData.noHpGuru = document.getElementsByName('noHpGuru')[0].value;
-          formData.emailMoeGuru = emailTapis;
-          formData.peserta1 = document.getElementsByName('peserta1')[0].value;
-          formData.peserta2 = document.getElementsByName('peserta2')[0].value || "";
-          formData.peserta3 = document.getElementsByName('peserta3')[0].value || "";
-        }
-
-        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(formData) })
-        .then(response => {
-          if (!response.ok) throw new Error("Pelayan tidak dapat memproses pendaftaran.");
-          return response.json();
-        })
-        .then(result => {
-          if (!result || result.result !== "success") {
-            throw new Error(result && result.error ? result.error : "Pendaftaran tidak berjaya diproses.");
-          }
-          Swal.fire({
-            title: "Pendaftaran Dihantar!",
-            html: `
-              <p class="text-slate-700 text-sm mb-3">
-                E-mel pengesahan akan masuk ke <b>${emailTapis}</b> jika pendaftaran berjaya. Mohon semak folder <b>Spam / Junk</b> juga.
-              </p>
-              <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-700 text-left">
-                ⚠️ <b>Perhatian:</b> Jika mesej ini diterima, pendaftaran dan e-mel pengesahan telah berjaya diproses. Mohon semak folder <b>Spam / Junk</b> juga.
-              </div>
-            `,
-            icon: "success",
-            confirmButtonText: "Kembali ke Utama"
-          }).then(() => {
-            seksyenBorang.classList.add('opacity-0', 'translate-y-4');
-            setTimeout(() => {
-              seksyenBorang.classList.add('hidden');
-              seksyenUtama.classList.remove('hidden');
-            }, 400);
-          });
-        })
-        .catch(err => {
-          Swal.fire("Pendaftaran sedang disemak", "Sila tunggu e-mel pengesahan atau hubungi urus setia untuk semakan jika tiada e-mel diterima dalam masa 30 minit.", "info");
-        });
-      }
+      Swal.fire("Pendaftaran Ditutup", "Maaf, pendaftaran bagi kesemua pertandingan PUICE 2026 telah ditutup secara rasmi.", "warning");
     }
   </script>
 </body>
