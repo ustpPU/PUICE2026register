@@ -580,8 +580,15 @@
           formData.peserta3 = document.getElementsByName('peserta3')[0].value || "";
         }
 
-        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(formData), mode: "no-cors" })
-        .then(() => {
+        fetch(WEB_APP_URL, { method: "POST", body: JSON.stringify(formData) })
+        .then(response => {
+          if (!response.ok) throw new Error("Pelayan tidak dapat memproses pendaftaran.");
+          return response.json();
+        })
+        .then(result => {
+          if (!result || result.result !== "success") {
+            throw new Error(result && result.error ? result.error : "Pendaftaran tidak berjaya diproses.");
+          }
           Swal.fire({
             title: "Pendaftaran Dihantar!",
             html: `
@@ -589,7 +596,7 @@
                 E-mel pengesahan akan masuk ke <b>${emailTapis}</b> jika pendaftaran berjaya. Mohon semak folder <b>Spam / Junk</b> juga.
               </p>
               <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-xs text-amber-700 text-left">
-                ⚠️ <b>Perhatian:</b> Jika pendaftaran tidak berjaya atau tiada e-mel pengesahan diterima, mohon semak semula saiz fail yang dimuat naik dan daftar semula.
+                ⚠️ <b>Perhatian:</b> Jika mesej ini diterima, pendaftaran dan e-mel pengesahan telah berjaya diproses. Mohon semak folder <b>Spam / Junk</b> juga.
               </div>
             `,
             icon: "success",
@@ -603,7 +610,7 @@
           });
         })
         .catch(err => {
-          Swal.fire("Ralat Sistem", "Penghantaran gagal. Sila periksa semula sambungan internet anda.", "error");
+          Swal.fire("Pendaftaran sedang disemak", "Sila tunggu e-mel pengesahan atau hubungi urus setia untuk semakan jika tiada e-mel diterima dalam masa 30 minit.", "info");
         });
       }
     }
