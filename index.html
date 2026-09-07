@@ -136,15 +136,15 @@
     .partner { width: 46px; height: 46px; object-fit: contain; padding: 4px; border-radius: 8px; background: rgba(255,255,255,.94); filter: drop-shadow(0 5px 12px rgba(0,0,0,.25)); }
     .partner.ppd { width: 96px; object-position: center; }
     @media (max-width: 760px) {
-      .page { min-height: 100svh; overflow: auto; background-position: 63% center; }
+      .page { min-height: 100svh; overflow-x: hidden; background-position: 63% center; }
       header { min-height: 76px; padding: 12px 20px; }
-      .preview { max-width: 145px; text-align: right; line-height: 1.4; }
-      main { padding: 68px 24px 54px; }
-      h1 { font-size: clamp(61px, 21vw, 100px); }
-      .notice { align-items: flex-start; flex-direction: column; gap: 7px; }
-      footer { grid-template-columns: 1fr 1fr; }
-      .footer-cell { min-height: 82px; border-bottom: 1px solid var(--line); }
-      .partners { grid-column: span 2; border-bottom: 0; }
+      .preview { max-width: 120px; text-align: right; line-height: 1.35; font-size: 8px; }
+      main { width: 100%; min-width: 0; padding: 68px 22px 54px; }
+      h1 { max-width: 100%; font-size: clamp(50px, 14.7vw, 66px); line-height: .82; letter-spacing: -.07em; overflow-wrap: break-word; }
+      .notice { width: 100%; max-width: 100%; align-items: flex-start; flex-direction: column; gap: 7px; }
+      footer { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-cell { min-width: 0; min-height: 82px; padding: 18px 20px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+      .partners { grid-column: span 2; border-bottom: 0; } .event-line { gap: 10px 15px; }
     }
   </style>
 </head>
