@@ -3,7 +3,11 @@ import { notFound } from 'next/navigation';
 import BrandStrip from '../../../components/BrandStrip';
 import HeroSlideshow from '../../../components/HeroSlideshow';
 import JourneyLinks from '../../../components/JourneyLinks';
-import { getCompetition } from '../../../lib/competitions';
+import { competitions, getCompetition } from '../../../lib/competitions';
+
+export function generateStaticParams() {
+  return competitions.map(competition => ({ slug: competition.slug }));
+}
 
 export default async function CompetitionDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

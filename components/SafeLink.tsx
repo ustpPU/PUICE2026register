@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes } from 'react';
+import { sitePath } from '../lib/runtime-paths';
 
 type SafeLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
   href: string;
@@ -9,5 +10,5 @@ type SafeLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
  * framework prefetch/hydration before a visitor's first tap can work.
  */
 export default function SafeLink({ href, ...props }: SafeLinkProps) {
-  return <a href={href} {...props} />;
+  return <a href={sitePath(href)} {...props} />;
 }

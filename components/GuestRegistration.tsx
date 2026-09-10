@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import HeroSlideshow from './HeroSlideshow';
 import { media } from '../lib/media';
 import type { JourneySettings } from '../lib/journey-settings';
+import { publicApiUrl, sitePath } from '../lib/runtime-paths';
 
 type Rating = 1 | 2 | 3 | 4;
 type Mode = 'attendance' | 'feedback';
@@ -66,9 +67,13 @@ const scale: Array<{ value: Rating; label: string }> = [
 ];
 
 async function postJourney(payload: Record<string, unknown>) {
-  const response = await fetch('/api/guest-journey', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-  const result = await response.json() as { message?: string; record?: AttendanceRecord; records?: AttendanceRecord[] };
-  if (!response.ok) throw new Error(result.message || 'Permintaan tidak dapat diproses.');
+  const response = await fetch(publicApiUrl || sitePath('/api/guest-journey'), {
+    method: 'POST',
+    headers: { 'Content-Type': publicApiUrl ? 'text/plain;charset=utf-8' : 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json() as { ok?: boolean; message?: string; record?: AttendanceRecord; records?: AttendanceRecord[] };
+  if (!response.ok || result.ok === false) throw new Error(result.message || 'Permintaan tidak dapat diproses.');
   return result;
 }
 
@@ -92,7 +97,7 @@ async function downloadCertificate(record: AttendanceRecord) {
   doc.setDrawColor(83, 29, 52); doc.setLineWidth(.35); doc.rect(14, 14, width - 28, height - 28);
 
   try {
-    const logoSet = await loadImage('/brand/logo-set-puice.png');
+    const logoSet = await loadImage(sitePath('/brand/logo-set-puice.png'));
     doc.addImage(logoSet, 'PNG', (width - 172) / 2, 19, 172, 37.6);
   } catch { /* The certificate remains valid if a browser blocks an image. */ }
 
@@ -135,10 +140,12 @@ export default function GuestRegistration({ settings = fallbackSettings }: { set
   const [certificateLoading, setCertificateLoading] = useState(false);
 
   useEffect(() => {
-    const refreshSettings = () => fetch('/api/journey-settings', { cache: 'no-store' })
+    const settingsUrl = publicApiUrl ? `${publicApiUrl}?action=journey_settings` : sitePath('/api/journey-settings');
+    const refreshSettings = () => fetch(settingsUrl, { cache: 'no-store' })
       .then(async response => await response.json() as { settings?: JourneySettings })
       .then(result => { if (result.settings) setLiveSettings(result.settings); })
       .catch(() => undefined);
+    refreshSettings();
     const settingsTimer = window.setInterval(refreshSettings, 30000);
     return () => window.clearInterval(settingsTimer);
   }, []);

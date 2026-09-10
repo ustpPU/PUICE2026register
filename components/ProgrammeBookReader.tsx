@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { sitePath } from '../lib/runtime-paths';
 
 const TOTAL_PAGES = 48;
 
 function pageSource(page: number) {
-  return `/media/book-program/pages/page-${String(page).padStart(2, '0')}.webp`;
+  return sitePath(`/media/book-program/pages/page-${String(page).padStart(2, '0')}.webp`);
 }
 
 export default function ProgrammeBookReader() {

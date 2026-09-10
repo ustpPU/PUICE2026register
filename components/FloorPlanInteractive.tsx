@@ -2,6 +2,7 @@
 
 import Link from './SafeLink';
 import { useEffect, useState } from 'react';
+import { sitePath } from '../lib/runtime-paths';
 
 type Zone = {
   id: string;
@@ -64,7 +65,7 @@ export default function FloorPlanInteractive() {
 
   const renderMap = (expanded = false) => <div className={`floorplan-viewport${expanded ? ' expanded' : ''}`}>
     <div className={`floorplan-canvas zoom-${zoom}`}>
-      <img src="/media/floor-plan-puice-2026.webp" alt="Pelan Dewan Kemuncak PUiCE 2026 di Dewan Sivik MBPJ" />
+      <img src={sitePath('/media/floor-plan-puice-2026.webp')} alt="Pelan Dewan Kemuncak PUiCE 2026 di Dewan Sivik MBPJ" />
       {hotspots.map((hotspot) => {
         const zone = zones.find((item) => item.id === hotspot.zone)!;
         return <button
@@ -91,7 +92,7 @@ export default function FloorPlanInteractive() {
         <button type="button" className="zoom-readout" onClick={() => setZoom(100)} aria-label="Tetapkan semula zum">{zoom}%</button>
         <button type="button" onClick={() => changeZoom(1)} disabled={zoom === 200} aria-label="Tambah zum">+</button>
         <button type="button" onClick={() => setIsFullscreen(true)}>Skrin penuh</button>
-        <a href="/media/floor-plan-puice-2026.pdf" download>Muat turun PDF</a>
+        <a href={sitePath('/media/floor-plan-puice-2026.pdf')} download>Muat turun PDF</a>
       </div>
     </div>
     <div className="floorplan-layout">

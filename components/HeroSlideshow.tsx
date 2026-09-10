@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { sitePath } from '../lib/runtime-paths';
 
 type HeroSlideshowProps = {
   images: readonly string[];
@@ -19,7 +20,7 @@ export default function HeroSlideshow({ images, className = '', intervalSeconds 
     {images.map((image, index) => <img
       key={image}
       className={index === active ? 'active' : ''}
-      src={image}
+      src={sitePath(image)}
       alt=""
       decoding="async"
       fetchPriority={index === 0 ? 'high' : 'auto'}

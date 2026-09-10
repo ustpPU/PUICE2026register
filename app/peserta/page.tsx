@@ -8,6 +8,7 @@ import JourneyLinks from '../../components/JourneyLinks';
 import { participants } from '../../lib/site-data';
 import { competitions } from '../../lib/competitions';
 import { media } from '../../lib/media';
+import { publicSheetUrl } from '../../lib/runtime-paths';
 
 export default function Participants() {
   const [query, setQuery] = useState('');
@@ -15,7 +16,7 @@ export default function Participants() {
   const [records, setRecords] = useState(participants);
 
   useEffect(() => {
-    fetch('/api/public-data/Participants')
+    fetch(publicSheetUrl('Participants'))
       .then(async response => await response.json() as { rows?: Record<string, string>[] })
       .then(data => {
         if (!data.rows?.length) return;

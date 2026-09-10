@@ -1,4 +1,5 @@
 import Link from './SafeLink';
+import { sitePath } from '../lib/runtime-paths';
 
 const attendanceRules = [
   ['Sepanjang hari', 'Peserta dan guru pengiring KmR, PBL dan PBL-STEM'],
@@ -33,14 +34,14 @@ export default function GuestGuide() {
       <div className="session-grid"><section className="session"><small>SESI PAGI · 8.00 PAGI</small><h3>Penolong Kanan</h3><p>Disarankan hadir untuk Perasmian Pembukaan.</p></section><section className="session afternoon"><small>SESI PETANG · 1.30 PETANG</small><h3>Pengetua &amp; Guru Besar</h3><p>Disarankan hadir untuk memeriahkan Perasmian Penutupan.</p></section></div>
       <div className="attendance-list">{attendanceRules.map(([time, group]) => <div className="attendance-row" key={group}><b>{time}</b><span>{group}</span></div>)}</div>
       <div className="guide-note"><strong>Poster Digital:</strong> Pemenang Platinum dan Emas perlu berada di lokasi sehingga sesi petang.</div>
-      <a className="original-link" href="/media/guest-guide-attendance.webp" target="_blank" rel="noopener noreferrer">Lihat poster asal ↗</a>
+      <a className="original-link" href={sitePath('/media/guest-guide-attendance.webp')} target="_blank" rel="noopener noreferrer">Lihat poster asal ↗</a>
     </article>
     <article id="aliran-reruai-foto" className="guide-detail photo-detail">
       <div className="guide-detail-header"><div><p className="eyebrow">PANDUAN 02</p><h2>Aliran Reruai Foto</h2></div><p>Satu token, satu kenangan. Ikuti urutan ini untuk mendapatkan jalur foto anda.</p></div>
       <div className="guide-facts"><span>10 SEPTEMBER 2026</span><span>8.00 PAGI – 4.00 PETANG</span><span>LOBI · LUAR DEWAN</span></div>
       <div className="photo-grid">{photoSteps.map(([number, title, description]) => <section className="photo-step" key={number}><strong>{number}</strong><div><h3>{title}</h3><p>{description}</p></div></section>)}</div>
       <div className="guide-note"><strong>Jangan buang token.</strong> Nombor pada token digunakan untuk memadankan anda dengan jalur foto yang telah dicetak.</div>
-      <a className="original-link" href="/media/guest-guide-photo-flow.webp" target="_blank" rel="noopener noreferrer">Lihat poster asal ↗</a>
+      <a className="original-link" href={sitePath('/media/guest-guide-photo-flow.webp')} target="_blank" rel="noopener noreferrer">Lihat poster asal ↗</a>
     </article>
     <a className="section-step" href="#pertandingan-kemuncak">Terokai pertandingan di Kemuncak <span>↓</span></a>
   </section>;
