@@ -17,7 +17,7 @@ export default function Venue() {
     <header className="v-nav"><Link className="brand" href="/kemuncak">PUiCE <span>2026</span></Link><Link href="/kemuncak">← Kemuncak</Link></header>
     <section className="venue-hero"><HeroSlideshow images={media.venue} /><div className="hero-slideshow-overlay hero-overlay-standard" aria-hidden="true" /><div className="hero-layer"><p className="eyebrow">LOKASI</p><h1>Dewan Sivik<br /><span>MBPJ</span></h1><p className="intro">Satu lokasi untuk pertandingan, Champion Showcase, pengumuman keputusan dan pengalaman Kemuncak PUiCE 2026.</p><div className="quick">{places.map(place => <span key={place}>{place}</span>)}</div></div></section>
     <section className="v-main"><FloorPlanInteractive /><div className="info"><div><p className="eyebrow">SEBELUM ANDA TIBA</p><h2>Cari hala<br /><span>tuju anda.</span></h2></div><div className="info-list">{venues.map((venue) => <div key={venue.name}><b>{venue.name} · {venue.location}</b>{venue.note}</div>)}<div><b>KEMUDAHAN</b>Parkir, surau, tandas dan pertolongan cemas akan ditandakan apabila maklumat rasmi diterima.</div></div></div></section>
-    <JourneyLinks title="Sudah tahu lokasi? Rancang perjalanan hari anda." primary={{ label: 'Daftar Kehadiran', href: '/kemuncak#daftar' }} secondary={{ label: 'Semak Atur Cara', href: '/kemuncak#atur-cara' }} />
+    <JourneyLinks title="Imbas kembali perjalanan hari Kemuncak." primary={{ label: 'Kembali ke Kemuncak', href: '/kemuncak' }} secondary={{ label: 'Terokai Arkib', href: '/arkib' }} />
     <BrandStrip />
   </main>;
 }

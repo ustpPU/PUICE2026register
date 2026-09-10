@@ -42,7 +42,7 @@ type FeedbackAnswers = {
 const PHONE_KEY = 'puice-2026-attendance-phone';
 const fallbackSettings: JourneySettings = {
   testMode: false,
-  attendanceEnabled: true,
+  attendanceEnabled: false,
   attendanceOpenAt: '2026-09-10T08:00:00+08:00',
   feedbackEnabled: true,
   feedbackOpenAt: '2026-09-10T11:00:00+08:00',
@@ -258,6 +258,7 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
 
   const status = selected || created;
   const accessOpen = feedbackOnly ? feedbackOpen : registrationOpen;
+  const registrationClosed = !feedbackOnly && !liveSettings.testMode && !liveSettings.attendanceEnabled;
 
   return <section id={feedbackOnly ? 'maklum-balas' : 'daftar'} className={`registration-panel journey-panel${feedbackOnly ? ' archive-feedback-panel' : ''}`}>
     <HeroSlideshow images={media.registration} className="registration-media" />
@@ -341,7 +342,7 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
         <button type="button" className="ghost-action" onClick={() => { setFeedbackStage('lookup'); setSelected(null); setMessage(''); }}>Semak nama lain</button>
       </div>}
     </div>
-    {!accessOpen && <div className="registration-lock" role="status" aria-live="polite"><div className="registration-lock-card"><div className="registration-lock-icon" aria-hidden="true">⌛</div><p className="eyebrow">{feedbackOnly ? 'MAKLUM BALAS BELUM DIBUKA' : 'PENDAFTARAN BELUM DIBUKA'}</p><h3>{feedbackOnly ? 'Borang maklum balas belum dibuka.' : 'Borang kehadiran akan dibuka pada hari Kemuncak.'}</h3><p>{feedbackOnly ? 'Sila kembali ke bahagian ini apabila maklum balas dibuka.' : 'Sila kembali ke bahagian ini apabila pendaftaran bermula.'}</p><strong>{feedbackOnly ? '11.00 PAGI · 10 SEPTEMBER 2026' : '8.00 PAGI · 10 SEPTEMBER 2026'}</strong></div></div>}
+    {!accessOpen && <div className="registration-lock" role="status" aria-live="polite"><div className="registration-lock-card"><div className="registration-lock-icon" aria-hidden="true">{registrationClosed ? '✓' : '⌛'}</div><p className="eyebrow">{feedbackOnly ? 'MAKLUM BALAS BELUM DIBUKA' : registrationClosed ? 'PENDAFTARAN KEHADIRAN DITUTUP' : 'PENDAFTARAN BELUM DIBUKA'}</p><h3>{feedbackOnly ? 'Borang maklum balas belum dibuka.' : registrationClosed ? 'Borang kehadiran telah ditutup.' : 'Borang kehadiran akan dibuka pada hari Kemuncak.'}</h3><p>{feedbackOnly ? 'Sila kembali ke bahagian ini apabila maklum balas dibuka.' : registrationClosed ? 'Terima kasih kepada semua tetamu yang telah merekodkan kehadiran dan menjayakan Kemuncak PUiCE 2026.' : 'Sila kembali ke bahagian ini apabila pendaftaran bermula.'}</p>{!registrationClosed && <strong>{feedbackOnly ? '11.00 PAGI · 10 SEPTEMBER 2026' : '8.00 PAGI · 10 SEPTEMBER 2026'}</strong>}</div></div>}
     </div>
   </section>;
 }

@@ -11,7 +11,7 @@ export type JourneySettings = {
 
 export const defaultJourneySettings: JourneySettings = {
   testMode: false,
-  attendanceEnabled: true,
+  attendanceEnabled: false,
   attendanceOpenAt: '2026-09-10T08:00:00+08:00',
   feedbackEnabled: true,
   feedbackOpenAt: '2026-09-10T11:00:00+08:00',
