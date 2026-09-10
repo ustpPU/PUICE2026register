@@ -2,10 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const TOTAL_PAGES = 48;
+const BOOK_PAGES = Array.from({ length: 48 }, (_, i) => i + 1)
+  .filter((page) => page !== 4);
 
-function pageSource(page: number) {
-  return `/media/book-program/pages/page-${String(page).padStart(2, '0')}.webp`;
+const TOTAL_PAGES = BOOK_PAGES.length;
+
+function pageSource(displayPage: number) {
+  const actualPage = BOOK_PAGES[displayPage - 1];
+
+  return `/media/book-program/pages/page-${String(actualPage).padStart(2, '0')}.webp`;
 }
 
 export default function ProgrammeBookReader() {
