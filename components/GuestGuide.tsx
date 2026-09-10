@@ -1,3 +1,5 @@
+import Link from './SafeLink';
+
 const attendanceRules = [
   ['Sepanjang hari', 'Peserta dan guru pengiring KmR, PBL dan PBL-STEM'],
   ['Sepanjang hari', 'Pemenang Platinum CI3M'], ['Petang', 'Pemenang Emas CI3M'],
@@ -23,7 +25,7 @@ export default function GuestGuide() {
     <div className="guide-grid">
       <article className="guide-card attendance"><div><small>SESI PAGI &amp; PETANG</small><h3>Aturan Kehadiran</h3><p>Semak waktu dan ketetapan kehadiran mengikut peranan anda.</p></div><a href="#aturan-kehadiran">Lihat panduan ↓</a></article>
       <article className="guide-card photo"><div><small>8.00 PAGI – 4.00 PETANG</small><h3>Aliran Reruai Foto</h3><p>Lapan langkah mudah daripada pendaftaran hingga tuntutan jalur foto.</p></div><a href="#aliran-reruai-foto">Lihat aliran ↓</a></article>
-      <article className="guide-card book"><div><small>MAKLUMAN</small><h3>Buku Program</h3><p>Buku program sedang dikemas kini. Sila rujuk Atur Cara Kemuncak buat sementara waktu.</p></div><a href="#atur-cara">Lihat atur cara ↓</a></article>
+      <article className="guide-card book"><div><small>48 HALAMAN</small><h3>Buku Program Rasmi</h3><p>Baca atur cara, pengisian, pembentang dan senarai peserta.</p></div><Link href="/buku-program">Baca buku program →</Link></article>
     </div>
     <article id="aturan-kehadiran" className="guide-detail attendance-detail">
       <div className="guide-detail-header"><div><p className="eyebrow">PANDUAN 01</p><h2>Aturan Kehadiran</h2></div><p>Ketetapan sesi dibuat untuk melancarkan perjalanan majlis dan memastikan keselesaan tetamu.</p></div>
