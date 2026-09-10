@@ -30,7 +30,7 @@ if (unprefixedInternalRoute.test(allHtml)) errors.push('Found an internal route 
 if (!rootHtml.includes("location.replace('./arkib/'")) errors.push('Root redirect to /arkib/ is missing.');
 
 const summit = htmlFiles[0];
-for (const phrase of ['Buku Program Rasmi', 'Borang kehadiran', 'Isi Maklum Balas', 'Acara telah tamat']) {
+for (const phrase of ['Buku Program Rasmi', 'Borang kehadiran', 'Isi Maklum Balas', 'ACARA TELAH TAMAT']) {
   if (!summit.includes(phrase)) errors.push(`Kemuncak is missing: ${phrase}`);
 }
 
