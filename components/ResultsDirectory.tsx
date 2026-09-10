@@ -44,13 +44,13 @@ export default function ResultsDirectory({ groups }: { groups: ResultCompetition
 
   return <div className="results-directory">
     <div className="results-audience-filter" role="group" aria-label="Tapis komuniti">
-      {(['SEMUA', 'GURU', 'MURID'] as const).map(value => <button key={value} className={audience === value ? 'active' : ''} onClick={() => chooseAudience(value)}>{value === 'SEMUA' ? 'Semua' : value === 'GURU' ? 'Guru' : 'Murid'}</button>)}
+      {(['SEMUA', 'GURU', 'MURID'] as const).map(value => <button type="button" key={value} className={audience === value ? 'active' : ''} onClick={() => chooseAudience(value)}>{value === 'SEMUA' ? 'Semua' : value === 'GURU' ? 'Guru' : 'Murid'}</button>)}
     </div>
 
     <div className="results-competition-picker" role="list" aria-label="Pilih pertandingan">
       {visibleGroups.map(group => {
         const recipientCount = group.awards.reduce((total, award) => total + award.recipients.length, 0);
-        return <button role="listitem" key={group.slug} className={selected?.slug === group.slug ? 'active' : ''} onClick={() => chooseCompetition(group.slug)}>
+        return <button type="button" role="listitem" key={group.slug} className={selected?.slug === group.slug ? 'active' : ''} onClick={() => chooseCompetition(group.slug)}>
           <span>{group.audience}</span>
           <strong>{group.name}</strong>
           <small>{recipientCount ? `${recipientCount} penerima · ${group.awards.length} anugerah` : 'Belum diumumkan'}</small>
@@ -62,7 +62,7 @@ export default function ResultsDirectory({ groups }: { groups: ResultCompetition
       <header><div><span>{selected.audience} · KEPUTUSAN RASMI</span><h2>{selected.name}</h2></div><small>{selected.awards.reduce((total, award) => total + award.recipients.length, 0)} PENERIMA DIPAPARKAN</small></header>
       {selected.awards.length ? <>
         <div className="award-tabs" role="tablist" aria-label="Pilih anugerah">
-          {selected.awards.map(award => <button role="tab" aria-selected={activeAward?.name === award.name} className={activeAward?.name === award.name ? 'active' : ''} key={award.name} onClick={() => setSelectedAward(award.name)}><span>{award.name}</span><b>{award.recipients.length}</b></button>)}
+          {selected.awards.map(award => <button type="button" role="tab" aria-selected={activeAward?.name === award.name} className={activeAward?.name === award.name ? 'active' : ''} key={award.name} onClick={() => setSelectedAward(award.name)}><span>{award.name}</span><b>{award.recipients.length}</b></button>)}
         </div>
         {activeAward && <div className="award-panel" role="tabpanel">
           <div className="award-panel-heading"><small>ANUGERAH</small><h3>{activeAward.name}</h3><p>Semua penerima disenaraikan setara tanpa kedudukan atau ranking.</p></div>

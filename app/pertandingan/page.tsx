@@ -22,7 +22,7 @@ export default function Competitions() {
       <div className="route-hero-copy"><p className="route-eyebrow">PUiCE 2026</p><h1>7<br /><span>Pertandingan</span></h1><p>Tujuh ruang untuk idea, inovasi, penyelidikan dan penyelesaian yang membentuk masa hadapan pendidikan.</p></div>
     </section>
     <section className="directory-content">
-      <div className="filter-buttons">{filters.map(([value, label]) => <button className={filter === value ? 'active' : ''} onClick={() => setFilter(value)} key={value}>{label}</button>)}</div>
+      <div className="filter-buttons">{filters.map(([value, label]) => <button type="button" className={filter === value ? 'active' : ''} onClick={() => setFilter(value)} key={value}>{label}</button>)}</div>
       <div className="competition-card-grid">{visible.map(item => <article className="competition-photo-card" key={item.slug}>
         <img src={item.heroImages[0]} alt="" aria-hidden="true" />
         <div className="competition-card-shade" />

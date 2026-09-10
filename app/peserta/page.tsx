@@ -48,7 +48,7 @@ export default function Participants() {
     </section>
     <section className="directory-content">
       <label className="directory-search"><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Cari nama, pasukan, sekolah atau pertandingan..." aria-label="Cari peserta" /><b>⌕</b></label>
-      <div className="filter-buttons"><button className={audience === 'SEMUA' ? 'active' : ''} onClick={() => setAudience('SEMUA')}>Semua</button><button className={audience === 'GURU' ? 'active' : ''} onClick={() => setAudience('GURU')}>Guru</button><button className={audience === 'MURID' ? 'active' : ''} onClick={() => setAudience('MURID')}>Murid</button></div>
+      <div className="filter-buttons"><button type="button" className={audience === 'SEMUA' ? 'active' : ''} onClick={() => setAudience('SEMUA')}>Semua</button><button type="button" className={audience === 'GURU' ? 'active' : ''} onClick={() => setAudience('GURU')}>Guru</button><button type="button" className={audience === 'MURID' ? 'active' : ''} onClick={() => setAudience('MURID')}>Murid</button></div>
       <p className="record-count">{visible.length} REKOD DIPAPARKAN</p>
       {visible.length ? <div className="participant-grid">{visible.map(participant => <article className="participant-card" key={participant.id}><div><span>{participant.audience}</span><h2>{participant.name}</h2><p>{participant.school}</p></div><small>{participant.competition}</small></article>)}</div> : <div className="no-results"><b>TIADA PADANAN</b><p>Cuba kata carian atau kategori lain.</p></div>}
       <div className="privacy-note"><b>PRIVASI DATA</b><p>Hanya rekod dengan <code>public_visibility = TRUE</code> dipaparkan. Nombor telefon, e-mel dan data peribadi tidak dipaparkan.</p></div>
