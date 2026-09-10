@@ -11,7 +11,7 @@ const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
 createServer(async (request, response) => {
   const url = new URL(request.url || '/', `http://${request.headers.host}`);
   if (url.pathname === base || url.pathname === `${base}/`) {
-    response.writeHead(302, { Location: `${base}/kemuncak/${url.search}${url.hash}` });
+    response.writeHead(302, { Location: `${base}/arkib/${url.search}` });
     response.end();
     return;
   }

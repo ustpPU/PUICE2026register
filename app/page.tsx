@@ -12,6 +12,7 @@ import { sitePath } from '../lib/runtime-paths';
 
 const navigation = ['Utama', 'PUiCE', 'Pertandingan', 'Peserta', 'Kemuncak', 'Keputusan', 'Lokasi', 'Arkib'];
 const navigationEn = ['Home', 'PUiCE', 'Competitions', 'Participants', 'Kemuncak', 'Results', 'Venue', 'Archive'];
+const navigationPaths = ['#utama', '/puice', '/pertandingan', '/peserta', '/kemuncak', '/keputusan', '/lokasi', '/arkib'];
 const resultPreview = [
   ['PUiCE: Cetusan Inspirasi Tiga Minit (CI3M)', 'GURU', 'Gangsa ✓ · Perak ✓', 'Emas & Platinum · Kemuncak'],
   ['PUiCE: Inovasi Guru', 'GURU', 'Gangsa ✓ · Perak ✓', 'Emas & Platinum · Kemuncak'],
@@ -62,8 +63,8 @@ export default function Home() {
         <HeroSlideshow images={media.home} />
         <div className="hero-slideshow-overlay hero-overlay-home" aria-hidden="true" />
         <header className="site-header">
-          <a className="brand" href="#utama" aria-label="PUiCE 2026 home"><span>PUiCE <em>2026</em></span></a>
-          <nav className={menuOpen ? 'open' : ''} aria-label="Primary navigation">{nav.map((item, index) => { const key = navigation[index]; return <a className={index === 0 ? 'active' : ''} onClick={() => setMenuOpen(false)} href={key === 'PUiCE' ? '/puice' : key === 'Pertandingan' ? '/pertandingan' : key === 'Peserta' ? '/peserta' : key === 'Kemuncak' ? '/kemuncak' : key === 'Keputusan' ? '/keputusan' : key === 'Lokasi' ? '/lokasi' : key === 'Arkib' ? '/arkib' : '#utama'} key={key}>{item}</a>; })}</nav>
+          <Link className="brand" href="#utama" aria-label="PUiCE 2026 home"><span>PUiCE <em>2026</em></span></Link>
+          <nav className={menuOpen ? 'open' : ''} aria-label="Primary navigation">{nav.map((item, index) => <Link className={index === 0 ? 'active' : ''} onClick={() => setMenuOpen(false)} href={navigationPaths[index]} key={navigation[index]}>{item}</Link>)}</nav>
           <div className="language" aria-label="Language selector"><button type="button" className={!en ? 'selected' : ''} onClick={() => setLanguage('bm')}>BM</button><span>/</span><button type="button" className={en ? 'selected' : ''} onClick={() => setLanguage('en')}>EN</button></div>
           <button type="button" className={`menu${menuOpen ? ' open' : ''}`} aria-label={menuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'} aria-expanded={menuOpen} onClick={() => setMenuOpen((current) => !current)}><i /><i /></button>
         </header>

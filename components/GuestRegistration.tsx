@@ -120,12 +120,13 @@ async function downloadCertificate(record: AttendanceRecord) {
   doc.save(`Sijil-PUiCE-2026-${filename}.pdf`);
 }
 
-export default function GuestRegistration({ settings = fallbackSettings }: { settings?: JourneySettings }) {
+export default function GuestRegistration({ settings = fallbackSettings, variant = 'full' }: { settings?: JourneySettings; variant?: 'full' | 'feedback-only' }) {
+  const feedbackOnly = variant === 'feedback-only';
   const [liveSettings, setLiveSettings] = useState(settings);
   const [registrationOpen, setRegistrationOpen] = useState(false);
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [certificateOpen, setCertificateOpen] = useState(false);
-  const [mode, setMode] = useState<Mode>('attendance');
+  const [mode, setMode] = useState<Mode>(feedbackOnly ? 'feedback' : 'attendance');
   const [attendanceStep, setAttendanceStep] = useState(0);
   const [attendance, setAttendance] = useState<AttendanceAnswers>(emptyAttendance);
   const [created, setCreated] = useState<AttendanceRecord | null>(null);
@@ -256,27 +257,28 @@ export default function GuestRegistration({ settings = fallbackSettings }: { set
   }
 
   const status = selected || created;
+  const accessOpen = feedbackOnly ? feedbackOpen : registrationOpen;
 
-  return <section id="daftar" className="registration-panel journey-panel">
+  return <section id={feedbackOnly ? 'maklum-balas' : 'daftar'} className={`registration-panel journey-panel${feedbackOnly ? ' archive-feedback-panel' : ''}`}>
     <HeroSlideshow images={media.registration} className="registration-media" />
     <div className="registration-media-overlay" aria-hidden="true" />
     <style>{`.registration-gate{position:relative;width:100%;max-width:720px}.registration-gate.is-locked .registration-form-shell{filter:blur(7px);opacity:.52;pointer-events:none;user-select:none}.registration-lock{position:absolute;inset:0;z-index:5;display:grid;place-items:center;padding:24px;background:rgba(8,16,35,.3);backdrop-filter:blur(2px)}.registration-lock-card{width:min(440px,100%);padding:clamp(27px,5vw,42px);text-align:center;background:rgba(9,22,45,.96);color:#fff;border:1px solid rgba(242,199,110,.55);box-shadow:0 24px 70px rgba(0,0,0,.38)}.registration-lock-icon{width:58px;height:58px;margin:0 auto 22px;display:grid;place-items:center;border-radius:50%;background:#f2c76e;color:#132341;font-size:25px}.registration-lock-card .eyebrow{color:#f2c76e}.registration-lock-card h3{font-family:Georgia,serif;font-size:clamp(29px,4vw,42px);line-height:1.08;margin:8px 0 17px}.registration-lock-card p:not(.eyebrow){margin:0;color:#d9e1ee;font-size:14px;line-height:1.6}.registration-lock-card strong{display:block;margin-top:22px;color:#f2c76e;font-size:13px;letter-spacing:.06em}@media(max-width:780px){.registration-gate{max-width:780px}.registration-lock{padding:12px}.registration-lock-card{padding:28px 20px}.registration-lock-card h3{font-size:29px}}`}</style>
     <div className="registration-copy">
-      <p className="eyebrow">KEHADIRAN · MAKLUM BALAS · SIJIL</p>
-      <h2>Dua langkah.<br /><span>Satu perjalanan.</span></h2>
-      <p>Lengkapkan kehadiran dahulu. Selepas maklum balas dihantar, sijil PDF boleh dijana terus tanpa disimpan dalam sistem.</p>
-      <p className="feedback-time-note"><strong>Maklum balas dibuka pada 11.00 pagi, 10 September 2026.</strong> Sijil kehadiran digital boleh dijana selepas maklum balas dilengkapkan.</p>
+      <p className="eyebrow">{feedbackOnly ? 'LANGKAH AKHIR · PUiCE 2026' : 'KEHADIRAN · MAKLUM BALAS · SIJIL'}</p>
+      <h2>{feedbackOnly ? <>Lengkapkan maklum balas.<br /><span>Jana sijil anda.</span></> : <>Dua langkah.<br /><span>Satu perjalanan.</span></>}</h2>
+      <p>{feedbackOnly ? 'Jika kehadiran anda telah direkodkan, gunakan nombor telefon yang sama untuk melengkapkan maklum balas dan menjana sijil kehadiran digital.' : 'Lengkapkan kehadiran dahulu. Selepas maklum balas dihantar, sijil PDF boleh dijana terus tanpa disimpan dalam sistem.'}</p>
+      {!feedbackOnly && <p className="feedback-time-note"><strong>Maklum balas dibuka pada 11.00 pagi, 10 September 2026.</strong> Sijil kehadiran digital boleh dijana selepas maklum balas dilengkapkan.</p>}
       <div className="journey-status"><span className={status ? 'done' : ''}><b>{status ? '✓' : '1'}</b>Kehadiran</span><i /><span className={status?.feedback_status === 'COMPLETE' ? 'done' : ''}><b>{status?.feedback_status === 'COMPLETE' ? '✓' : '2'}</b>Maklum balas</span><i /><span className={status?.certificate_status === 'ELIGIBLE' ? 'done' : ''}><b>{status?.certificate_status === 'ELIGIBLE' ? '✓' : '3'}</b>Sijil</span></div>
       <div className="privacy-chip">Satu nombor boleh digunakan untuk beberapa nama</div>
-      {feedbackOpen && <div className="feedback-open-banner" role="status"><strong>Maklum balas kini dibuka.</strong><span>Lengkapkan maklum balas untuk menjana sijil kehadiran digital.</span><button type="button" onClick={() => chooseMode('feedback')}>Isi sekarang →</button></div>}
+      {!feedbackOnly && feedbackOpen && <div className="feedback-open-banner" role="status"><strong>Maklum balas kini dibuka.</strong><span>Lengkapkan maklum balas untuk menjana sijil kehadiran digital.</span><button type="button" onClick={() => chooseMode('feedback')}>Isi sekarang →</button></div>}
     </div>
 
-    <div className={`registration-gate${registrationOpen ? '' : ' is-locked'}`}>
-    <div className="registration-form-shell journey-shell" aria-hidden={!registrationOpen} inert={registrationOpen ? undefined : true}>
-      <div className="journey-tabs" role="tablist" aria-label="Kehadiran dan maklum balas">
+    <div className={`registration-gate${accessOpen ? '' : ' is-locked'}`}>
+    <div className="registration-form-shell journey-shell" aria-hidden={!accessOpen} inert={accessOpen ? undefined : true}>
+      {!feedbackOnly && <div className="journey-tabs" role="tablist" aria-label="Kehadiran dan maklum balas">
         <button type="button" className={mode === 'attendance' ? 'active' : ''} onClick={() => chooseMode('attendance')}><span>01</span> Kehadiran</button>
         <button type="button" className={mode === 'feedback' ? 'active' : ''} onClick={() => chooseMode('feedback')}><span>02</span> Maklum Balas &amp; Sijil</button>
-      </div>
+      </div>}
 
       {mode === 'attendance' && (created ? <div className="form-success attendance-success" aria-live="polite">
         <div className="success-mark">✓</div><p className="eyebrow">1 DARIPADA 2 SELESAI</p><h3>Selamat datang, {created.full_name}.</h3>
@@ -299,7 +301,7 @@ export default function GuestRegistration({ settings = fallbackSettings }: { set
         <div className="form-actions">{attendanceStep > 0 && <button type="button" className="back-action" onClick={() => { setAttendanceStep(0); setMessage(''); }}>← Kembali</button>}{attendanceStep === 0 ? <button type="button" onClick={attendanceNext}>Teruskan →</button> : <button type="submit" disabled={state === 'loading'}>{state === 'loading' ? 'Merekodkan…' : 'Rekod Kehadiran →'}</button>}</div>
       </form>)}
 
-      {mode === 'feedback' && !feedbackOpen && <div className="form-success feedback-locked-state" role="status"><div className="registration-lock-icon" aria-hidden="true">⌛</div><p className="eyebrow">MAKLUM BALAS BELUM DIBUKA</p><h3>Kembali selepas jam 11.00 pagi.</h3><p>Maklum balas dibuka pada 11.00 pagi, 10 September 2026. Sijil kehadiran digital boleh dijana selepas maklum balas dilengkapkan.</p><button type="button" className="ghost-action" onClick={() => chooseMode('attendance')}>← Kembali ke Kehadiran</button></div>}
+      {mode === 'feedback' && !feedbackOpen && <div className="form-success feedback-locked-state" role="status"><div className="registration-lock-icon" aria-hidden="true">⌛</div><p className="eyebrow">MAKLUM BALAS BELUM DIBUKA</p><h3>Kembali selepas jam 11.00 pagi.</h3><p>Maklum balas dibuka pada 11.00 pagi, 10 September 2026. Sijil kehadiran digital boleh dijana selepas maklum balas dilengkapkan.</p>{!feedbackOnly && <button type="button" className="ghost-action" onClick={() => chooseMode('attendance')}>← Kembali ke Kehadiran</button>}</div>}
 
       {mode === 'feedback' && feedbackOpen && feedbackStage === 'lookup' && <form className="registration-form lookup-form" onSubmit={lookup}>
         <div className="form-stage-heading"><span>SEMAK REKOD</span><strong>Maklum balas &amp; sijil</strong></div>
@@ -308,7 +310,7 @@ export default function GuestRegistration({ settings = fallbackSettings }: { set
         {message && <p className={`form-message ${state}`} role="alert">{message}</p>}
         <button type="submit" className="lookup-action" disabled={state === 'loading'}>{state === 'loading' ? 'Mencari…' : 'Cari Rekod Saya →'}</button>
         {records.length > 1 && <div className="record-list"><p>Pilih nama:</p>{records.map(record => <button type="button" key={record.attendance_id} onClick={() => selectRecord(record)}><span><strong>{record.full_name}</strong><small>{record.organisation_or_school}</small></span><b>{record.feedback_status === 'COMPLETE' ? 'Sijil tersedia' : 'Isi maklum balas'} →</b></button>)}</div>}
-        <button type="button" className="text-action" onClick={() => chooseMode('attendance')}>Belum daftar kehadiran?</button>
+        {!feedbackOnly && <button type="button" className="text-action" onClick={() => chooseMode('attendance')}>Belum daftar kehadiran?</button>}
       </form>}
 
       {mode === 'feedback' && feedbackOpen && feedbackStage === 'questions' && selected && <form className="registration-form" onSubmit={event => event.preventDefault()}>
@@ -339,7 +341,7 @@ export default function GuestRegistration({ settings = fallbackSettings }: { set
         <button type="button" className="ghost-action" onClick={() => { setFeedbackStage('lookup'); setSelected(null); setMessage(''); }}>Semak nama lain</button>
       </div>}
     </div>
-    {!registrationOpen && <div className="registration-lock" role="status" aria-live="polite"><div className="registration-lock-card"><div className="registration-lock-icon" aria-hidden="true">⌛</div><p className="eyebrow">PENDAFTARAN BELUM DIBUKA</p><h3>Borang kehadiran akan dibuka pada hari Kemuncak.</h3><p>Sila kembali ke bahagian ini apabila pendaftaran bermula.</p><strong>8.00 PAGI · 10 SEPTEMBER 2026</strong></div></div>}
+    {!accessOpen && <div className="registration-lock" role="status" aria-live="polite"><div className="registration-lock-card"><div className="registration-lock-icon" aria-hidden="true">⌛</div><p className="eyebrow">{feedbackOnly ? 'MAKLUM BALAS BELUM DIBUKA' : 'PENDAFTARAN BELUM DIBUKA'}</p><h3>{feedbackOnly ? 'Borang maklum balas belum dibuka.' : 'Borang kehadiran akan dibuka pada hari Kemuncak.'}</h3><p>{feedbackOnly ? 'Sila kembali ke bahagian ini apabila maklum balas dibuka.' : 'Sila kembali ke bahagian ini apabila pendaftaran bermula.'}</p><strong>{feedbackOnly ? '11.00 PAGI · 10 SEPTEMBER 2026' : '8.00 PAGI · 10 SEPTEMBER 2026'}</strong></div></div>}
     </div>
   </section>;
 }

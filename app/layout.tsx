@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import FloatingNavigation from '../components/FloatingNavigation';
+import { LegacySiteRedirect } from '../components/EventRouteGuard';
 import { sitePath } from '../lib/runtime-paths';
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ms">
-      <body>{children}<FloatingNavigation /></body>
+      <body><LegacySiteRedirect />{children}<FloatingNavigation /></body>
     </html>
   );
 }

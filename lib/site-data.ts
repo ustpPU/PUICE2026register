@@ -1,9 +1,9 @@
 export type EventMode = 'PRE_EVENT' | 'LIVE' | 'ARCHIVE';
 
 export const siteSettings = {
-  eventMode: 'PRE_EVENT' as EventMode,
+  eventMode: 'ARCHIVE' as EventMode,
   eventDate: '2026-09-10T08:00:00+08:00',
-  eventEnd: '2026-09-10T17:00:00+08:00',
+  eventEnd: '2026-09-10T20:00:00+08:00',
   venue: 'Dewan Sivik MBPJ',
   guestRegistrationEnabled: true,
   guestRegistrationLiveOnly: false,
@@ -74,6 +74,7 @@ export const galleryPlaceholders = [
 ];
 
 export function getEventMode(now = new Date()): EventMode {
+  if (siteSettings.eventMode === 'ARCHIVE') return 'ARCHIVE';
   const start = new Date(siteSettings.eventDate);
   const end = new Date(siteSettings.eventEnd);
   if (now >= end) return 'ARCHIVE';
