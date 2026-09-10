@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../components/SafeLink';
 import BrandStrip from '../../components/BrandStrip';
 import HeroSlideshow from '../../components/HeroSlideshow';
 import JourneyLinks from '../../components/JourneyLinks';

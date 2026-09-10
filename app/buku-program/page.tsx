@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '../../components/SafeLink';
 import BrandStrip from '../../components/BrandStrip';
 import ProgrammeBookReader from '../../components/ProgrammeBookReader';
 import JourneyLinks from '../../components/JourneyLinks';

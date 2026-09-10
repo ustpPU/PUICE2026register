@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from './SafeLink';
 
 const attendanceRules = [
   ['Sepanjang hari', 'Peserta dan guru pengiring KmR, PBL dan PBL-STEM'],

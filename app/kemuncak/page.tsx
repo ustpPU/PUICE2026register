@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../components/SafeLink';
 import BrandStrip from '../../components/BrandStrip';
 import GuestRegistration from '../../components/GuestRegistration';
 import GuestGuide from '../../components/GuestGuide';

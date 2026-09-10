@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from '../components/SafeLink';
 import BrandStrip from '../components/BrandStrip';
 import GuestRegistration from '../components/GuestRegistration';
 import HeroSlideshow from '../components/HeroSlideshow';
