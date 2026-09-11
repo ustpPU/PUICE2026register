@@ -26,6 +26,11 @@ function doGet(e) {
   try {
     const action = clean_(e && e.parameter && e.parameter.action, 40);
     if (action === 'journey_settings') return json_({ ok: true, settings: journeySettings_() });
+    if (action === 'lookup_attendance') {
+      ensureJourneySheets_();
+      rateLimit_(action, e && e.parameter && e.parameter.phone_normalized, 40, 600);
+      return json_(lookupAttendance_({ phone_normalized: e && e.parameter && e.parameter.phone_normalized }));
+    }
     const tab = clean_(e && e.parameter && e.parameter.tab, 40);
     if (!PUBLIC_FIELDS[tab]) return json_({ ok: false, message: 'Tab tidak dibenarkan.' });
     return json_({ ok: true, rows: publicRows_(tab) });
@@ -138,7 +143,7 @@ function lookupAttendance_(payload) {
   if (phone.length < 8) return { ok: false, message: 'Masukkan nombor telefon yang sah.' };
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ATTENDANCE_TAB);
   const values = sheet.getDataRange().getDisplayValues();
-  return { ok: true, records: values.slice(1).filter(row => row[6] === phone).map(attendanceRecord_) };
+  return { ok: true, records: values.slice(1).filter(row => normalizePhone_(row[6] || row[5]) === phone).map(attendanceRecord_) };
 }
 
 function submitFeedback_(payload) {

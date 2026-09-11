@@ -9,6 +9,11 @@ const FEEDBACK_HEADERS = ['feedback_id', 'attendance_id', 'submitted_at', 'ratin
 const CERTIFICATE_HEADERS = ['certificate_number', 'attendance_id', 'full_name', 'eligible_at', 'template_version', 'status', 'generated_count', 'last_generated_at'];
 
 function doGet(e) {
+  const action = String((e && e.parameter && e.parameter.action) || '');
+  if (action === 'lookup_attendance') {
+    ensureJourneySheets_();
+    return json_(lookupAttendance_({ phone_normalized: e && e.parameter && e.parameter.phone_normalized }));
+  }
   const tab = String((e && e.parameter && e.parameter.tab) || '');
   if (!PUBLIC_TABS.includes(tab)) return json_({ ok: false, message: 'Tab tidak dibenarkan.' });
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(tab);
@@ -55,9 +60,9 @@ function createAttendance_(payload) {
 
 function lookupAttendance_(payload) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(ATTENDANCE_TAB);
-  const phone = normalizePhone_(payload.phone_normalized);
+  const phone = normalizePhone_(payload.phone_normalized || payload.phone_number);
   const values = sheet.getDataRange().getDisplayValues();
-  return { ok: true, records: values.slice(1).filter(row => row[6] === phone).map(attendanceRecord_) };
+  return { ok: true, records: values.slice(1).filter(row => normalizePhone_(row[6] || row[5]) === phone).map(attendanceRecord_) };
 }
 
 function submitFeedback_(payload) {

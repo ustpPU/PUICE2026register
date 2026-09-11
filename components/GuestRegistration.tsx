@@ -67,12 +67,25 @@ const scale: Array<{ value: Rating; label: string }> = [
 ];
 
 async function postJourney(payload: Record<string, unknown>) {
-  const response = await fetch(publicApiUrl || sitePath('/api/guest-journey'), {
+  const endpoint = publicApiUrl || sitePath('/api/guest-journey');
+  const request = async (url: string) => fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': publicApiUrl ? 'text/plain;charset=utf-8' : 'application/json' },
     body: JSON.stringify(payload),
+    cache: 'no-store',
   });
-  const result = await response.json() as { ok?: boolean; message?: string; record?: AttendanceRecord; records?: AttendanceRecord[] };
+  let response = await request(publicApiUrl ? `${endpoint}?request_id=${Date.now()}` : endpoint);
+  let result = await response.json() as { ok?: boolean; message?: string; record?: AttendanceRecord; records?: AttendanceRecord[] };
+
+  // Some mobile browser/network combinations can occasionally follow the Apps Script
+  // response as a GET. Retry lookups through the dedicated read fallback only then.
+  if (publicApiUrl && payload.action === 'lookup_attendance' && result.ok === false && /tab tidak dibenarkan/i.test(result.message || '')) {
+    const phone = String(payload.phone_number || '').replace(/\D/g, '').replace(/^60(?=1)/, '').replace(/^0(?=1)/, '');
+    const fallbackUrl = `${endpoint}?action=lookup_attendance&phone_normalized=${encodeURIComponent(phone)}&request_id=${Date.now()}`;
+    response = await fetch(fallbackUrl, { method: 'GET', cache: 'no-store' });
+    result = await response.json() as typeof result;
+  }
+
   if (!response.ok || result.ok === false) throw new Error(result.message || 'Permintaan tidak dapat diproses.');
   return result;
 }
