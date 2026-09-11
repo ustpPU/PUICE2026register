@@ -12,7 +12,7 @@ const sections = [
 ] as const;
 
 export default function ArchiveSectionNavigator() {
-  const [active, setActive] = useState(sections[0].id);
+  const [active, setActive] = useState<string>(sections[0].id);
 
   useEffect(() => {
     const targets = sections
