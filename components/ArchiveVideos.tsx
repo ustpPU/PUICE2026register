@@ -17,6 +17,14 @@ const videos = [
   },
 ] as const;
 
+const preEventVideo = {
+  id: '7675682115857812757',
+  eyebrow: 'SOROTAN · 19 OGOS 2026',
+  title: 'Sorotan Pra-Acara PUICE 2026',
+  description: 'Imbas kembali CI3M dan PUICE: Inovasi Guru yang membuka perjalanan PUICE 2026.',
+  url: 'https://www.tiktok.com/@wasilahminda/video/7675682115857812757',
+} as const;
+
 export default function ArchiveVideos() {
   const main = videos[0];
   const highlight = videos[1];
@@ -27,7 +35,10 @@ export default function ArchiveVideos() {
       <div><small>{main.eyebrow}</small><h3>{main.title}</h3><p>{main.description}</p><a href={main.url} target="_blank" rel="noopener noreferrer">Buka di YouTube ↗</a></div>
     </article>
     <div className="archive-video-grid">
-      <article className="archive-video-card video-placeholder"><div className="video-placeholder-mark">01</div><div><small>SOROTAN · 19 OGOS 2026</small><h3>Sorotan Pra-Acara PUICE 2026</h3><p>Ruang video telah disediakan. Pautan rasmi akan dimasukkan kemudian.</p><span>AKAN DATANG</span></div></article>
+      <article className="archive-video-card archive-video-card-tiktok">
+        <div className="tiktok-frame"><iframe src={`https://www.tiktok.com/player/v1/${preEventVideo.id}?controls=1&description=1&music_info=0&rel=0`} title={preEventVideo.title} loading="lazy" allow="fullscreen; autoplay; encrypted-media; picture-in-picture" allowFullScreen /></div>
+        <div><small>{preEventVideo.eyebrow}</small><h3>{preEventVideo.title}</h3><p>{preEventVideo.description}</p><a href={preEventVideo.url} target="_blank" rel="noopener noreferrer">Buka di TikTok ↗</a></div>
+      </article>
       <article className="archive-video-card"><div className="video-frame"><iframe src={`https://www.youtube-nocookie.com/embed/${highlight.id}?rel=0`} title={highlight.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div><div><small>{highlight.eyebrow}</small><h3>{highlight.title}</h3><p>{highlight.description}</p><a href={highlight.url} target="_blank" rel="noopener noreferrer">Buka di YouTube ↗</a></div></article>
     </div>
   </section>;
