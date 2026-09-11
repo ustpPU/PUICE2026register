@@ -25,29 +25,29 @@ export const programme = [
   { id: 'PR-010', start: '12.00 tengah hari', end: '1.00 petang', title: 'Pembentangan Amalan Terbaik Kepimpinan', titleEn: 'Leadership Best Practice Presentations', venue: 'Pentas Utama / Dewan', type: 'PRESENTATION', details: ['Kepimpinan Pengetua', 'Kepimpinan Guru Besar', 'Penyampaian cenderamata'] },
   { id: 'PR-011', start: '1.00 petang', end: '2.00 petang', title: 'Rehat, Jamuan dan Persediaan Majlis Penutupan Rasmi', titleEn: 'Break, Refreshments and Preparation for the Official Closing Ceremony', venue: 'Ruang Jamuan / Dewan', type: 'BREAK', details: [] },
   { id: 'PR-012', start: '2.00 petang', end: '', title: 'Ketibaan Tetamu Kehormat Majlis Penutupan Rasmi', titleEn: 'Arrival of the Guest of Honour for the Official Closing Ceremony', venue: 'Lobi / Dewan Utama', type: 'ARRIVAL', details: [] },
-  { id: 'PR-013', start: '2.15 petang', end: '', title: 'Majlis Penutupan Rasmi', titleEn: 'Official Closing Ceremony', venue: 'Pentas Utama / Dewan', type: 'CEREMONY', details: ['Perarakan masuk tetamu kehormat, Tuan Ahmad Azri bin Zainal Nor, A.M.S., diiringi dif-dif kehormat', 'Persembahan', 'Ucapan perasmian penutupan oleh Tuan Ahmad Azri bin Zainal Nor, A.M.S.', 'Tayangan montaj PUiCE 2026'] },
+  { id: 'PR-013', start: '2.15 petang', end: '', title: 'Majlis Penutupan Rasmi', titleEn: 'Official Closing Ceremony', venue: 'Pentas Utama / Dewan', type: 'CEREMONY', details: ['Perarakan masuk tetamu kehormat, Tuan Ahmad Azri bin Zainal Nor, A.M.S., diiringi dif-dif kehormat', 'Persembahan', 'Ucapan perasmian penutupan oleh Tuan Ahmad Azri bin Zainal Nor, A.M.S.', 'Tayangan montaj PUICE 2026'] },
   { id: 'PR-014', start: '3.00 petang', end: '', title: 'Upacara Penyampaian Hadiah', titleEn: 'Prize-Giving Ceremony', venue: 'Pentas Utama / Dewan', type: 'RESULTS', details: ['Sesi fotografi beramai-ramai bersama perasmi'] },
   { id: 'PR-015', start: '4.30 petang', end: '', title: 'Bersurai dan Pengurusan Selepas Majlis', titleEn: 'Dismissal and Post-Event Management', venue: 'Dewan Utama / Lobi', type: 'CLOSING', details: ['Tetamu dan peserta bersurai', 'Pengurusan reruai dan peralatan', 'Semakan akhir ruang program'] },
 ];
 
 export const participants = [
-  { id: 'P-001', name: 'Cikgu Nurul Izzati', school: 'SK Petaling Jaya', competition: 'PUiCE: Cetusan Inspirasi Tiga Minit (CI3M)', audience: 'GURU' },
-  { id: 'P-002', name: 'Cikgu Aina Rahman', school: 'SK Damansara Utama', competition: 'PUiCE: Inovasi Guru', audience: 'GURU' },
+  { id: 'P-001', name: 'Cikgu Nurul Izzati', school: 'SK Petaling Jaya', competition: 'PUICE: Cetusan Inspirasi Tiga Minit (CI3M)', audience: 'GURU' },
+  { id: 'P-002', name: 'Cikgu Aina Rahman', school: 'SK Damansara Utama', competition: 'PUICE: Inovasi Guru', audience: 'GURU' },
   { id: 'P-003', name: 'Pasukan Inovasi Hijau', school: 'SMK Taman Tun Dr Ismail', competition: 'Pembelajaran Berasaskan Projek (PBL)', audience: 'MURID' },
   { id: 'P-004', name: 'STEM Explorers', school: 'SK Bukit Gasing', competition: 'Pembelajaran Berasaskan Projek STEM (PBL-STEM)', audience: 'MURID' },
   { id: 'P-005', name: 'Cikgu Siti Mariam', school: 'SK Sri Petaling', competition: 'Poster Digital', audience: 'GURU' },
   { id: 'P-006', name: 'Pasukan EcoNova', school: 'SMK Seksyen 4 Kota Damansara', competition: 'Pembelajaran Berasaskan Projek STEM (PBL-STEM)', audience: 'MURID' },
   { id: 'P-007', name: 'Cikgu Muhammad Farhan', school: 'SK Taman Megah', competition: 'Pembentangan Kajian Tindakan', audience: 'GURU' },
   { id: 'P-008', name: 'Pasukan Reka Cipta Muda', school: 'SK Kelana Jaya 1', competition: 'Kefahaman Melalui Reka Bentuk (KmR)', audience: 'MURID' },
-  { id: 'P-009', name: 'Cikgu Kavitha Devi', school: 'SJK(T) Vivekananda', competition: 'PUiCE: Cetusan Inspirasi Tiga Minit (CI3M)', audience: 'GURU' },
+  { id: 'P-009', name: 'Cikgu Kavitha Devi', school: 'SJK(T) Vivekananda', competition: 'PUICE: Cetusan Inspirasi Tiga Minit (CI3M)', audience: 'GURU' },
   { id: 'P-010', name: 'Pasukan AquaSense', school: 'SMK Damansara Jaya', competition: 'Pembelajaran Berasaskan Projek (PBL)', audience: 'MURID' },
   { id: 'P-011', name: 'Cikgu Lee Wen Qi', school: 'SJK(C) Yuk Chai', competition: 'Poster Digital', audience: 'GURU' },
   { id: 'P-012', name: 'Pasukan Future Makers', school: 'SMK Bandar Utama Damansara 3', competition: 'Kefahaman Melalui Reka Bentuk (KmR)', audience: 'MURID' },
 ];
 
 export const resultGroups = [
-  { competition: 'PUiCE: Cetusan Inspirasi Tiga Minit (CI3M)', audience: 'GURU', visible: 'Gangsa & Perak telah diumumkan', locked: 'Emas & Platinum · Kemuncak' },
-  { competition: 'PUiCE: Inovasi Guru', audience: 'GURU', visible: 'Gangsa & Perak telah diumumkan', locked: 'Emas & Platinum · Kemuncak' },
+  { competition: 'PUICE: Cetusan Inspirasi Tiga Minit (CI3M)', audience: 'GURU', visible: 'Gangsa & Perak telah diumumkan', locked: 'Emas & Platinum · Kemuncak' },
+  { competition: 'PUICE: Inovasi Guru', audience: 'GURU', visible: 'Gangsa & Perak telah diumumkan', locked: 'Emas & Platinum · Kemuncak' },
   { competition: 'Poster Digital', audience: 'GURU', visible: 'Dalam penilaian', locked: 'Semua anugerah · Kemuncak' },
   { competition: 'Pembentangan Kajian Tindakan', audience: 'GURU', visible: 'Menunggu pertandingan', locked: 'Semua anugerah · Kemuncak' },
   { competition: 'Kefahaman Melalui Reka Bentuk (KmR)', audience: 'MURID', visible: 'Berlangsung 10 September', locked: 'Selepas penilaian rasmi' },
@@ -65,12 +65,11 @@ export const venues = [
 ];
 
 export const galleryPlaceholders = [
-  { id: 'GA-001', title: 'Galeri Pra-Acara PUiCE 2026', category: '19 Ogos · CI3M & PUiCE: Inovasi Guru', image: '/media/pre-event-feature.webp', albumUrl: 'https://photos.app.goo.gl/XBYjoFezpjdV4mSb8' },
-  { id: 'GA-002', title: 'Sorotan Penjurian', category: 'Pra-Acara · 19 Ogos', image: '/media/pre-event-judging.webp', albumUrl: 'https://photos.app.goo.gl/XBYjoFezpjdV4mSb8' },
-  { id: 'GA-003', title: 'Pentas CI3M', category: 'Pra-Acara · 19 Ogos', image: '/media/pre-event-stage.webp', albumUrl: 'https://photos.app.goo.gl/XBYjoFezpjdV4mSb8' },
-  { id: 'GA-004', title: 'Ruang Idea & Inovasi', category: 'Pra-Acara · 19 Ogos', image: '/media/pre-event-venue.webp', albumUrl: 'https://photos.app.goo.gl/XBYjoFezpjdV4mSb8' },
-  { id: 'GA-005', title: 'Pemenang & Pengiktirafan', category: 'Kemuncak', image: '', albumUrl: '' },
-  { id: 'GA-006', title: 'Foto & Video Rasmi', category: 'Arkib', image: '', albumUrl: '' },
+  { id: 'GA-001', title: 'Galeri Pra-Acara PUICE 2026', category: '19 Ogos · CI3M & PUICE: Inovasi Guru', image: '/media/pre-event-feature.webp', albumUrl: 'https://photos.app.goo.gl/XBYjoFezpjdV4mSb8' },
+  { id: 'GA-002', title: 'Galeri Kemuncak PUICE 2026', category: 'Kemuncak · 10 September', image: '/media/2026/kemuncak-hero-1.jpg', albumUrl: '' },
+  { id: 'GA-003', title: 'Pertandingan, Pentas & Reruai', category: 'Kemuncak · Dokumentasi', image: '/media/2026/kemuncak-hero-2.jpg', albumUrl: '' },
+  { id: 'GA-004', title: 'Pemenang & Pengiktirafan', category: 'Kemuncak · Anugerah', image: '/media/2026/kemuncak-hero-3.jpg', albumUrl: '' },
+  { id: 'GA-005', title: 'Di Sebalik Tabir', category: 'Kemuncak · Urus Setia', image: '/media/2026/kemuncak-hero-4.jpg', albumUrl: '' },
 ];
 
 export function getEventMode(now = new Date()): EventMode {

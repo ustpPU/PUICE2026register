@@ -58,7 +58,7 @@ const statements = [
   'Tempat dan kemudahan yang disediakan adalah sesuai untuk pelaksanaan program.',
   'Pelantar yang sesuai disediakan untuk menyalurkan maklumat yang jelas dan terkini berkaitan program.',
   'Pembentangan, pameran dan pertandingan memberikan peluang untuk mendapatkan idea atau inspirasi baharu.',
-  'Pelibatan dalam aktiviti PUiCE 2026 menambahkan pengalaman positif dan berimpak kepada peserta dan pengunjung.',
+  'Pelibatan dalam aktiviti PUICE 2026 menambahkan pengalaman positif dan berimpak kepada peserta dan pengunjung.',
   'Program ini berjaya melahirkan lebih ramai warga pendidikan yang kreatif dan kritis dalam melaksanakan pedagogi serta PdP berkesan.',
 ];
 const scale: Array<{ value: Rating; label: string }> = [
@@ -109,15 +109,15 @@ async function downloadCertificate(record: AttendanceRecord) {
   doc.text(nameLines, width / 2, 114, { align: 'center' });
   const afterName = 114 + (nameLines.length - 1) * 9;
   doc.setTextColor(19, 35, 65); doc.setFont('helvetica', 'normal'); doc.setFontSize(12);
-  doc.text('telah menghadiri Kemuncak PUiCE 2026', width / 2, afterName + 14, { align: 'center' });
+  doc.text('telah menghadiri Kemuncak PUICE 2026', width / 2, afterName + 14, { align: 'center' });
   doc.setFont('helvetica', 'bold'); doc.text('10 September 2026  ·  Dewan Sivik, MBPJ', width / 2, afterName + 24, { align: 'center' });
   doc.setDrawColor(210, 201, 187); doc.line(48, 158, width - 48, 158);
   doc.setTextColor(69, 79, 95); doc.setFontSize(8.5);
   doc.setFont('helvetica', 'bold'); doc.text(`No. sijil: ${record.certificate_number || record.attendance_id}`, 20, 176);
-  doc.setFont('helvetica', 'normal'); doc.text('Sijil ini dijana secara digital dan disahkan melalui sistem rasmi PUiCE 2026.', width - 20, 176, { align: 'right' });
-  doc.setFontSize(8); doc.text('PUiCE 2026 | Pendidikan Masa Hadapan: Teknologi Memacu, Insan Memimpin', width / 2, 190, { align: 'center' });
+  doc.setFont('helvetica', 'normal'); doc.text('Sijil ini dijana secara digital dan disahkan melalui sistem rasmi PUICE 2026.', width - 20, 176, { align: 'right' });
+  doc.setFontSize(8); doc.text('PUICE 2026 | Pendidikan Masa Hadapan: Teknologi Memacu, Insan Memimpin', width / 2, 190, { align: 'center' });
   const filename = record.full_name.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 60) || 'Peserta';
-  doc.save(`Sijil-PUiCE-2026-${filename}.pdf`);
+  doc.save(`Sijil-PUICE-2026-${filename}.pdf`);
 }
 
 export default function GuestRegistration({ settings = fallbackSettings, variant = 'full' }: { settings?: JourneySettings; variant?: 'full' | 'feedback-only' }) {
@@ -265,7 +265,7 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
     <div className="registration-media-overlay" aria-hidden="true" />
     <style>{`.registration-gate{position:relative;width:100%;max-width:720px}.registration-gate.is-locked .registration-form-shell{filter:blur(7px);opacity:.52;pointer-events:none;user-select:none}.registration-lock{position:absolute;inset:0;z-index:5;display:grid;place-items:center;padding:24px;background:rgba(8,16,35,.3);backdrop-filter:blur(2px)}.registration-lock-card{width:min(440px,100%);padding:clamp(27px,5vw,42px);text-align:center;background:rgba(9,22,45,.96);color:#fff;border:1px solid rgba(242,199,110,.55);box-shadow:0 24px 70px rgba(0,0,0,.38)}.registration-lock-icon{width:58px;height:58px;margin:0 auto 22px;display:grid;place-items:center;border-radius:50%;background:#f2c76e;color:#132341;font-size:25px}.registration-lock-card .eyebrow{color:#f2c76e}.registration-lock-card h3{font-family:Georgia,serif;font-size:clamp(29px,4vw,42px);line-height:1.08;margin:8px 0 17px}.registration-lock-card p:not(.eyebrow){margin:0;color:#d9e1ee;font-size:14px;line-height:1.6}.registration-lock-card strong{display:block;margin-top:22px;color:#f2c76e;font-size:13px;letter-spacing:.06em}@media(max-width:780px){.registration-gate{max-width:780px}.registration-lock{padding:12px}.registration-lock-card{padding:28px 20px}.registration-lock-card h3{font-size:29px}}`}</style>
     <div className="registration-copy">
-      <p className="eyebrow">{feedbackOnly ? 'LANGKAH AKHIR · PUiCE 2026' : 'KEHADIRAN · MAKLUM BALAS · SIJIL'}</p>
+      <p className="eyebrow">{feedbackOnly ? 'LANGKAH AKHIR · PUICE 2026' : 'KEHADIRAN · MAKLUM BALAS · SIJIL'}</p>
       <h2>{feedbackOnly ? <>Lengkapkan maklum balas.<br /><span>Jana sijil anda.</span></> : <>Dua langkah.<br /><span>Satu perjalanan.</span></>}</h2>
       <p>{feedbackOnly ? 'Jika kehadiran anda telah direkodkan, gunakan nombor telefon yang sama untuk melengkapkan maklum balas dan menjana sijil kehadiran digital.' : 'Lengkapkan kehadiran dahulu. Selepas maklum balas dihantar, sijil PDF boleh dijana terus tanpa disimpan dalam sistem.'}</p>
       {!feedbackOnly && <p className="feedback-time-note"><strong>Maklum balas dibuka pada 11.00 pagi, 10 September 2026.</strong> Sijil kehadiran digital boleh dijana selepas maklum balas dilengkapkan.</p>}
@@ -284,7 +284,7 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
       {mode === 'attendance' && (created ? <div className="form-success attendance-success" aria-live="polite">
         <div className="success-mark">✓</div><p className="eyebrow">1 DARIPADA 2 SELESAI</p><h3>Selamat datang, {created.full_name}.</h3>
         <div className="person-summary"><strong>{created.full_name}</strong><span>{created.organisation_or_school}</span><small>{created.attendance_id}</small></div>
-        <p>{message} Semoga anda menikmati pengalaman sepanjang Kemuncak PUiCE 2026.</p>
+        <p>{message} Semoga anda menikmati pengalaman sepanjang Kemuncak PUICE 2026.</p>
         <div className="welcome-links"><a href="#panduan-tetamu">Lihat Panduan Tetamu →</a><a href="#atur-cara">Terokai Atur Cara →</a></div>
         <button type="button" className="primary-action" onClick={() => chooseMode('feedback')}>{feedbackOpen ? 'Isi Maklum Balas →' : 'Maklum Balas Dibuka 11.00 Pagi →'}</button>
         <button type="button" className="ghost-action" onClick={addAnotherPerson}>+ Daftar nama lain dengan nombor sama</button>
@@ -306,7 +306,7 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
 
       {mode === 'feedback' && feedbackOpen && feedbackStage === 'lookup' && <form className="registration-form lookup-form" onSubmit={lookup}>
         <div className="form-stage-heading"><span>SEMAK REKOD</span><strong>Maklum balas &amp; sijil</strong></div>
-        <div className="lookup-intro"><p className="eyebrow">KEMBALI KE PUiCE</p><h3>Cari rekod kehadiran.</h3><p>Gunakan nombor telefon yang sama. Jika beberapa nama berkongsi nombor tersebut, pilih nama anda pada langkah seterusnya.</p></div>
+        <div className="lookup-intro"><p className="eyebrow">KEMBALI KE PUICE</p><h3>Cari rekod kehadiran.</h3><p>Gunakan nombor telefon yang sama. Jika beberapa nama berkongsi nombor tersebut, pilih nama anda pada langkah seterusnya.</p></div>
         <label>No. telefon<input required type="tel" inputMode="tel" autoComplete="tel" value={lookupPhone} onChange={event => setLookupPhone(event.target.value)} placeholder="Contoh: 012-345 6789" /></label>
         {message && <p className={`form-message ${state}`} role="alert">{message}</p>}
         <button type="submit" className="lookup-action" disabled={state === 'loading'}>{state === 'loading' ? 'Mencari…' : 'Cari Rekod Saya →'}</button>
@@ -324,9 +324,9 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
       {mode === 'feedback' && feedbackOpen && feedbackStage === 'final' && selected && <form className="registration-form" onSubmit={submitFeedback}>
         <div className="form-progress"><span style={{ width: '92%' }} /></div><div className="form-stage-heading"><span>LANGKAH AKHIR</span><strong>Pandangan seterusnya</strong></div>
         <div className="form-stage final-stage">
-          <fieldset className="choice-group"><legend>Adakah penganjuran PUiCE perlu diteruskan?</legend><div className="three-choices">{['Ya', 'Mungkin', 'Tidak'].map(value => <button type="button" key={value} className={feedback.continue_future === value ? 'selected' : ''} onClick={() => updateFeedback('continue_future', value)}>{value}</button>)}</div></fieldset>
+          <fieldset className="choice-group"><legend>Adakah penganjuran PUICE perlu diteruskan?</legend><div className="three-choices">{['Ya', 'Mungkin', 'Tidak'].map(value => <button type="button" key={value} className={feedback.continue_future === value ? 'selected' : ''} onClick={() => updateFeedback('continue_future', value)}>{value}</button>)}</div></fieldset>
           <label>Satu perkara paling penting yang perlu diperbaiki<textarea required rows={4} value={feedback.improvement} onChange={event => updateFeedback('improvement', event.target.value)} placeholder="Kongsikan cadangan yang paling bermakna…" /></label>
-          <fieldset className="choice-group"><legend>Adakah anda akan menyertai PUiCE pada masa akan datang?</legend><div className="three-choices">{['Ya', 'Mungkin', 'Tidak'].map(value => <button type="button" key={value} className={feedback.participate_future === value ? 'selected' : ''} onClick={() => updateFeedback('participate_future', value)}>{value}</button>)}</div></fieldset>
+          <fieldset className="choice-group"><legend>Adakah anda akan menyertai PUICE pada masa akan datang?</legend><div className="three-choices">{['Ya', 'Mungkin', 'Tidak'].map(value => <button type="button" key={value} className={feedback.participate_future === value ? 'selected' : ''} onClick={() => updateFeedback('participate_future', value)}>{value}</button>)}</div></fieldset>
           <label className="consent"><input type="checkbox" checked={feedback.confirmation} onChange={event => updateFeedback('confirmation', event.target.checked)} /><span>Saya mengesahkan semua jawapan yang diberikan adalah lengkap.</span></label>
         </div>
         {message && <p className={`form-message ${state}`} role="alert">{message}</p>}
@@ -342,7 +342,7 @@ export default function GuestRegistration({ settings = fallbackSettings, variant
         <button type="button" className="ghost-action" onClick={() => { setFeedbackStage('lookup'); setSelected(null); setMessage(''); }}>Semak nama lain</button>
       </div>}
     </div>
-    {!accessOpen && <div className="registration-lock" role="status" aria-live="polite"><div className="registration-lock-card"><div className="registration-lock-icon" aria-hidden="true">{registrationClosed ? '✓' : '⌛'}</div><p className="eyebrow">{feedbackOnly ? 'MAKLUM BALAS BELUM DIBUKA' : registrationClosed ? 'PENDAFTARAN KEHADIRAN DITUTUP' : 'PENDAFTARAN BELUM DIBUKA'}</p><h3>{feedbackOnly ? 'Borang maklum balas belum dibuka.' : registrationClosed ? 'Borang kehadiran telah ditutup.' : 'Borang kehadiran akan dibuka pada hari Kemuncak.'}</h3><p>{feedbackOnly ? 'Sila kembali ke bahagian ini apabila maklum balas dibuka.' : registrationClosed ? 'Terima kasih kepada semua tetamu yang telah merekodkan kehadiran dan menjayakan Kemuncak PUiCE 2026.' : 'Sila kembali ke bahagian ini apabila pendaftaran bermula.'}</p>{!registrationClosed && <strong>{feedbackOnly ? '11.00 PAGI · 10 SEPTEMBER 2026' : '8.00 PAGI · 10 SEPTEMBER 2026'}</strong>}</div></div>}
+    {!accessOpen && <div className="registration-lock" role="status" aria-live="polite"><div className="registration-lock-card"><div className="registration-lock-icon" aria-hidden="true">{registrationClosed ? '✓' : '⌛'}</div><p className="eyebrow">{feedbackOnly ? 'MAKLUM BALAS BELUM DIBUKA' : registrationClosed ? 'PENDAFTARAN KEHADIRAN DITUTUP' : 'PENDAFTARAN BELUM DIBUKA'}</p><h3>{feedbackOnly ? 'Borang maklum balas belum dibuka.' : registrationClosed ? 'Borang kehadiran telah ditutup.' : 'Borang kehadiran akan dibuka pada hari Kemuncak.'}</h3><p>{feedbackOnly ? 'Sila kembali ke bahagian ini apabila maklum balas dibuka.' : registrationClosed ? 'Terima kasih kepada semua tetamu yang telah merekodkan kehadiran dan menjayakan Kemuncak PUICE 2026.' : 'Sila kembali ke bahagian ini apabila pendaftaran bermula.'}</p>{!registrationClosed && <strong>{feedbackOnly ? '11.00 PAGI · 10 SEPTEMBER 2026' : '8.00 PAGI · 10 SEPTEMBER 2026'}</strong>}</div></div>}
     </div>
   </section>;
 }

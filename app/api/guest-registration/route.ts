@@ -44,7 +44,7 @@ export async function POST(request: Request) {
 
   const response = await fetch(webhook, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-PUiCE-Key': process.env.GOOGLE_SHEETS_WEBHOOK_KEY ?? '' },
+    headers: { 'Content-Type': 'application/json', 'X-PUICE-Key': process.env.GOOGLE_SHEETS_WEBHOOK_KEY ?? '' },
     body: JSON.stringify({ ...registration, webhook_key: process.env.GOOGLE_SHEETS_WEBHOOK_KEY ?? '' }),
   });
   const webhookResult = await response.json().catch(() => null) as { ok?: boolean; registration_id?: string } | null;

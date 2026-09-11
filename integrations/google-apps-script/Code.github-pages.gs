@@ -1,5 +1,5 @@
 /**
- * PUiCE 2026 — GitHub Pages API candidate.
+ * PUICE 2026 — GitHub Pages API candidate.
  * Deploy this as a Google Apps Script Web App only during the approved rollout.
  * Execute as: Me. Access: Anyone.
  */

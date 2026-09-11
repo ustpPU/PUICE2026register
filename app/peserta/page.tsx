@@ -41,11 +41,11 @@ export default function Participants() {
   }), [query, audience, records]);
 
   return <main className="participants-page route-page">
-    <header className="route-nav"><Link href="/kemuncak">PUiCE <span>2026</span></Link><Link href="/kemuncak">← Kemuncak</Link></header>
+    <header className="route-nav"><Link href="/kemuncak">PUICE <span>2026</span></Link><Link href="/kemuncak">← Kemuncak</Link></header>
     <section className="route-hero">
       <HeroSlideshow images={media.home} />
       <div className="hero-slideshow-overlay hero-overlay-standard" aria-hidden="true" />
-      <div className="route-hero-copy"><p className="route-eyebrow">PESERTA</p><h1>Mereka yang<br />membawa <span>idea</span><br />ke pentas.</h1><p>Cari peserta, pasukan, sekolah atau pertandingan dalam direktori PUiCE 2026.</p></div>
+      <div className="route-hero-copy"><p className="route-eyebrow">PESERTA</p><h1>Mereka yang<br />membawa <span>idea</span><br />ke pentas.</h1><p>Cari peserta, pasukan, sekolah atau pertandingan dalam direktori PUICE 2026.</p></div>
     </section>
     <section className="directory-content">
       <label className="directory-search"><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Cari nama, pasukan, sekolah atau pertandingan..." aria-label="Cari peserta" /><b>⌕</b></label>

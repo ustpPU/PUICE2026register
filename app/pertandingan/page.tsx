@@ -16,11 +16,11 @@ export default function Competitions() {
   const visible = useMemo(() => competitions.filter(item => filter === 'SEMUA' || item.audience === filter || item.phase === filter), [filter]);
 
   return <main className="competition-directory route-page">
-    <header className="route-nav"><Link href="/kemuncak">PUiCE <span>2026</span></Link><Link href="/kemuncak">← Kemuncak</Link></header>
+    <header className="route-nav"><Link href="/kemuncak">PUICE <span>2026</span></Link><Link href="/kemuncak">← Kemuncak</Link></header>
     <section className="route-hero">
       <HeroSlideshow images={competitionHeroImages} />
       <div className="hero-slideshow-overlay hero-overlay-standard" aria-hidden="true" />
-      <div className="route-hero-copy"><p className="route-eyebrow">PUiCE 2026</p><h1>7<br /><span>Pertandingan</span></h1><p>Tujuh ruang untuk idea, inovasi, penyelidikan dan penyelesaian yang membentuk masa hadapan pendidikan.</p></div>
+      <div className="route-hero-copy"><p className="route-eyebrow">PUICE 2026</p><h1>7<br /><span>Pertandingan</span></h1><p>Tujuh ruang untuk idea, inovasi, penyelidikan dan penyelesaian yang membentuk masa hadapan pendidikan.</p></div>
     </section>
     <section className="directory-content">
       <div className="filter-buttons">{filters.map(([value, label]) => <button type="button" className={filter === value ? 'active' : ''} onClick={() => setFilter(value)} key={value}>{label}</button>)}</div>

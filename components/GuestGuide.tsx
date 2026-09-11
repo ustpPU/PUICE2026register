@@ -5,7 +5,7 @@ const attendanceRules = [
   ['Sepanjang hari', 'Peserta dan guru pengiring KmR, PBL dan PBL-STEM'],
   ['Sepanjang hari', 'Pemenang Platinum CI3M'], ['Petang', 'Pemenang Emas CI3M'],
   ['Sepanjang hari', 'Pemenang Platinum Kajian Tindakan'], ['Petang', 'Semua peserta Kajian Tindakan'],
-  ['Petang', 'Pemenang Platinum dan Emas PUiCE: Inovasi Guru'], ['11.30 pagi', 'Semua pemenang Poster Digital'],
+  ['Petang', 'Pemenang Platinum dan Emas PUICE: Inovasi Guru'], ['11.30 pagi', 'Semua pemenang Poster Digital'],
 ];
 
 const photoSteps = [
@@ -14,7 +14,7 @@ const photoSteps = [
   ['03', 'Ceraikan token', 'Simpan satu bahagian dan serahkan satu bahagian kepada petugas reruai foto.'],
   ['04', 'Tiga pose', 'Jurugambar mengambil tiga foto dalam tiga pose.'],
   ['05', 'Hantar ke editor', 'Foto dihantar ke stesen editor bersama nombor token.'],
-  ['06', 'Edit jalur foto', 'Editor membuang latar hijau dan menyusun tiga pose dalam templat PUiCE.'],
+  ['06', 'Edit jalur foto', 'Editor membuang latar hijau dan menyusun tiga pose dalam templat PUICE.'],
   ['07', 'Cetak', 'Jalur foto dicetak dan disusun mengikut nombor token.'],
   ['08', 'Tuntut foto', 'Tunjukkan keratan token untuk mengambil jalur foto anda.'],
 ];
